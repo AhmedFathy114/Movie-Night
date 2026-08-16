@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@100..900&display=swap");
+
+@import "tailwindcss";
+
+@utility font-bebas {
+  font-family: "Bebas Neue", "Bebas Neue Fallback", sans-serif;
+}
+@utility font-roboto {
+  font-family: "Roboto Slab", "Roboto Slab Fallback", sans-serif;
+}
+@utility carousal-inf {
+  @apply rounded-full border border-red-600 px-3 py-1.5 text-xs text-white sm:px-4 sm:py-2 sm:text-sm font-roboto bg-red-500/20 backdrop-blur-2xl;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bebas;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #991b1b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
+}
