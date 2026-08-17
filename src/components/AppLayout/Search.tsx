@@ -8,7 +8,7 @@ import useDebounce from "@/hooks/Debounce";
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedQuery = useDebounce(searchQuery, 400);
+  const debouncedQuery = useDebounce(searchQuery, 700);
 
   const { data, isPending } = useMovieEndPoint<TMDBResponse>(
     "/search/multi",
@@ -21,7 +21,10 @@ function Search() {
     debouncedQuery.length > 0,
   );
 
-  const movies = data?.results?.slice(0, 5) ?? [];
+  const movies =
+    data?.results
+      .filter((movie) => "media_type" in movie && movie.media_type !== "person")
+      .slice(0, 5) ?? [];
   const showResults = debouncedQuery.trim().length > 0;
 
   return (
@@ -33,7 +36,7 @@ function Search() {
         placeholder="Search movies, tv shows..."
         className="
           hidden w-full rounded-lg border border-neutral-400
-          bg-neutral-900/10 px-4 py-2
+          bg-neutral-900/10 px-4 py-1.5
           pr-20
           text-neutral-200 placeholder:text-neutral-400
           outline-none backdrop-blur-2xl
@@ -42,19 +45,22 @@ function Search() {
           focus:border-red-700
           focus:ring-0
           md:block
+          font-roboto text-[17px] font-bold
+
         "
       />
 
       {/* Search icon */}
-      <SearchIcon
-        size={18}
+      <button
         className="
           pointer-events-none
           absolute right-4 top-1/2
           -translate-y-1/2
           text-neutral-400
         "
-      />
+      >
+        <SearchIcon size={18} />
+      </button>
 
       {/* Clear button */}
       {searchQuery && (
@@ -79,16 +85,18 @@ function Search() {
 
       {showResults && (
         <div
-          className="
+          className={`
             absolute left-0 right-0 top-[calc(100%+8px)]
-            z-[9999]
+            z-9999
             overflow-hidden
             rounded-xl
             border border-neutral-800
             bg-neutral-950/95
             shadow-2xl
             backdrop-blur-xl
-          "
+            font-roboto
+            ${!movies.length && "hidden"}
+          `}
         >
           {isPending ? (
             <div className="flex min-h-40 items-center justify-center">
@@ -96,18 +104,14 @@ function Search() {
                 Searching...
               </p>
             </div>
-          ) : movies.length > 0 ? (
-            <div className="divide-y divide-neutral-800">
-              {movies.map((movie) => (
-                <MovieMiniCard key={movie.id} movie={movie} />
-              ))}
-            </div>
           ) : (
-            <div className="flex min-h-40 items-center justify-center">
-              <p className="font-roboto text-sm text-neutral-500">
-                No movies found
-              </p>
-            </div>
+            movies.length > 0 && (
+              <div className="divide-y divide-neutral-800">
+                {movies.map((movie) => (
+                  <MovieMiniCard key={movie.id} movie={movie} />
+                ))}
+              </div>
+            )
           )}
         </div>
       )}

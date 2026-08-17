@@ -2,18 +2,13 @@ import { backDropUrl } from "@/lib/Variables";
 import type { TMDBItem } from "@/types/Movies";
 
 function MovieMiniCard({ movie }: { movie: TMDBItem }) {
-  const isPerson = "profile_path" in movie;
-  const isMovie = "release_date" in movie;
+  const isMovie = movie.media_type === "movie";
+  const isTV = movie.media_type === "tv";
 
-  const title = isPerson
-    ? movie.name
-    : isMovie
-      ?  movie.title
-      :  movie.name;
+  const title = isMovie ? movie.title : isTV ? movie.name : undefined;
 
-  const imagePath = isPerson
-    ? movie.profile_path
-    : movie.poster_path;
+  const imagePath =
+    isMovie || isTV ? movie.poster_path || movie.backdrop_path : undefined;
 
   const year = isMovie
     ? movie.release_date?.slice(0, 4)
@@ -21,20 +16,12 @@ function MovieMiniCard({ movie }: { movie: TMDBItem }) {
       ? movie.first_air_date?.slice(0, 4)
       : undefined;
 
-  const type = isPerson
-    ? "Person"
-    : isMovie
-      ? "Movie"
-      : "TV Show";
+  const type = isMovie ? "Movie" : "TV Show";
 
   return (
     <div className="group flex min-h-20 cursor-pointer items-center gap-3 px-3 py-2.5 hover:bg-neutral-800">
       <img
-        src={
-          imagePath
-            ? `${backDropUrl}${imagePath}`
-            : "/NoPoster.png"
-        }
+        src={imagePath ? `${backDropUrl}${imagePath}` : "/NoPoster.png"}
         alt={title}
         className="h-16 w-11 shrink-0 rounded-md object-cover"
       />

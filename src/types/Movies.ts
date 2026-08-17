@@ -1,6 +1,7 @@
 export type Movie = {
   id: number;
   title: string;
+  media_type?: "movie";
   original_title: string;
   overview: string;
   backdrop_path: string | null;
@@ -49,6 +50,7 @@ export type GenresResponse = {
 export type TVShow = {
   id: number;
   name: string;
+  media_type?: "tv";
   original_name: string;
   overview: string;
   backdrop_path: string | null;
@@ -62,6 +64,7 @@ export type TVShow = {
 export type Person = {
   id: number;
   name: string;
+  media_type?: "person";
   gender: number;
   known_for_department: string;
   profile_path: string | null;
