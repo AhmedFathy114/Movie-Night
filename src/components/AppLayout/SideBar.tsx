@@ -92,8 +92,6 @@ const genreItems: MenuItem[] = [
 ];
 
 function SideMenuItem({ item }: { item: MenuItem }) {
-  const Icon = item.icon;
-
   return (
     <Link
       to={item.to}
@@ -105,11 +103,12 @@ function SideMenuItem({ item }: { item: MenuItem }) {
         hover:text-red-500
       "
     >
-      <Icon
-        size={19}
-        strokeWidth={2.5}
-        className="shrink-0 transition-colors"
-      />
+      {item.icon &&
+        (() => {
+          const Icon = item.icon;
+
+          return <Icon size={18} />;
+        })()}
 
       <span className="font-bebas text-[18px] tracking-wide">{item.title}</span>
     </Link>
