@@ -1,12 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Audiowide&display=swap");
 
-html,
-body {
-  margin: 0;
-  overflow: hidden;
-}
-
 .page-not-found {
+  margin: 0;
   position: relative;
   width: 100vw;
   height: 100vh;

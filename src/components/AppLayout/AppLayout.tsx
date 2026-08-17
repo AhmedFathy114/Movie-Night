@@ -6,35 +6,48 @@ import { useEffect, useState } from "react";
 
 function AppLayout() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  useEffect(function () {
+
+  useEffect(() => {
     function handleScroll() {
       setShowScrollTop(window.scrollY > 100);
     }
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("click", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
   function handleToTop() {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }
+
   return (
-    <section className="flex flex-col min-h-screen bg-black">
+    <section className="flex min-h-screen flex-col bg-black">
       <Header />
-      <main className="scrollbar-thin flex-1 ">
+
+      <main className="flex-1">
         <Outlet />
       </main>
+
       <Footer />
 
       {showScrollTop && (
         <button
+          type="button"
           onClick={handleToTop}
-          className="fixed bottom-6
-          left-6 bg-red-600 p-4 rounded-full
-          text-lg z-999 cursor-pointer hover:bg-red-600/70"
+          className="
+            fixed bottom-6 left-6 z-999
+            cursor-pointer rounded-full
+            bg-red-600 p-4 text-lg
+            transition-all duration-300
+            hover:bg-red-600/70
+          "
+          aria-label="Scroll to top"
         >
           <FaArrowUp />
         </button>

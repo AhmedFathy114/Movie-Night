@@ -144,7 +144,7 @@ function Home() {
           params={{
             language: "en-US",
             page: 1,
-            with_genres: 28,
+            with_genres: 35,
           }}
         />
         <Section
