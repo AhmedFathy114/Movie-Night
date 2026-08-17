@@ -7,13 +7,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import CarouselSwiperSlide from "./CarouselSwiperSlide";
-import type { Movie } from "@/types/MovieResponse";
+import type { Movie } from "@/types/Movies";
 import { useGenres } from "./useGeners";
 
 function Carousel() {
   const { weekMovies } = useWeeklyMovies();
-  const { genres} = useGenres();
-  
+  const { genres } = useGenres();
+
   return (
     <>
       <Swiper
@@ -45,7 +45,7 @@ function Carousel() {
       >
         {weekMovies?.results?.map((movie: Movie) => (
           <SwiperSlide key={movie.id}>
-            <CarouselSwiperSlide movie={movie} genres={genres?.genres ?? []}/>
+            <CarouselSwiperSlide movie={movie} genres={genres?.genres ?? []} />
           </SwiperSlide>
         ))}
       </Swiper>

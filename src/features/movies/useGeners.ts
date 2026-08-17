@@ -1,5 +1,5 @@
 import { getAllGenres } from "@/services/Genres";
-import type { GenresResponse } from "@/types/MovieResponse";
+import type { GenresResponse } from "@/types/Movies";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGenres() {

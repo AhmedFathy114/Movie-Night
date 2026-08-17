@@ -39,9 +39,7 @@ import {
   Flag,
   Tent,
 } from "lucide-react";
-import type { MenuItem } from "@/types/MovieResponse";
-
-
+import type { MenuItem } from "@/types/Movies";
 
 const exploreItems: MenuItem[] = [
   {
@@ -113,9 +111,7 @@ function SideMenuItem({ item }: { item: MenuItem }) {
         className="shrink-0 transition-colors"
       />
 
-      <span className="font-bebas text-[18px] tracking-wide">
-        {item.title}
-      </span>
+      <span className="font-bebas text-[18px] tracking-wide">{item.title}</span>
     </Link>
   );
 }
@@ -168,16 +164,13 @@ function SideBar() {
       >
         <SheetHeader className="sr-only">
           <SheetTitle>Menu</SheetTitle>
-          <SheetDescription>
-            Movie Night navigation menu
-          </SheetDescription>
+          <SheetDescription>Movie Night navigation menu</SheetDescription>
         </SheetHeader>
 
         <div className="flex h-36 items-center border-b border-white/10 px-5 py-3">
           <span className="font-bebas text-2xl tracking-wider text-red-500">
             MENU
           </span>
-
         </div>
 
         <div className="overflow-y-auto scrollbar-none px-3 py-3">
@@ -198,9 +191,7 @@ function SideBar() {
               className="group-hover:text-red-500"
             />
 
-            <span className="font-bebas text-[18px] tracking-wide">
-              Home
-            </span>
+            <span className="font-bebas text-[18px] tracking-wide">Home</span>
           </Link>
 
           {/* Explore */}

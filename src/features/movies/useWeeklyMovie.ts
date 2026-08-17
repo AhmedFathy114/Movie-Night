@@ -1,5 +1,5 @@
 import { getWeeklyMovies } from "@/services/movies";
-import type { MovieResponse } from "@/types/MovieResponse";
+import type { MovieResponse } from "@/types/Movies";
 import { useQuery } from "@tanstack/react-query";
 
 export function useWeeklyMovies() {

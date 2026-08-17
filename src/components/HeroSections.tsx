@@ -1,15 +1,12 @@
 import MovieCard from "./MovieCard";
 
-import { useMovieEndPoint } from "@/features/movies/useMovieEndPOint";
-import { language } from "@/lib/constants";
-import type { Movie, SectionProps } from "@/types/MovieResponse";
+import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
+import type { SectionProps, TMDBResponse } from "@/types/Movies";
 
-function Section({ endpoint, title }: SectionProps) {
-  const { data } = useMovieEndPoint(endpoint, language, 1);
+function Section({ endpoint, title, params }: SectionProps) {
+  const { data } = useMovieEndPoint<TMDBResponse>(endpoint, params);
 
-  const movies: Movie[] = data?.results ?? [];
-  console.log(movies)
-
+  const movies = data?.results ?? [];
   return (
     <section className="py-4 md:py-8 px-2 sm:px-4 relative" id={title}>
       <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">

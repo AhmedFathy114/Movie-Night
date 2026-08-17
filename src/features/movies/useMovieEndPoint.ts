@@ -1,16 +1,16 @@
 import { fetchMovies } from "@/services/movies";
-import type { MovieResponse } from "@/types/MovieResponse";
 import { useQuery } from "@tanstack/react-query";
 
-export function useMovieEndPoint(
+export function useMovieEndPoint<T>(
   endpoint: string,
-  language: string,
-  page: number,
+  params?: Record<string, string | number | boolean>,
+  enabled: boolean = true,
 ) {
-  const { data, isPending } = useQuery<MovieResponse>({
-    queryKey: ["movies", endpoint],
-    queryFn: () => fetchMovies(endpoint, language, page),
+  const { data, isPending } = useQuery<T>({
+    queryKey: ["movies", endpoint, params],
+    queryFn: () => fetchMovies(endpoint, params),
+    enabled,
   });
 
-  return {data , isPending}
+  return { data, isPending };
 }

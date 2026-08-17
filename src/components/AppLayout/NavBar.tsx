@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import DropMenu from "./DropMenu";
+import DropMenu from "../DropMenu/DropMenu";
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import SideBar from "./SideBar";
@@ -34,7 +34,7 @@ function NavBar() {
             </Link>
           </div>
 
-          <div className="hidden flex-1 items-center justify-center gap-6 text-[13px] font-bold uppercase tracking-wider lg:flex lg:gap-8">
+          <div className="hidden flex-1 items-center justify-center gap-6 text-[13px] font-bold uppercase tracking-wider md:flex lg:gap-8">
             <Link
               to="/home"
               className="text-neutral-400 transition-all duration-300 hover:scale-105 hover:text-white font-roboto"
