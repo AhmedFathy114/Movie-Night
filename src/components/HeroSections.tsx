@@ -9,7 +9,10 @@ function Section({ endpoint, title, params }: SectionProps) {
   const movies = data?.results ?? [];
   return (
     <section className="py-4 md:py-8 px-2 sm:px-4 relative" id={title}>
-      <div className="flex items-center justify-between gap-3 mb-4 md:mb-6">
+      <div
+        className="flex items-center justify-between gap-3 mb-4 md:mb-6"
+        id={endpoint}
+      >
         <div className="flex items-center gap-2 md:gap-3">
           <div className="w-1 md:w-1.5 h-8 md:h-16 bg-red-700 rounded-full shadow-lg shadow-red-700/50" />
 

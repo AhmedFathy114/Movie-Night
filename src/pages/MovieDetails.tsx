@@ -1,11 +1,11 @@
+import PageLoader from "@/features/Shared/PageLoader";
+
 function MovieDetails() {
-    return (
-        <>
-            <div>
-            movieDetails
-            </div>
-        </>
-    )
+  return (
+    <>
+      <PageLoader message="Loading Movie Details" />
+    </>
+  );
 }
 
-export default MovieDetails
+export default MovieDetails;

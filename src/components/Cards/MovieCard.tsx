@@ -1,16 +1,21 @@
 import { backDropUrl } from "@/lib/Variables";
 import type { TMDBItem } from "@/types/Movies";
 import Stars from "../Stars";
+import { useDefineType } from "@/hooks/useDefineType";
+import { useNavigateDetails } from "@/hooks/useNavigateDetails";
 
 function MovieCard({ movie }: { movie: TMDBItem }) {
-  const imagePath =
-    "profile_path" in movie ? movie.profile_path : movie.poster_path;
+  const { data, type } = useDefineType(movie);
+  const { handleSubmit } = useNavigateDetails(movie);
+
+  const imagePath = type === "actor" ? data.profile_path : data.poster_path;
 
   const title =
-    "title" in movie ? movie.title || movie.original_title : movie.name;
+    type === "movie" ? data.title || data.original_title : data.name;
 
   return (
     <div
+      onClick={handleSubmit}
       className="
         group
         mt-3 md:mt-0
@@ -62,22 +67,22 @@ function MovieCard({ movie }: { movie: TMDBItem }) {
       </h3>
 
       <div className="pt-1 text-sm font-extrabold font-roboto text-neutral-400">
-        {"release_date" in movie ? (
-          <p>Release Date: {movie.release_date || "N/A"}</p>
-        ) : "first_air_date" in movie ? (
-          <p>First Air Date: {movie.first_air_date || "N/A"}</p>
-        ) : "known_for_department" in movie ? (
-          <p>Known For: {movie.known_for_department || "N/A"}</p>
+        {type === "movie" ? (
+          <p>Release Date: {data.release_date || "N/A"}</p>
+        ) : type === "tv" ? (
+          <p>First Air Date: {data.first_air_date || "N/A"}</p>
+        ) : type === "actor" ? (
+          <p>Known For: {data.known_for_department || "N/A"}</p>
         ) : (
           <p>N/A</p>
         )}
       </div>
 
-      {"vote_average" in movie && movie.vote_average > 0 ? (
+      {type === "movie" || (type === "tv" && data.vote_average > 0) ? (
         <div className="mt-1 -ms-1.25">
-          <Stars vote_average={movie.vote_average} size={20} />
+          <Stars vote_average={data.vote_average} size={20} />
         </div>
-      ) : "known_for_department" in movie ? (
+      ) : type === "actor" ? (
         ""
       ) : (
         <div className="mt-1 -ms-1.25">

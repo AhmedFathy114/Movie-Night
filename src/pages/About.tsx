@@ -1,11 +1,11 @@
+import PageLoader from "@/features/Shared/PageLoader";
+
 function About() {
-    return (
-        <>
-            <div>
-            about
-            </div>
-        </>
-    )
+  return (
+    <>
+      <PageLoader message="Loading Page Loader" />
+    </>
+  );
 }
 
-export default About
+export default About;

@@ -1,38 +1,11 @@
-import { useEffect, useState } from "react";
 import Carousel from "@/features/movies/Carousel";
 import Section from "@/components/HeroSections";
-import { createPortal } from "react-dom";
-import LoadingModel from "@/components/Loaders/LoadingModel";
+import PageLoader from "@/features/Shared/PageLoader";
 
 function Home() {
-  const [showLoader, setShowLoader] = useState(true);
-  const [hideLoader, setHideLoader] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setHideLoader(true);
-      setTimeout(() => {
-        setShowLoader(false);
-      }, 600);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
-      {showLoader &&
-        createPortal(
-          <div
-            className={`fixed inset-0 z-9999 transition-opacity duration-600 ${
-              hideLoader ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            <LoadingModel message="Loading home page" />
-          </div>,
-          document.body,
-        )}
-
+      <PageLoader message="Loading Home Page" />
       <div>
         <Carousel />
         <Section

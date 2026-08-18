@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { Compass, House, Menu, X } from "lucide-react";
 import { exploreItems, genreItems } from "@/lib/Header/HeaderConstants";
 import SideMenuItem from "./SideMenuItem";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "./SideBarTitle";
 
 function SideBar() {
   return (
@@ -54,6 +54,7 @@ function SideBar() {
           [&>button]:opacity-100
           [&>button]:hover:bg-transparent
           [&>button]:hover:text-red-500
+          z-9999
           "
       >
         {/* Accessibility */}
