@@ -6,11 +6,11 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaDiscord } from "react-icons/fa";
 export const navigationLinks: MenuItem[] = [
   {
     title: "Home",
-    to: "/",
+    to: "/home",
   },
   {
     title: "Discover",
-    to: "/discover",
+    to: "/explore",
   },
   {
     title: "About",
@@ -128,22 +128,22 @@ export const genreItems: MenuItem[] = [
 export const socialMedia: SocialItem[] = [
   {
     label: "LinkedIn",
-    href: "",
+    href: "https://linkedin.com/in/ahmedfathy111",
     icon: FaLinkedinIn,
   },
   {
     label: "GitHub",
-    href: "",
+    href: "https://github.com/AhmedFathy114/Movie-Night",
     icon: FaGithub,
   },
   {
     label: "Facebook",
-    href: "",
+    href: "https://www.facebook.com/ahmed.fathy.755195/",
     icon: FaFacebookF,
   },
   {
     label: "Discord",
-    href: "",
+    href: "https://discord.com/users/863036588543574026",
     icon: FaDiscord,
   },
 ];

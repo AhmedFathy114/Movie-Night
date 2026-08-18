@@ -1,6 +1,6 @@
 import { backDropUrl } from "@/lib/Variables";
 import type { TMDBItem } from "@/types/Movies";
-import Stars from "./Stars";
+import Stars from "../Stars";
 
 function MovieCard({ movie }: { movie: TMDBItem }) {
   const imagePath =

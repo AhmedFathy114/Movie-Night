@@ -1,5 +1,5 @@
 import { fetchMovies } from "@/services/movies";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function useMovieEndPoint<T>(
   endpoint: string,
@@ -10,6 +10,7 @@ export function useMovieEndPoint<T>(
     queryKey: ["movies", endpoint, params],
     queryFn: () => fetchMovies(endpoint, params),
     enabled,
+    placeholderData : keepPreviousData
   });
 
   return { data, isPending };

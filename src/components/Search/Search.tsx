@@ -1,12 +1,14 @@
 import { useState } from "react";
-import MovieMiniCard from "../MovieMiniCard";
+import MovieMiniCard from "../Cards/MovieMiniCard";
 import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
 import type { TMDBResponse } from "@/types/Movies";
 import { language } from "@/lib/Variables";
 import { Search as SearchIcon, X } from "lucide-react";
-import useDebounce from "@/hooks/Debounce";
+import useDebounce from "@/hooks/useDebounce";
+import SearchModal from "./SearchModal";
 
 function Search() {
+  const [openModal ,setOpenModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 700);
 
@@ -44,23 +46,33 @@ function Search() {
           hover:bg-neutral-600/50
           focus:border-red-700
           focus:ring-0
-          md:block
+          lg:block
           font-roboto text-[17px] font-bold
 
         "
       />
 
       {/* Search icon */}
-      <button
+
+      <SearchIcon
+        size={18}
         className="
           pointer-events-none
           absolute right-4 top-1/2
           -translate-y-1/2
           text-neutral-400
+          hidden
+          lg:block
         "
-      >
-        <SearchIcon size={18} />
-      </button>
+      />
+
+      <SearchIcon
+        size={18}
+        className="text-white size-6 absolute top-1/2 right-4 sm:right-0 -translate-y-1/2 lg:hidden sm:size-7 "
+        onClick={() => setOpenModal(true)}
+      />
+
+      {openModal && <SearchModal setIsSearchModelOpen={setOpenModal}/>}
 
       {/* Clear button */}
       {searchQuery && (

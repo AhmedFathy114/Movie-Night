@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard";
+import MovieCard from "./Cards/MovieCard";
 
 import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
 import type { SectionProps, TMDBResponse } from "@/types/Movies";

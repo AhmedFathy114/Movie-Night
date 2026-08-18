@@ -36,7 +36,7 @@ function DropMenu() {
           </NavigationMenuTrigger>
 
           <NavigationMenuContent className="rounded bg-[#111] p-3 shadow-2xl">
-            <div className="w-155">
+            <div className="w-125">
               <div className="grid grid-cols-2 gap-1">
                 {genreItems.map((item) => (
                   <MenuLink key={item.title} item={item} />
