@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useWeeklyMovies } from "./useWeeklyMovie";
 
 import "swiper/css";
@@ -17,12 +17,11 @@ function Carousel() {
   return (
     <>
       <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000 }}
-        effect="fade"
         className=" md:h-screen
         [&_.swiper-button-prev]:text-red-500!
         [&_.swiper-button-next]:text-red-500!

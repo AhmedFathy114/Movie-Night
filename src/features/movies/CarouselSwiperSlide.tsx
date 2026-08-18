@@ -19,6 +19,7 @@ function CarouselSwiperSlide({
         <img
           src={`${backDropUrl}${movie.backdrop_path}`}
           alt={movie.title}
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
 
