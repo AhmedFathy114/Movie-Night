@@ -1,15 +1,47 @@
 export type Movie = {
   id: number;
   title: string;
-  media_type?: "movie";
   original_title: string;
   overview: string;
+
+  media_type?: "movie";
+
   backdrop_path: string | null;
   poster_path: string | null;
+
+  genres: genres[];
   genre_ids: number[];
+
   vote_average: number;
   vote_count: number;
+
   release_date: string;
+
+  // Details
+  runtime: number;
+
+  belongs_to_collection: {
+    id: number;
+    name: string;
+    poster_path: string | null;
+    backdrop_path: string | null;
+  } | null;
+
+  tagline: string;
+  status: string;
+
+  homepage: string;
+  imdb_id: string | null;
+
+  original_language: string;
+  origin_country: string[];
+
+  popularity: number;
+  adult: boolean;
+  video: boolean;
+
+  budget: number;
+  revenue: number;
 };
 
 export type PaginatedResponse<T> = {
@@ -83,35 +115,62 @@ export type MovieVideos = {
   results: Videos[];
 };
 
-export type MovieDetails = {
+export type CastMember = {
   adult: boolean;
-  backdrop_path: string | null;
-  belongs_to_collection: {
-    id: number;
-    name: string;
-    poster_path: string | null;
-    backdrop_path: string | null;
-  } | null;
-  budget: number;
-  genres: genres[];
-  homepage: string;
+  gender: number;
   id: number;
-  imdb_id: string | null;
-  origin_country: string[];
-  original_language: string;
-  original_title: string;
-  overview: string;
+  known_for_department: string;
+  name: string;
+  original_name: string;
   popularity: number;
-  poster_path: string | null;
-  release_date: string;
-  revenue: number;
-  runtime: number;
-  status: string;
-  tagline: string;
+  profile_path: string | null;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
+
+export type MovieCredits = {
+  id: number;
+  cast: CastMember[];
+};
+
+export type SectionDetailsProps<T> = {
+  movieId: number;
   title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
+  items: T[];
+  renderItem: (item: T, index: number) => React.ReactNode;
+  horizontal?: boolean;
+};
+
+export type CollectionMovie = Pick<
+  Movie,
+  | "id"
+  | "title"
+  | "original_title"
+  | "overview"
+  | "backdrop_path"
+  | "poster_path"
+  | "media_type"
+  | "original_language"
+  | "genre_ids"
+  | "popularity"
+  | "release_date"
+  | "video"
+  | "vote_average"
+  | "vote_count"
+  | "adult"
+>;
+
+export type MovieCollection = {
+  id: number;
+  name: string;
+  original_language: string;
+  original_name: string;
+  overview: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  parts: CollectionMovie[];
 };
 
 export type MovieResponse = PaginatedResponse<Movie>;

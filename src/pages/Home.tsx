@@ -1,6 +1,7 @@
 import Carousel from "@/features/movies/carousel/Carousel";
-import Section from "@/components/HeroSections";
+import Section from "@/components/HomeSections";
 import PageLoader from "@/features/Shared/PageLoader";
+import { language } from "@/lib/Variables";
 
 function Home() {
   return (
@@ -12,7 +13,7 @@ function Home() {
           title="Popular Movies"
           endpoint="/movie/popular"
           params={{
-            language: "en-US",
+            language,
             page: 1,
           }}
         />
@@ -21,7 +22,7 @@ function Home() {
           title="Popular TV Shows"
           endpoint="/tv/popular"
           params={{
-            language: "en-US",
+            language,
             page: 1,
           }}
         />
@@ -30,7 +31,7 @@ function Home() {
           title="Popular Actors"
           endpoint="/person/popular"
           params={{
-            language: "en-US",
+            language,
             page: 1,
           }}
         />
@@ -39,7 +40,7 @@ function Home() {
           title="Now Playing Movies"
           endpoint="/movie/now_playing"
           params={{
-            language: "en-US",
+            language,
             page: 1,
           }}
         />
@@ -48,7 +49,7 @@ function Home() {
           title="Anime Series"
           endpoint="/discover/tv"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
             with_keywords: 210024,
@@ -62,7 +63,7 @@ function Home() {
           title="Airing Today TV Shows"
           endpoint="/tv/airing_today"
           params={{
-            language: "en-US",
+            language,
             page: 1,
           }}
         />
@@ -71,7 +72,7 @@ function Home() {
           title="Popular Movies in Egypt"
           endpoint="/discover/movie"
           params={{
-            language: "ar-EG",
+            language,
             page: 1,
             region: "EG",
             with_origin_country: "EG",
@@ -83,7 +84,7 @@ function Home() {
           title="Trending TV Shows in Egypt"
           endpoint="/discover/tv"
           params={{
-            language: "ar-EG",
+            language,
             page: 1,
             region: "EG",
             with_origin_country: "EG",
@@ -95,7 +96,7 @@ function Home() {
           title="Top Rated Egyptian Movies"
           endpoint="/discover/movie"
           params={{
-            language: "ar-EG",
+            language,
             page: 1,
             with_origin_country: "EG",
             sort_by: "vote_average.desc",
@@ -106,7 +107,7 @@ function Home() {
           title="Action Movies"
           endpoint="/discover/movie"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 28,
           }}
@@ -115,7 +116,7 @@ function Home() {
           title="Comedy Movies"
           endpoint="/discover/movie"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 35,
           }}
@@ -124,7 +125,7 @@ function Home() {
           title="Anime Movies"
           endpoint="/discover/movie"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
           }}
@@ -133,7 +134,7 @@ function Home() {
           title="Coming Soon Movies"
           endpoint="/movie/upcoming"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
           }}
@@ -142,7 +143,7 @@ function Home() {
           title="Coming Soon TV Shows"
           endpoint="/tv/on_the_air"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
           }}
@@ -151,7 +152,7 @@ function Home() {
           title="Top Rated Movies"
           endpoint="/movie/top_rated"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
           }}
@@ -160,7 +161,7 @@ function Home() {
           title="Top Rated TV Shows"
           endpoint="/tv/top_rated"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             with_genres: 16,
           }}
@@ -169,7 +170,7 @@ function Home() {
           title="Critically Acclaimed Movies"
           endpoint="/discover/movie"
           params={{
-            language: "en-US",
+            language,
             page: 1,
             "vote_average.gte": 7.5,
             "vote_count.gte": 1000,

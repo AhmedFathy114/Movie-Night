@@ -11,6 +11,7 @@ import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
 import TvDetails from "./pages/TvDetails";
 import ActorDetails from "./pages/ActorDetails";
+import FullCast from "./pages/FullCast";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -57,6 +58,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/movie/:movieId/:slug" element={<MovieDetails />} />
+            <Route path="/movie/cast/:movieId" element={<FullCast />} />
             <Route path="/tv/:movieId/:slug" element={<TvDetails />} />
             <Route path="/actor/:movieId/:slug" element={<ActorDetails />} />
             <Route path="/profile" element={<Profile />} />

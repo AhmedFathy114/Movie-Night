@@ -1,7 +1,7 @@
 import Stars from "@/components/Stars";
 import formatDate from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { genres, MovieDetails, Videos } from "@/types/Movies";
+import type { genres, Movie, Videos } from "@/types/Movies";
 import { useState } from "react";
 import { X } from "lucide-react";
 
@@ -10,9 +10,11 @@ function MovieHero({
   movie,
 }: {
   finalTrailer?: Videos;
-  movie: MovieDetails;
+  movie: Movie;
 }) {
   const [showModal, setShowModal] = useState(false);
+  const hours = Math.floor(movie.runtime / 60);
+  const minutes = movie.runtime % 60;
 
   if (!movie) return null;
   return (
@@ -173,19 +175,16 @@ function MovieHero({
                 lg:justify-start
               "
             >
-              <span className="carousal-inf">{movie.vote_count} Votes</span>
-
               <span className="carousal-inf">
-                <span className="hidden sm:inline">
-                  {formatDate(movie.release_date)}
-                </span>
-
-                <span className="sm:hidden">
-                  {movie.release_date.slice(0, 4)}
-                </span>
+                {formatDate(movie.release_date)}
               </span>
 
-              <span className="carousal-inf flex items-center">
+              <span className="carousal-inf">
+                {hours > 0 && `${hours}h `}
+                {minutes > 0 && `${minutes}m`}
+              </span>
+
+              <span className="mt-2 lg:mt-0 carousal-inf flex items-center">
                 {movie.vote_average.toFixed(1)}/10
                 <Stars vote_average={movie.vote_average} size={17} />
               </span>
@@ -232,7 +231,7 @@ function MovieHero({
                 className="
                   mx-auto
                   mt-2
-                  max-w-xl
+                  max-w-lg
                   line-clamp-4
                   font-roboto
                   text-sm

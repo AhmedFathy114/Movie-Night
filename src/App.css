@@ -10,7 +10,7 @@
   font-family: "Roboto Slab", "Roboto Slab Fallback", sans-serif;
 }
 @utility carousal-inf {
-  @apply rounded-full border border-red-600 px-3 py-1.5 text-xs text-white sm:px-4 sm:py-2 sm:text-sm font-roboto bg-neutral-500/10 backdrop-blur-xs;
+  @apply rounded-full border border-red-600 px-3 py-1.5 text-xs text-white sm:px-4 sm:py-2 sm:text-sm font-roboto bg-neutral-500/10 backdrop-blur-lg;
 }
 
 @layer base {
@@ -27,6 +27,7 @@
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 11px;
 }
 
 ::-webkit-scrollbar-track {

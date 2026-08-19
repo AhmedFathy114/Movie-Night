@@ -41,7 +41,7 @@ function AppLayout() {
           type="button"
           onClick={handleToTop}
           className="
-            fixed bottom-6 left-6 z-999
+            fixed bottom-6 right-6 z-999
             cursor-pointer rounded-full
             bg-red-600 p-4 text-lg
             transition-all duration-300
