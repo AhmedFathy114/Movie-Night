@@ -76,7 +76,7 @@ function SearchModal({
                   key={`${movie.media_type}-${movie.id}`}
                   onClick={() => setIsSearchModelOpen(false)}
                 >
-                  <MovieMiniCard movie={movie} />
+                  <MovieMiniCard movie={movie} setSearchQuery={setLocalQuery} />
                 </div>
               ))}
             </div>
