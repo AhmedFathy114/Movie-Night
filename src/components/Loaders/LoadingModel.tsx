@@ -1,4 +1,3 @@
-"use client";
 interface LoadingModelProps {
   message?: string;
 }
@@ -46,7 +45,7 @@ export default function LoadingModel({
         </div>
       </div>
 
-      <style >{`
+      <style>{`
         @keyframes spin-reverse {
           from {
             transform: rotate(360deg);

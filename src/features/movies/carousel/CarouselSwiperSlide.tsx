@@ -1,17 +1,17 @@
 import Stars from "@/components/Stars";
 import { backDropUrl } from "@/lib/Variables";
 import type { genres, Movie } from "@/types/Movies";
+import { useGenres } from "../../Shared/useGeners";
+import { useNavigate } from "react-router-dom";
+import { slugify } from "@/lib/utils";
 
-function CarouselSwiperSlide({
-  movie,
-  genres,
-}: {
-  movie: Movie;
-  genres: genres[];
-}) {
-  const movieGenres = genres.filter((genre: genres) =>
-    movie.genre_ids.includes(genre.id),
-  );
+function CarouselSwiperSlide({ movie }: { movie: Movie }) {
+  const { movieGenres } = useGenres(movie.genre_ids);
+  const navigate = useNavigate();
+
+  function handleSubmit() {
+    navigate(`/movie/${movie.id}/${slugify(movie.title)}`);
+  }
 
   return (
     <>
@@ -75,7 +75,7 @@ function CarouselSwiperSlide({
 
             {/* Genres */}
             <div className="mt-3 md:flex flex-wrap gap-2 hidden">
-              {movieGenres.map((genre: genres) => (
+              {movieGenres?.map((genre: genres) => (
                 <span
                   key={genre.id}
                   className="
@@ -115,6 +115,7 @@ function CarouselSwiperSlide({
             </div>
 
             <button
+              onClick={handleSubmit}
               className="
                     mt-5
                     rounded-lg

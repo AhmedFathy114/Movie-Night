@@ -1,6 +1,6 @@
 import MovieCard from "./Cards/MovieCard";
 
-import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
+import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
 import type { SectionProps, TMDBResponse } from "@/types/Movies";
 
 function Section({ endpoint, title, params }: SectionProps) {

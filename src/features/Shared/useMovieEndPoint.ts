@@ -1,4 +1,4 @@
-import { fetchMovies } from "@/services/movies";
+import { fetchMovies } from "@/services/shared/allWithEndPoint";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function useMovieEndPoint<T>(

@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useWeeklyMovies } from "./useWeeklyMovie";
+import { useWeeklyMovies } from "../useWeeklyMovie";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,11 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import CarouselSwiperSlide from "./CarouselSwiperSlide";
 import type { Movie } from "@/types/Movies";
-import { useGenres } from "../Shared/useGeners";
 
 function Carousel() {
   const { weekMovies } = useWeeklyMovies();
-  const { genres } = useGenres();
 
   return (
     <>
@@ -44,7 +42,7 @@ function Carousel() {
       >
         {weekMovies?.results?.map((movie: Movie) => (
           <SwiperSlide key={movie.id}>
-            <CarouselSwiperSlide movie={movie} genres={genres?.genres ?? []} />
+            <CarouselSwiperSlide movie={movie} />
           </SwiperSlide>
         ))}
       </Swiper>

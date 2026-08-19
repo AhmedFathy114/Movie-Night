@@ -1,4 +1,4 @@
-import { getWeeklyMovies } from "@/services/movies";
+import { getWeeklyMovies } from "@/services/movies/movie";
 import type { MovieResponse } from "@/types/Movies";
 import { useQuery } from "@tanstack/react-query";
 

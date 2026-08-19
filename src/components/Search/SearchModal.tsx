@@ -1,4 +1,4 @@
-import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
+import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
 import useDebounce from "@/hooks/useDebounce";
 import { language } from "@/lib/Variables";
 import type { TMDBResponse } from "@/types/Movies";
@@ -69,7 +69,7 @@ function SearchModal({
         </form>
 
         <div className="max-h-[50vh] overflow-y-auto custom-scrollbar rounded-xl bg-neutral-900/50 border border-neutral-800/50">
-          {movies.length > 0 && localQuery.length>0 ? (
+          {movies.length > 0 && localQuery.length > 0 ? (
             <div className="divide-y divide-neutral-800/50">
               {movies.map((movie) => (
                 <div
@@ -80,7 +80,7 @@ function SearchModal({
                 </div>
               ))}
             </div>
-          ) :(
+          ) : (
             <div className="py-12 text-center text-neutral-500 italic">
               Try searching for &quot;Inception&quot; or &quot;Breaking
               Bad&quot;

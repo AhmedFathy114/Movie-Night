@@ -1,4 +1,4 @@
-import Carousel from "@/features/movies/Carousel";
+import Carousel from "@/features/movies/carousel/Carousel";
 import Section from "@/components/HeroSections";
 import PageLoader from "@/features/Shared/PageLoader";
 

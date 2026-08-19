@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MovieMiniCard from "../Cards/MovieMiniCard";
-import { useMovieEndPoint } from "@/features/movies/useMovieEndPoint";
+import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
 import type { TMDBResponse } from "@/types/Movies";
 import { language } from "@/lib/Variables";
 import { Search as SearchIcon, X } from "lucide-react";
@@ -8,7 +8,7 @@ import useDebounce from "@/hooks/useDebounce";
 import SearchModal from "./SearchModal";
 
 function Search() {
-  const [openModal ,setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 700);
 
@@ -72,7 +72,7 @@ function Search() {
         onClick={() => setOpenModal(true)}
       />
 
-      {openModal && <SearchModal setIsSearchModelOpen={setOpenModal}/>}
+      {openModal && <SearchModal setIsSearchModelOpen={setOpenModal} />}
 
       {/* Clear button */}
       {searchQuery && (
@@ -120,7 +120,7 @@ function Search() {
             movies.length > 0 && (
               <div className="divide-y divide-neutral-800">
                 {movies.map((movie) => (
-                  <MovieMiniCard key={movie.id} movie={movie} />
+                  <MovieMiniCard key={movie.id} movie={movie} setSearchQuery={setSearchQuery} />
                 ))}
               </div>
             )

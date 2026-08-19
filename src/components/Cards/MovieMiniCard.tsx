@@ -3,7 +3,13 @@ import { useDefineType } from "@/hooks/useDefineType";
 import { backDropUrl } from "@/lib/Variables";
 import type { TMDBItem } from "@/types/Movies";
 
-function MovieMiniCard({ movie }: { movie: TMDBItem }) {
+function MovieMiniCard({
+  movie,
+  setSearchQuery,
+}: {
+  movie: TMDBItem;
+  setSearchQuery: (searchQuery: string) => void;
+}) {
   // const isMovie = movie.media_type === "movie";
   // const isTv = movie.media_type === "tv";
 
@@ -32,7 +38,10 @@ function MovieMiniCard({ movie }: { movie: TMDBItem }) {
   return (
     <div
       className="group flex min-h-20 cursor-pointer items-center gap-3 px-3 py-2.5 hover:bg-neutral-800"
-      onClick={handleSubmit}
+      onClick={() => {
+        handleSubmit();
+        setSearchQuery("");
+      }}
     >
       <img
         src={imagePath ? `${backDropUrl}${imagePath}` : "/NoPoster.png"}

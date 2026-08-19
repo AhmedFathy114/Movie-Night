@@ -10,7 +10,7 @@
   font-family: "Roboto Slab", "Roboto Slab Fallback", sans-serif;
 }
 @utility carousal-inf {
-  @apply rounded-full border border-red-600 px-3 py-1.5 text-xs text-white sm:px-4 sm:py-2 sm:text-sm font-roboto bg-red-500/20 backdrop-blur-2xl;
+  @apply rounded-full border border-red-600 px-3 py-1.5 text-xs text-white sm:px-4 sm:py-2 sm:text-sm font-roboto bg-neutral-500/10 backdrop-blur-xs;
 }
 
 @layer base {
