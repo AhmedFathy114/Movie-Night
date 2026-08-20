@@ -179,6 +179,31 @@ export type StreamButtons = {
   urlType?: "path" | "query";
 };
 
+export type PersonDetails = {
+  adult: false;
+  also_known_as: [];
+  biography: string;
+  birthday: string;
+  known_for_department: string;
+  name: string;
+  place_of_birth: string;
+  profile_path: string;
+};
+
+export type PersonSocials = {
+  imdb_id: string;
+  facebook_id: string;
+  instagram_id: string;
+  tiktok_id: string;
+  twitter_id: string;
+  youtube_id: string;
+  wikidata_id: string;
+};
+
+export type PersonMovies = {
+  cast: Movie[];
+};
+
 export type MovieResponse = PaginatedResponse<Movie>;
 
 export type TVResponse = PaginatedResponse<TVShow>;

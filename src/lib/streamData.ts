@@ -11,6 +11,11 @@ export const streamData: StreamButtons[] = [
     urlType: "query",
   },
   {
+    name: "Videasy",
+    full_url: "https://player.videasy.net/movie/",
+    urlType: "path",
+  },
+  {
     name: "VidSrc (me)",
     full_url: "https://vidsrcme.ru/embed/movie/",
     urlType: "path",
@@ -104,11 +109,6 @@ export const streamData: StreamButtons[] = [
   {
     name: "ScreenScape",
     full_url: "https://screenscape.me/embed?tmdb=",
-    urlType: "path",
-  },
-  {
-    name: "Videasy",
-    full_url: "https://player.videasy.net/movie/",
     urlType: "path",
   },
 ];

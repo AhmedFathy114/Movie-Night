@@ -1,7 +1,7 @@
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { streamData } from "@/lib/streamData";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Player() {
@@ -18,15 +18,6 @@ function Player() {
       ? `${activeServer.full_url}${movieId}&tmdb=1`
       : `${activeServer.full_url}${movieId}`
     : "";
-
-  useEffect(() => {
-    if (!activeServer) return;
-
-    playerRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  }, [activeServer]);
 
   return (
     <>

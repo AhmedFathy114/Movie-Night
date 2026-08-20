@@ -171,24 +171,24 @@ function MovieHero({
                 flex
                 flex-wrap
                 justify-center
-                gap-2
-
+                gap-3
+                item-center
                 sm:gap-3
 
                 lg:justify-start
               "
             >
-              <span className="carousal-inf">
+              <span className="carousal-inf flex justify-center items-center">
                 {formatDate(movie.release_date) || "N/A"}
               </span>
 
-              <span className="carousal-inf">
+              <span className="carousal-inf flex justify-center items-center">
                 {hours === 0 && minutes === 0
                   ? "N/A"
                   : `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m` : ""}`}
               </span>
 
-              <span className="mt-2 lg:mt-0 carousal-inf flex items-center">
+              <span className=" carousal-inf  flex justify-center items-center">
                 {movie.vote_average.toFixed(1)}/10
                 <Stars vote_average={movie.vote_average} size={17} />
               </span>

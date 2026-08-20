@@ -8,11 +8,11 @@ import "./App.css";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Loading from "./components/Loaders/Loading";
 import About from "./pages/About";
-import ScrollToTop from "./components/ScrollToTop";
 import TvDetails from "./pages/Details/TvDetails";
 import ActorDetails from "./pages/Details/ActorDetails";
 import FullCast from "./pages/Details/FullCast";
 import Player from "./pages/players/MoviePlayer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -66,7 +66,7 @@ function App() {
             <Route path="/movie/cast/:movieId" element={<FullCast />} />
             <Route path="/movie/player/:movieId/:slug" element={<Player />} />
             <Route path="/tv/:movieId/:slug" element={<TvDetails />} />
-            <Route path="/actor/:movieId/:slug" element={<ActorDetails />} />
+            <Route path="/actor/:actorId/:slug" element={<ActorDetails />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />

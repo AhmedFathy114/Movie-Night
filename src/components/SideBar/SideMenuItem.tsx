@@ -1,24 +1,30 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import type { MenuItem } from "@/types/Movies";
 
-function SideMenuItem({ item }: { item: MenuItem }) {
+function SideMenuItem({
+  item,
+  onNavigate,
+}: {
+  item: MenuItem;
+  onNavigate?: () => void;
+}) {
   const Icon = item.icon;
 
   return (
-    <Link
+    <NavLink
       to={item.to}
-      className="
+      onClick={onNavigate}
+      className={({ isActive }) => `
         group flex items-center gap-4
         rounded-md px-3 py-2.5
-        text-neutral-400
         transition-all duration-200
-        hover:text-red-500
-      "
+        ${isActive ? "text-red-500 text-[20px]" : "text-neutral-400 hover:text-red-500 text-[18px]"}
+      `}
     >
       {Icon && <Icon size={18} />}
 
-      <span className="font-bebas text-[18px] tracking-wide">{item.title}</span>
-    </Link>
+      <span className="font-bebas  tracking-wide">{item.title}</span>
+    </NavLink>
   );
 }
 

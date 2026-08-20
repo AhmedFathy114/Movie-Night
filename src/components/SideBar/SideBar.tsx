@@ -9,16 +9,18 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Compass, House, Menu, X } from "lucide-react";
 import { exploreItems, genreItems } from "@/lib/Header/HeaderConstants";
 import SideMenuItem from "./SideMenuItem";
 import SectionTitle from "./SideBarTitle";
+import { useState } from "react";
 
 function SideBar() {
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       {/* Open Button */}
       <SheetTrigger
         render={
@@ -125,52 +127,57 @@ function SideBar() {
           "
         >
           {/* Home */}
-          <Link
+          <NavLink
             to="/home"
-            className="
-              group flex items-center gap-4
-              rounded-md px-3 py-2.5
-              text-neutral-400
-              transition-all duration-200
-              hover:bg-red-950/40
-              hover:text-red-500
-            "
+            onClick={() => setOpen(false)}
+            className={({ isActive }) => `
+            group flex items-center gap-4
+            rounded-md px-3 py-2.5
+            transition-all duration-200
+            ${isActive ? "text-red-500 text-[20px]" : "text-neutral-400 hover:text-red-500 text-[18px]"}
+          `}
           >
             <House size={19} strokeWidth={2.5} />
 
-            <span className="font-bebas text-[18px] tracking-wide">Home</span>
-          </Link>
+            <span className="font-bebas tracking-wide">Home</span>
+          </NavLink>
 
           {/* Explore */}
-          <Link
-            to="/explore"
-            className="
+          <NavLink
+            to="/about"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) => `
               group flex items-center gap-4
               rounded-md px-3 py-2.5
-              text-neutral-400
               transition-all duration-200
-              hover:text-red-500
-            "
+              ${isActive ? "text-red-500 text-[20px]" : "text-neutral-400 hover:text-red-500 text-[18px]"}
+            `}
           >
             <Compass size={19} strokeWidth={2.5} />
 
-            <span className="font-bebas text-[18px] tracking-wide">
-              Explore
-            </span>
-          </Link>
+            <span className="font-bebas tracking-wide ">About</span>
+          </NavLink>
 
           {/* Categories */}
           <SectionTitle>Categories</SectionTitle>
 
           {exploreItems.map((item) => (
-            <SideMenuItem key={item.title} item={item} />
+            <SideMenuItem
+              key={item.title}
+              item={item}
+              onNavigate={() => setOpen(false)}
+            />
           ))}
 
           {/* Genres */}
           <SectionTitle>Genres</SectionTitle>
 
           {genreItems.map((item) => (
-            <SideMenuItem key={item.title} item={item} />
+            <SideMenuItem
+              key={item.title}
+              item={item}
+              onNavigate={() => setOpen(false)}
+            />
           ))}
         </div>
       </SheetContent>
