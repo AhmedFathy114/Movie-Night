@@ -9,14 +9,15 @@ import AppLayout from "./components/AppLayout/AppLayout";
 import Loading from "./components/Loaders/Loading";
 import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
-import TvDetails from "./pages/TvDetails";
-import ActorDetails from "./pages/ActorDetails";
-import FullCast from "./pages/FullCast";
+import TvDetails from "./pages/Details/TvDetails";
+import ActorDetails from "./pages/Details/ActorDetails";
+import FullCast from "./pages/Details/FullCast";
+import Player from "./pages/players/MoviePlayer";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const Profile = lazy(() => import("./pages/Profile"));
-const MovieDetails = lazy(() => import("./pages/MovieDetails"));
+const MovieDetails = lazy(() => import("./pages/Details/MovieDetails"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const queryClient = new QueryClient({
@@ -28,12 +29,16 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(() => {
+    return !sessionStorage.getItem("app-loader-shown");
+  });
   const [hideLoader, setHideLoader] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setHideLoader(true);
+
+      sessionStorage.setItem("app-loader-shown", "true");
 
       const removeTimer = setTimeout(() => {
         setShowLoader(false);
@@ -59,6 +64,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/movie/:movieId/:slug" element={<MovieDetails />} />
             <Route path="/movie/cast/:movieId" element={<FullCast />} />
+            <Route path="/movie/player/:movieId/:slug" element={<Player />} />
             <Route path="/tv/:movieId/:slug" element={<TvDetails />} />
             <Route path="/actor/:movieId/:slug" element={<ActorDetails />} />
             <Route path="/profile" element={<Profile />} />

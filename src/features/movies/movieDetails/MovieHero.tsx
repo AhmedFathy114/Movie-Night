@@ -4,6 +4,7 @@ import { backDropUrl } from "@/lib/Variables";
 import type { genres, Movie, Videos } from "@/types/Movies";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function MovieHero({
   finalTrailer,
@@ -12,6 +13,8 @@ function MovieHero({
   finalTrailer?: Videos;
   movie: Movie;
 }) {
+  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const hours = Math.floor(movie.runtime / 60);
   const minutes = movie.runtime % 60;
@@ -176,12 +179,13 @@ function MovieHero({
               "
             >
               <span className="carousal-inf">
-                {formatDate(movie.release_date)}
+                {formatDate(movie.release_date) || "N/A"}
               </span>
 
               <span className="carousal-inf">
-                {hours > 0 && `${hours}h `}
-                {minutes > 0 && `${minutes}m`}
+                {hours === 0 && minutes === 0
+                  ? "N/A"
+                  : `${hours > 0 ? `${hours}h ` : ""}${minutes > 0 ? `${minutes}m` : ""}`}
               </span>
 
               <span className="mt-2 lg:mt-0 carousal-inf flex items-center">
@@ -268,6 +272,9 @@ function MovieHero({
               "
             >
               <button
+                onClick={() =>
+                  navigate(`/movie/player/${Number(movieId)}/${slug}`)
+                }
                 className="
                   cursor-pointer
                   rounded-full

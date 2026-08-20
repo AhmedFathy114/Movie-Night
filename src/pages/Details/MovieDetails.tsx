@@ -1,10 +1,10 @@
-import DetailsSection from "@/features/movies/DetailsSection";
-import MovieHero from "@/features/movies/MovieHero";
+import DetailsSection from "@/features/movies/movieDetails/DetailsSection";
+import MovieHero from "@/features/movies/movieDetails/MovieHero";
 import PageLoader from "@/features/Shared/PageLoader";
 import CastCard from "@/components/Cards/CastCard";
-import { useMovieCredits } from "@/features/movies/useMovieCredits";
-import { useMovieDetails } from "@/features/movies/useMovieDetails";
-import { useMovieVideos } from "@/features/movies/useMovieVideos";
+import { useMovieCredits } from "@/features/movies/movieDetails/useMovieCredits";
+import { useMovieDetails } from "@/features/movies/movieDetails/useMovieDetails";
+import { useMovieVideos } from "@/features/movies/movieDetails/useMovieVideos";
 import { useParams } from "react-router-dom";
 import type {
   CastMember,
@@ -14,9 +14,9 @@ import type {
 } from "@/types/Movies";
 import TrailerCard from "@/components/Cards/TrailerCard";
 import CollectionCard from "@/components/Cards/CollectionCard";
-import { useMovieCollection } from "@/features/movies/useMovieCollection";
-import { useMovieRecommended } from "@/features/movies/useMovieRecommended";
-import { useMovieSimilar } from "@/features/movies/useMovieSimilar";
+import { useMovieCollection } from "@/features/movies/movieDetails/useMovieCollection";
+import { useMovieRecommended } from "@/features/movies/movieDetails/useMovieRecommended";
+import { useMovieSimilar } from "@/features/movies/movieDetails/useMovieSimilar";
 
 function MovieDetails() {
   const { movieId } = useParams<{ movieId: string }>();

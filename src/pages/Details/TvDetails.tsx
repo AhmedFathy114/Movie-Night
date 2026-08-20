@@ -1,5 +1,4 @@
 import PageLoader from "@/features/Shared/PageLoader";
-
 function TvDetails() {
   return (
     <>

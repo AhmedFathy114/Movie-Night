@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useWeeklyMovies } from "../useWeeklyMovie";
+import { useWeeklyMovies } from "./useWeeklyMovie";
 
 import "swiper/css";
 import "swiper/css/navigation";

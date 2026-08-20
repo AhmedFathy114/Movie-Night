@@ -1,6 +1,6 @@
 import CastCard from "@/components/Cards/CastCard";
-import { useMovieCredits } from "@/features/movies/useMovieCredits";
-import { useMovieDetails } from "@/features/movies/useMovieDetails";
+import { useMovieCredits } from "@/features/movies/movieDetails/useMovieCredits";
+import { useMovieDetails } from "@/features/movies/movieDetails/useMovieDetails";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useParams } from "react-router-dom";
 
