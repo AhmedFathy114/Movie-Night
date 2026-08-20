@@ -1,7 +1,7 @@
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { streamData } from "@/lib/streamData";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Player() {
@@ -10,19 +10,23 @@ function Player() {
     slug: string;
   }>();
 
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const availableServers = streamData.filter(
-    (server) => !isMobile || server.mobileSupported,
-  );
-
-  const [activeServer, setActiveServer] = useState(availableServers[0]);
+  const [activeServer, setActiveServer] = useState(streamData[0]);
+  const playerRef = useRef<HTMLDivElement>(null);
 
   const embedUrl = activeServer
     ? activeServer.urlType === "query"
       ? `${activeServer.full_url}${movieId}&tmdb=1`
       : `${activeServer.full_url}${movieId}`
     : "";
+
+  useEffect(() => {
+    if (!activeServer) return;
+
+    playerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [activeServer]);
 
   return (
     <>
@@ -44,8 +48,11 @@ function Player() {
           </p>
 
           {/* Servers */}
-          <div className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start">
-            {availableServers.map((item) => (
+          <div
+            ref={playerRef}
+            className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start"
+          >
+            {streamData.map((item) => (
               <StreamButton
                 key={item.name}
                 name={item.name}

@@ -177,7 +177,6 @@ export type StreamButtons = {
   name: string;
   full_url: string;
   urlType?: "path" | "query";
-  mobileSupported?: boolean;
 };
 
 export type MovieResponse = PaginatedResponse<Movie>;
