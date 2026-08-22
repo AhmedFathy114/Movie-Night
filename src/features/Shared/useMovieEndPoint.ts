@@ -4,12 +4,12 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 export function useMovieEndPoint<T>(
   endpoint: string,
   params?: Record<string, string | number | boolean>,
-  enabled = true,
+  shouldFetch: boolean = false,
 ) {
   const { data, isPending } = useQuery<T>({
     queryKey: ["movies", endpoint, params],
     queryFn: () => fetchMovies(endpoint, params),
-    enabled,
+    enabled: shouldFetch,
     placeholderData: keepPreviousData,
   });
 

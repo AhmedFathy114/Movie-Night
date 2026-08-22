@@ -9,14 +9,9 @@ import { useParams } from "react-router-dom";
 function ActorDetails() {
   const { actorId } = useParams<{ actorId: string }>();
   const { actor, isActorDetailsLoading } = useActorDetails(Number(actorId));
-  const { socials, isActorSocialLoading } = useActorSocials(Number(actorId));
-  const { movies, isActorMoviesLoading } = useActorMovies(Number(actorId));
-  if (
-    isActorDetailsLoading ||
-    !actor ||
-    isActorSocialLoading ||
-    isActorMoviesLoading
-  )
+  const { socials } = useActorSocials(Number(actorId));
+  const { movies } = useActorMovies(Number(actorId));
+  if (isActorDetailsLoading || !actor)
     return <PageLoader message="Loading Actor Details" />;
   return (
     <>
@@ -28,7 +23,7 @@ function ActorDetails() {
           title="Filmography"
           key={actorId}
           items={movies?.cast}
-          renderItem={(item) => <CollectionCard key={item.id} movie={item}/>}
+          renderItem={(item) => <CollectionCard key={item.id} movie={item} />}
         />
       )}
     </>

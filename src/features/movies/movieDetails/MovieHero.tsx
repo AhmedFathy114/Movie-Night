@@ -19,7 +19,6 @@ function MovieHero({
   const hours = Math.floor(movie.runtime / 60);
   const minutes = movie.runtime % 60;
 
-  if (!movie) return null;
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
       {/* Background */}

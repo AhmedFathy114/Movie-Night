@@ -15,7 +15,6 @@ function ActorHero({
   actor: PersonDetails;
   socials?: PersonSocials;
 }) {
-  console.log(actor.profile_path);
 
   if (!actor) return null;
   return (

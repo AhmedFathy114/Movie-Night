@@ -25,27 +25,15 @@ function MovieDetails() {
   const { videos } = useMovieVideos(Number(movieId));
   const { credits, isCreditLoading } = useMovieCredits(Number(movieId));
   const collectionId = movie?.belongs_to_collection?.id;
-  const { collections, isCollectionLoading } = useMovieCollection(
-    Number(collectionId),
-  );
-  const { Recommended, isRecommendedLoading } = useMovieRecommended(
-    Number(movieId),
-  );
-  const { Similar, isSimilarLoading } = useMovieSimilar(Number(movieId));
+  const { collections } = useMovieCollection(Number(collectionId));
+  const { Recommended } = useMovieRecommended(Number(movieId));
+  const { Similar } = useMovieSimilar(Number(movieId));
 
-  if (
-    isMovieLoading ||
-    !movie ||
-    isCreditLoading ||
-    !credits ||
-    (collectionId && isCollectionLoading) ||
-    isRecommendedLoading ||
-    isSimilarLoading
-  )
+  if (isMovieLoading || !movie || isCreditLoading || !credits)
     return <PageLoader message="Fetching Movie Details" />;
 
   const hasMoreCast = credits?.cast.length > 12;
-  const visibleCast = credits.cast.slice(0, 12);
+  const visibleCast = credits?.cast.slice(0, 12);
 
   const finalTrailer =
     videos?.results.find(
@@ -71,7 +59,7 @@ function MovieDetails() {
     <>
       <PageLoader key={movieId} message="Fetching Movie Details" />
 
-      <MovieHero finalTrailer={finalTrailer} movie={movie} />
+      {movie && <MovieHero finalTrailer={finalTrailer} movie={movie} />}
 
       {teasers.length > 2 && (
         <DetailsSection<Videos>

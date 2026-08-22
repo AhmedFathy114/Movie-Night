@@ -2,13 +2,42 @@ import MovieCard from "./Cards/MovieCard";
 
 import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
 import type { SectionProps, TMDBResponse } from "@/types/Movies";
+import { useEffect, useRef, useState } from "react";
 
 function Section({ endpoint, title, params }: SectionProps) {
-  const { data } = useMovieEndPoint<TMDBResponse>(endpoint, params);
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldFetch(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "500px",
+      },
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const { data } = useMovieEndPoint<TMDBResponse>(endpoint, params , shouldFetch);
 
   const movies = data?.results ?? [];
   return (
-    <section className="py-4 md:py-8 px-2 sm:px-4 relative" id={title}>
+    <section
+      className="py-4 md:py-8 px-2 sm:px-4 relative"
+      id={title}
+      ref={ref}
+    >
       <div
         className="flex items-center justify-between gap-3 mb-4 md:mb-6"
         id={endpoint}
