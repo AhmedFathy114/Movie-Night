@@ -15,7 +15,7 @@ function ActorHero({
   actor: PersonDetails;
   socials?: PersonSocials;
 }) {
-  // const navigate = useNavigate();
+  console.log(actor.profile_path);
 
   if (!actor) return null;
   return (
@@ -56,10 +56,14 @@ function ActorHero({
           <div className="flex flex-col justify-center gap-5 ">
             <div className="flex justify-center lg:justify-end">
               <img
-                src={`${backDropUrl}${actor.profile_path}`}
+                src={
+                  actor.profile_path
+                    ? `${backDropUrl}${actor.profile_path}`
+                    : "/NoPoster.png"
+                }
                 alt={actor.name}
                 decoding="async"
-                className="
+                className={`
                 h-100
                 w-full
                 rounded-2xl
@@ -74,8 +78,9 @@ function ActorHero({
                 md:h-105
                 md:w-70
                 lg:h-130
-                lg:w-auto
-              "
+                
+                ${actor.place_of_birth !== null ? "lg:w-auto" : "lg:w-90"}
+              `}
               />
             </div>
 

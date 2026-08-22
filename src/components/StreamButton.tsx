@@ -15,7 +15,7 @@ function StreamButton({
       type="button"
       onClick={setStreamUrl}
       className={`
-        flex w-40 items-center gap-3 rounded-xl px-3 py-1.5
+        flex w-38 md:w-40 items-center gap-3 rounded-xl px-2 md:px-3 py-1.5
         cursor-pointer transition-all duration-200
         ${
           active
@@ -33,7 +33,7 @@ function StreamButton({
         <img
           src={generateServerAvatar(name)}
           alt={name}
-          className="h-6 w-7 rounded-full"
+          className="h-6 w-7  rounded-full"
         />
       </div>
 

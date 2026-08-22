@@ -5,11 +5,11 @@ export function generateServerAvatar(name: string) {
 }
 
 export const streamData: StreamButtons[] = [
-  {
-    name: "MultiEmbed",
-    full_url: "https://multiembed.mov/?video_id=",
-    urlType: "query",
-  },
+  // {
+  //   name: "MultiEmbed",
+  //   full_url: "https://multiembed.mov/?video_id=",
+  //   urlType: "query",
+  // },
   {
     name: "Videasy",
     full_url: "https://player.videasy.net/movie/",
@@ -91,11 +91,11 @@ export const streamData: StreamButtons[] = [
     urlType: "path",
   },
 
-  {
-    name: "SuperEmbed",
-    full_url: "https://multiembed.mov/?video_id=",
-    urlType: "query",
-  },
+  // {
+  //   name: "SuperEmbed",
+  //   full_url: "https://multiembed.mov/?video_id=",
+  //   urlType: "query",
+  // },
   {
     name: "VidSpark",
     full_url: "https://vidspark.to/movie/",

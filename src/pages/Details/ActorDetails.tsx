@@ -28,7 +28,7 @@ function ActorDetails() {
           title="Filmography"
           key={actorId}
           items={movies?.cast}
-          renderItem={(item) => <CollectionCard key={item.id} movie={item} />}
+          renderItem={(item) => <CollectionCard key={item.id} movie={item}/>}
         />
       )}
     </>

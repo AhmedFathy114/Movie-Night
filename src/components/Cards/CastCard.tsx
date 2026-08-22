@@ -5,16 +5,18 @@ import { useNavigate, useParams } from "react-router-dom";
 function CastCard({
   cast,
   showMore = false,
+  handleSubmit,
 }: {
   cast: CastMember;
   showMore?: boolean;
+  handleSubmit?: () => void;
 }) {
   const navigate = useNavigate();
-  const {movieId} = useParams<{movieId:string}>();
+  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
   return (
     <>
       <div
-        // onClick={handleSubmit}
+        onClick={showMore ? undefined : handleSubmit}
         className="
         group
         mt-3 md:mt-0
@@ -49,7 +51,10 @@ function CastCard({
         </div>
 
         {showMore && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60" onClick={() => navigate(`/movie/cast/${movieId}`)}>
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center bg-black/60"
+            onClick={() => navigate(`/movie/cast/${movieId}/${slug}`)}
+          >
             <span className="text-5xl font-bold text-white">+</span>
 
             <span className="mt-1 font-roboto text-sm font-semibold text-white">

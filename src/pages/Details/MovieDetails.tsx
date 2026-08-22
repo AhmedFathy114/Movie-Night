@@ -5,7 +5,7 @@ import CastCard from "@/components/Cards/CastCard";
 import { useMovieCredits } from "@/features/movies/movieDetails/useMovieCredits";
 import { useMovieDetails } from "@/features/movies/movieDetails/useMovieDetails";
 import { useMovieVideos } from "@/features/movies/movieDetails/useMovieVideos";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type {
   CastMember,
   CollectionMovie,
@@ -19,7 +19,8 @@ import { useMovieRecommended } from "@/features/movies/movieDetails/useMovieReco
 import { useMovieSimilar } from "@/features/movies/movieDetails/useMovieSimilar";
 
 function MovieDetails() {
-  const { movieId } = useParams<{ movieId: string }>();
+  const navigate = useNavigate();
+  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
   const { movie, isMovieLoading } = useMovieDetails(Number(movieId));
   const { videos } = useMovieVideos(Number(movieId));
   const { credits, isCreditLoading } = useMovieCredits(Number(movieId));
@@ -41,7 +42,7 @@ function MovieDetails() {
     isRecommendedLoading ||
     isSimilarLoading
   )
-    return <PageLoader message="Loading Movie Details" />;
+    return <PageLoader message="Fetching Movie Details" />;
 
   const hasMoreCast = credits?.cast.length > 12;
   const visibleCast = credits.cast.slice(0, 12);
@@ -92,6 +93,7 @@ function MovieDetails() {
               key={item.id}
               cast={item}
               showMore={hasMoreCast && index === 11}
+              handleSubmit={() => navigate(`/actor/${item.id}/${slug}`)}
             />
           )}
         />

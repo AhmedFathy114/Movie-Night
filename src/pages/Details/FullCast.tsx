@@ -2,10 +2,11 @@ import CastCard from "@/components/Cards/CastCard";
 import { useMovieCredits } from "@/features/movies/movieDetails/useMovieCredits";
 import { useMovieDetails } from "@/features/movies/movieDetails/useMovieDetails";
 import PageLoader from "@/features/Shared/PageLoader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function FullCast() {
-  const { movieId } = useParams<{ movieId: string }>();
+  const navigate = useNavigate();
+  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
 
   const id = Number(movieId);
 
@@ -81,7 +82,11 @@ function FullCast() {
           "
           >
             {credits.cast.map((cast) => (
-              <CastCard key={`${cast.id}-${cast.credit_id}`} cast={cast} />
+              <CastCard
+                key={`${cast.id}-${cast.credit_id}`}
+                cast={cast}
+                handleSubmit={() => navigate(`/actor/${cast.id}/${slug}`)}
+              />
             ))}
           </div>
         </div>
