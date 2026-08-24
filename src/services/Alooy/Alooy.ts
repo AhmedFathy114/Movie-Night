@@ -3,8 +3,7 @@ import type {
   AlooyResponse,
 } from "@/types/Alooy";
 
-const ALOOY_API =
-  "https://eecsajchjmzzbigvaeae.supabase.co/functions/v1/alooy";
+const ALOOY_API = import.meta.env.VITE_ALOOY_API;
 
 export async function getAllAlooy(): Promise<AlooyResponse> {
   const res = await fetch(ALOOY_API);

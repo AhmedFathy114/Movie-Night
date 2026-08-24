@@ -7,21 +7,21 @@ import { createPortal } from "react-dom";
 import "./App.css";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Loading from "./components/Loaders/Loading";
-import About from "./pages/About";
-import TvDetails from "./pages/Details/TvDetails";
-import ActorDetails from "./pages/Details/ActorDetails";
-import FullCast from "./pages/Details/FullCast";
-import Player from "./pages/players/MoviePlayer";
+import About from "./pages/AboutPage";
+import TvDetails from "./pages/Details/TvDetailsPage";
+import ActorDetails from "./pages/Details/ActorDetailsPage";
+import FullCast from "./pages/Details/FullCastPage";
+import Player from "./pages/players/MoviePlayerPage";
 import ScrollToTop from "./components/ScrollToTop";
-import TvSession from "./pages/Details/TvSession";
-import TvPlayer from "./pages/players/TvPlayer";
-import Alooy from "./pages/Alooy";
-import AlooyPlayer from "./pages/players/AlooyPlayer";
+import TvSession from "./pages/Details/TvSessionPage";
+import TvPlayer from "./pages/players/TvPlayerPage";
+import Alooy from "./pages/AlooyPage";
+import AlooyPlayer from "./pages/players/AlooyPlayerPage";
 
-const Login = lazy(() => import("./pages/Login"));
-const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/LoginPage"));
+const Home = lazy(() => import("./pages/HomePage"));
 const Profile = lazy(() => import("./pages/Profile"));
-const MovieDetails = lazy(() => import("./pages/Details/MovieDetails"));
+const MovieDetails = lazy(() => import("./pages/Details/MovieDetailsPage"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const queryClient = new QueryClient({
