@@ -2,8 +2,12 @@ import Carousel from "@/features/movies/carousel/Carousel";
 import Section from "@/components/HomeSections";
 import PageLoader from "@/features/Shared/PageLoader";
 import { language } from "@/lib/Variables";
+import { useEffect } from "react";
 
 function Home() {
+  useEffect(() => {
+    document.title = "Movie Night";
+  }, []);
   return (
     <>
       <PageLoader message="Loading Home Page" />

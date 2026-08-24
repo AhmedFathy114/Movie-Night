@@ -1,4 +1,5 @@
 import { api } from "@/apis/Axios";
+import type { MovieCredits } from "@/types/Movies";
 
 export async function fetchMovies<T>(
   endpoint: string,
@@ -8,4 +9,32 @@ export async function fetchMovies<T>(
     params,
   });
   return response.data;
+}
+
+export async function getCredits(
+  id: number,
+  type: string,
+): Promise<MovieCredits> {
+  const res = await api.get(`/${type}/${id}/credits`);
+  return res.data;
+}
+
+export async function getDetails<T>(id: number, type: string): Promise<T> {
+  const res = await api.get<T>(`/${type}/${id}`);
+  return res.data;
+}
+
+export async function getVideos<T>(id: number, type: string): Promise<T> {
+  const res = await api.get<T>(`/${type}/${id}/videos`);
+  return res.data;
+}
+
+export async function getRecommended<T>(id: number, type: string): Promise<T> {
+  const res = await api.get(`/${type}/${id}/recommendations`);
+  return res.data;
+}
+
+export async function getSimilar<T>(id: number, type: string): Promise<T> {
+  const res = await api.get(`/${type}/${id}/similar`);
+  return res.data;
 }

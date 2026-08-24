@@ -1,13 +1,21 @@
 import { slugify } from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { CollectionMovie } from "@/types/Movies";
+import type { CollectionMovie, TVShow } from "@/types/Movies";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-function CollectionCard({ movie }: { movie: CollectionMovie }) {
+function CollectionCard({
+  data,
+  type = "movie",
+}: {
+  data: CollectionMovie | TVShow;
+  type: string;
+}) {
   const navigate = useNavigate();
   function handleSubmit() {
-    navigate(`/movie/${movie.id}/${slugify(movie.title)}`);
+    navigate(
+      `/${type}/${data.id}/${slugify("title" in data ? data.title : data.name)}`,
+    );
   }
 
   return (
@@ -31,11 +39,17 @@ function CollectionCard({ movie }: { movie: CollectionMovie }) {
       <div className="overflow-hidden rounded-t-2xl ">
         <img
           src={
-            movie.poster_path
-              ? `${backDropUrl}${movie.poster_path}`
+            data.poster_path
+              ? `${backDropUrl}${data.poster_path}`
               : "/NoPoster.png"
           }
-          alt={movie.title || movie.original_title || "Poster"}
+          alt={
+            "title" in data
+              ? data.title || data.original_title
+              : data.name
+                ? data.name || data.original_name
+                : "Poster"
+          }
           className="
             h-75
             w-full
@@ -47,7 +61,11 @@ function CollectionCard({ movie }: { movie: CollectionMovie }) {
       </div>
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center bg-linear-to-t from-black via-black/70 to-transparent px-3 pb-3 pt-10 text-center">
         <p className="min-w-0 w-full truncate text-sm font-semibold text-white">
-          {movie.title || movie.original_title || "Poster"}
+          {"title" in data
+            ? data.title || data.original_title
+            : data.name
+              ? data.name || data.original_name
+              : "Poster"}
         </p>
 
         <div className="mt-1 flex items-center justify-center gap-1">
@@ -58,7 +76,7 @@ function CollectionCard({ movie }: { movie: CollectionMovie }) {
           />
 
           <span className="font-roboto text-sm font-bold text-red-600">
-            {movie.vote_average?.toFixed(1) ?? "N/A"}/10
+            {data.vote_average?.toFixed(1) ?? "N/A"}/10
           </span>
         </div>
       </div>

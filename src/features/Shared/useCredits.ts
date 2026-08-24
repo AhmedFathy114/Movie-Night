@@ -1,11 +1,11 @@
-import { getMovieCredits } from "@/services/movies/movie";
+import { getCredits } from "@/services/shared/allWithEndPoint";
 import type { MovieCredits } from "@/types/Movies";
 import { useQuery } from "@tanstack/react-query";
 
-export function useMovieCredits(id: number) {
+export function useCredits(id: number, type: string) {
   const { data: credits, isPending: isCreditLoading } = useQuery<MovieCredits>({
-    queryKey: ["movie-credits", id],
-    queryFn: () => getMovieCredits(id),
+    queryKey: [`${type}-credits`, id],
+    queryFn: () => getCredits(id, type),
     enabled: !!id,
   });
 

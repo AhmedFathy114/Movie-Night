@@ -7,7 +7,6 @@ function StreamButton({
 }: {
   name: string;
   setStreamUrl: () => void;
-  full_url: string;
   active: boolean;
 }) {
   return (

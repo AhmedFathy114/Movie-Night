@@ -1,4 +1,4 @@
-import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
+import { useMovieEndPoint } from "@/features/Shared/useAllEndPoint";
 import useDebounce from "@/hooks/useDebounce";
 import { language } from "@/lib/Variables";
 import type { TMDBResponse } from "@/types/Movies";

@@ -8,15 +8,19 @@ export function useNavigateDetails(movie: TMDBItem) {
   const { type, data } = useDefineType(movie);
   function handleSubmit() {
     if (type === "movie") {
-      navigate(`/movie/${movie.id}/${slugify(data.title)}`);
+      navigate(
+        `/movie/${movie.id}/${slugify(`${data.title}-${data.release_date.slice(0, 4)}`)}`,
+      );
     }
     if (type === "tv") {
-      navigate(`/tv/${movie.id}/${slugify(data.name)}`);
+      navigate(
+        `/tv/${movie.id}/${slugify(`${data.name}-${data.first_air_date.slice(0, 4)}`)}`,
+      );
     }
     if (type === "actor") {
       navigate(`/actor/${movie.id}/${slugify(data.name)}`);
     }
   }
 
-  return {handleSubmit}
+  return { handleSubmit };
 }

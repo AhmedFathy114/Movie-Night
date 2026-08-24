@@ -30,7 +30,7 @@ function AppLayout() {
     <section className="flex min-h-screen flex-col bg-black">
       <Header />
 
-      <main className="flex-1">
+      <main className="flex-1 text-white">
         <Outlet />
       </main>
 

@@ -6,13 +6,17 @@ function CastCard({
   cast,
   showMore = false,
   handleSubmit,
+  id,
+  type = "movie",
 }: {
   cast: CastMember;
   showMore?: boolean;
   handleSubmit?: () => void;
+  type?: string;
+  id: number;
 }) {
   const navigate = useNavigate();
-  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
+  const { slug } = useParams<{ slug: string }>();
   return (
     <>
       <div
@@ -53,7 +57,7 @@ function CastCard({
         {showMore && (
           <div
             className="absolute inset-0 flex flex-col items-center justify-center bg-black/60"
-            onClick={() => navigate(`/movie/cast/${movieId}/${slug}`)}
+            onClick={() => navigate(`/${type}/cast/${id}/${slug}`)}
           >
             <span className="text-5xl font-bold text-white">+</span>
 

@@ -13,6 +13,10 @@ import ActorDetails from "./pages/Details/ActorDetails";
 import FullCast from "./pages/Details/FullCast";
 import Player from "./pages/players/MoviePlayer";
 import ScrollToTop from "./components/ScrollToTop";
+import TvSession from "./pages/Details/TvSession";
+import TvPlayer from "./pages/players/TvPlayer";
+import Alooy from "./pages/Alooy";
+import AlooyPlayer from "./pages/players/AlooyPlayer";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -62,10 +66,20 @@ function App() {
             <Route index element={<Navigate replace to="/home" />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/alooy" element={<Alooy />} />
+            <Route path="/alooy/:alloyId/:slug" element={<AlooyPlayer />} />
             <Route path="/movie/:movieId/:slug" element={<MovieDetails />} />
-            <Route path="/movie/cast/:movieId/:slug" element={<FullCast />} />
+            <Route path="/:type/cast/:id/:slug" element={<FullCast />} />
             <Route path="/movie/player/:movieId/:slug" element={<Player />} />
-            <Route path="/tv/:movieId/:slug" element={<TvDetails />} />
+            <Route path="/tv/:tvId/:slug" element={<TvDetails />} />
+            <Route
+              path="/tv/season/:tvId/:seasonNumber/:slug"
+              element={<TvSession />}
+            />
+            <Route
+              path="/tv/player/:tvId/:seasonNumber/:episodeNumber/:slug"
+              element={<TvPlayer />}
+            />
             <Route path="/actor/:actorId/:slug" element={<ActorDetails />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

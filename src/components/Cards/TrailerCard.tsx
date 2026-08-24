@@ -29,6 +29,7 @@ function TrailerCard({ video }: { video: Videos }) {
           ring-1
           ring-white/10
           hover:scale-[1.01]
+          transition-all duration-300
         "
       >
         <iframe
@@ -55,7 +56,7 @@ function TrailerCard({ video }: { video: Videos }) {
           leading-tight
           text-white
           transition-colors
-          duration-200
+          duration-300
           group-hover:text-red-500
           lg:text-[14px]
           overflow-hidden

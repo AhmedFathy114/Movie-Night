@@ -20,3 +20,11 @@ export function slugify(title: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
+
+export function capitalizeWords(value: string) {
+  return value
+    .replace(/-(\d{4})$/, " ($1)")
+    .replaceAll("-", " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}

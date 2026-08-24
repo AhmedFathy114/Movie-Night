@@ -1,7 +1,7 @@
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
-import { streamData } from "@/lib/streamData";
-import { useRef, useState } from "react";
+import { streamDataMovie } from "@/lib/streamData";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Player() {
@@ -9,8 +9,26 @@ function Player() {
     movieId: string;
     slug: string;
   }>();
+  const [activeServerName, setActiveServerName] = useState(
+    streamDataMovie[0].name,
+  );
 
-  const [activeServer, setActiveServer] = useState(streamData[0]);
+  const activeServer = streamDataMovie.find(
+    (server) => server.name === activeServerName,
+  )!;
+
+  useEffect(() => {
+    if (!window.history.state?.server) {
+      window.history.replaceState(
+        {
+          server: activeServerName,
+        },
+        "",
+        window.location.href,
+      );
+    }
+  }, [activeServerName]);
+
   const playerRef = useRef<HTMLDivElement>(null);
 
   const embedUrl = activeServer
@@ -18,6 +36,32 @@ function Player() {
       ? `${activeServer.full_url}${movieId}&tmdb=1`
       : `${activeServer.full_url}${movieId}`
     : "";
+
+  const handleServerChange = (serverName: string) => {
+    setActiveServerName(serverName);
+
+    window.history.pushState(
+      {
+        server: serverName,
+      },
+      "",
+      window.location.href,
+    );
+  };
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state?.server) {
+        setActiveServerName(event.state.server);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
     <>
@@ -43,13 +87,12 @@ function Player() {
             ref={playerRef}
             className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start"
           >
-            {streamData.map((item) => (
+            {streamDataMovie.map((item) => (
               <StreamButton
                 key={item.name}
                 name={item.name}
-                full_url={item.full_url}
-                setStreamUrl={() => setActiveServer(item)}
-                active={item.name === activeServer.name}
+                setStreamUrl={() => handleServerChange(item.name)}
+                active={item.name === activeServerName}
               />
             ))}
           </div>

@@ -11,7 +11,7 @@ import {
 
 import { NavLink } from "react-router-dom";
 
-import { Compass, House, Menu, X } from "lucide-react";
+import { Compass, House, Menu, Tv, X } from "lucide-react";
 import { exploreItems, genreItems } from "@/lib/Header/HeaderConstants";
 import SideMenuItem from "./SideMenuItem";
 import SectionTitle from "./SideBarTitle";
@@ -140,6 +140,21 @@ function SideBar() {
             <House size={19} strokeWidth={2.5} />
 
             <span className="font-bebas tracking-wide">Home</span>
+          </NavLink>
+
+          <NavLink
+            to="/alooy"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) => `
+              group flex items-center gap-4
+              rounded-md px-3 py-2.5
+              transition-all duration-200
+              ${isActive ? "text-red-500 text-[20px]" : "text-neutral-400 hover:text-red-500 text-[18px]"}
+            `}
+          >
+            <Tv size={19} strokeWidth={2.5} />
+
+            <span className="font-bebas tracking-wide ">Alooy Tv</span>
           </NavLink>
 
           {/* Explore */}

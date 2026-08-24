@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MovieMiniCard from "../Cards/MovieMiniCard";
-import { useMovieEndPoint } from "@/features/Shared/useMovieEndPoint";
+import { useMovieEndPoint } from "@/features/Shared/useAllEndPoint";
 import type { TMDBResponse } from "@/types/Movies";
 import { language } from "@/lib/Variables";
 import { Search as SearchIcon, X } from "lucide-react";
@@ -120,7 +120,11 @@ function Search() {
             movies.length > 0 && (
               <div className="divide-y divide-neutral-800">
                 {movies.map((movie) => (
-                  <MovieMiniCard key={movie.id} movie={movie} setSearchQuery={setSearchQuery} />
+                  <MovieMiniCard
+                    key={movie.id}
+                    movie={movie}
+                    setSearchQuery={setSearchQuery}
+                  />
                 ))}
               </div>
             )

@@ -70,7 +70,7 @@ export type SectionProps = {
 };
 
 export type genres = {
-  genres: unknown;
+  genres?: unknown;
   id: number;
   name: string;
 };
@@ -136,11 +136,12 @@ export type MovieCredits = {
 };
 
 export type SectionDetailsProps<T> = {
-  movieId: number;
+  id: number;
   title: string;
   items: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
   horizontal?: boolean;
+  list?: boolean;
 };
 
 export type CollectionMovie = Pick<
@@ -202,6 +203,76 @@ export type PersonSocials = {
 
 export type PersonMovies = {
   cast: Movie[];
+};
+
+export type TVSeason = {
+  air_date: string | null;
+  episode_count: number;
+  id: number;
+  name: string;
+  poster_path: string | null;
+  season_number: number;
+  vote_average: number;
+};
+
+export type TVDetails = {
+  backdrop_path: string | null;
+
+  first_air_date: string;
+
+  genres: genres[];
+
+  name: string;
+
+  number_of_episodes: number;
+  number_of_seasons: number;
+
+  original_name: string;
+
+  overview: string;
+
+  poster_path: string | null;
+
+  seasons: TVSeason[];
+
+  vote_average: number;
+};
+
+export type TVEpisode = {
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string | null;
+  vote_average: number;
+  vote_count: number;
+  crew: unknown[];
+  guest_stars: unknown[];
+};
+
+export type TvSessionHeroProps = {
+  tvName: string;
+  backdropPath: string | null;
+  season: TVSeasonDetails;
+  finalTrailer?: Videos;
+};
+
+export type TVSeasonDetails = {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string | null;
+  season_number: number;
+  air_date: string | null;
+  vote_average: number;
+
+  episodes: TVEpisode[];
 };
 
 export type MovieResponse = PaginatedResponse<Movie>;

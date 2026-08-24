@@ -1,25 +1,42 @@
 import CastCard from "@/components/Cards/CastCard";
-import { useMovieCredits } from "@/features/movies/movieDetails/useMovieCredits";
-import { useMovieDetails } from "@/features/movies/movieDetails/useMovieDetails";
+import { useCredits } from "@/features/Shared/useCredits";
+import { useDetails } from "@/features/Shared/useDetails";
 import PageLoader from "@/features/Shared/PageLoader";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import type { Movie, TVDetails } from "@/types/Movies";
+import { capitalizeWords } from "@/lib/utils";
 
 function FullCast() {
   const navigate = useNavigate();
-  const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
+  const { id, slug, type } = useParams<{
+    id: string;
+    slug: string;
+    type: string;
+  }>();
 
-  const id = Number(movieId);
+  const { credits, isCreditLoading } = useCredits(Number(id), type!);
+  const { details, isLoadingDetails } = useDetails<Movie | TVDetails>(
+    Number(id),
+    type!,
+  );
 
-  const { credits, isCreditLoading } = useMovieCredits(id);
-  const { movie, isMovieLoading } = useMovieDetails(id);
+  useEffect(
+    function () {
+      document.title = slug
+        ? `${capitalizeWords(slug)} cast & actors | Movie Night`
+        : "Movie Night";
+    },
+    [slug],
+  );
 
-  if (isCreditLoading || isMovieLoading || !credits || !movie) {
+  if (isCreditLoading || isLoadingDetails || !credits || !details) {
     return <PageLoader message="Fetching full cast" />;
   }
 
   return (
     <>
-      <PageLoader key={movieId} message="Fetching full cast" />
+      <PageLoader key={id} message="Fetching full cast" />
       <main className="min-h-dvh bg-black px-4 py-24 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           {/* Header */}
@@ -49,7 +66,7 @@ function FullCast() {
                 md:text-3xl
               "
               >
-                {movie.title}
+                {"title" in details ? details.title : details.name}
               </h2>
 
               <span
@@ -62,7 +79,11 @@ function FullCast() {
                 md:text-lg
               "
               >
-                ({movie.release_date.slice(0, 4)})
+                (
+                {"release_date" in details
+                  ? details.release_date.slice(0, 4)
+                  : details.first_air_date.slice(0, 4)}
+                )
               </span>
             </div>
 
@@ -85,6 +106,7 @@ function FullCast() {
               <CastCard
                 key={`${cast.id}-${cast.credit_id}`}
                 cast={cast}
+                id={Number(id)}
                 handleSubmit={() => navigate(`/actor/${cast.id}/${slug}`)}
               />
             ))}

@@ -1,43 +1,48 @@
 import { api } from "@/apis/Axios";
 import type {
-  Movie,
   MovieCollection,
-  MovieCredits,
   MovieResponse,
-  MovieVideos,
 } from "@/types/Movies";
+
+interface TmdbSearchResult {
+  id: number;
+  media_type: "movie" | "tv" | "person";
+  title?: string;
+  name?: string;
+  poster_path: string | null;
+}
+
+interface TmdbSearchResponse {
+  results: TmdbSearchResult[];
+}
+
 
 export async function getWeeklyMovies(): Promise<MovieResponse> {
   const res = await api.get("/trending/movie/week");
   return res.data;
 }
 
-export async function getMovieDetails(id: number): Promise<Movie> {
-  const res = await api.get(`/movie/${id}`);
-  return res.data;
-}
-
-export async function getMovieVideos(id: number): Promise<MovieVideos> {
-  const res = await api.get(`/movie/${id}/videos`);
-  return res.data;
-}
-
-export async function getMovieCredits(id: number): Promise<MovieCredits> {
-  const res = await api.get(`/movie/${id}/credits`);
-  return res.data;
-}
 
 export async function getMovieCollection(id: number): Promise<MovieCollection> {
   const res = await api.get(`/collection//${id}`);
   return res.data;
 }
 
-export async function getMovieRecommended(id: number): Promise<MovieResponse> {
-  const res = await api.get(`/movie/${id}/recommendations`);
-  return res.data;
-}
+export async function searchAlooyPoster(title: string) {
+  const { data } = await api.get<TmdbSearchResponse>("/search/multi", {
+    params: {
+      query: title,
+      language: "ar",
+      page: 1,
+      include_adult: false,
+    },
+  });
 
-export async function getMovieSimilar(id: number): Promise<MovieResponse> {
-  const res = await api.get(`/movie/${id}/similar`);
-  return res.data;
+  return (
+    data.results.find(
+      (item) =>
+        (item.media_type === "movie" || item.media_type === "tv") &&
+        item.poster_path,
+    ) ?? null
+  );
 }
