@@ -1,4 +1,4 @@
-import { getDetails } from "@/services/shared/allWithEndPoint";
+import { getDetails } from "@/services/shared/AllWithEndPoint";
 import { useQuery } from "@tanstack/react-query";
 
 export function useDetails<T>(id: number, type: string) {

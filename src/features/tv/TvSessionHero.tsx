@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, X } from "lucide-react";
 import { useState } from "react";
 import { backDropUrl } from "@/lib/Variables";
-import type { TVDetails, TvSessionHeroProps } from "@/types/Movies";
+import type { TVDetails, TvSessionHeroProps } from "@/types/AllTypes";
 import Stars from "@/components/Stars";
 import formatDate, { slugify } from "@/lib/utils";
 import { Link, useParams } from "react-router-dom";

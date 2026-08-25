@@ -1,4 +1,4 @@
-import type { MenuItem } from "@/types/Movies";
+import type { MenuItem } from "@/types/AllTypes";
 import { NavigationMenuLink } from "../ui/navigation-menu";
 import { Link } from "react-router-dom";
 

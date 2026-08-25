@@ -1,6 +1,6 @@
 import { slugify } from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { TVDetails, TVSeason } from "@/types/Movies";
+import type { TVDetails, TVSeason } from "@/types/AllTypes";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 

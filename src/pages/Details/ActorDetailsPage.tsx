@@ -28,12 +28,12 @@ function ActorDetails() {
     <>
       <PageLoader message="Loading Actor Details" />
       <ActorHero actor={actor} socials={socials} />
-      {movies?.cast.length && (
+      {(movies?.cast.length ?? 0) > 1 && (
         <DetailsSection
           id={Number(actorId)}
           title="Filmography"
           key={actorId}
-          items={movies?.cast}
+          items={movies?.cast ?? []}
           renderItem={(item) => (
             <CollectionCard key={item.id} data={item} type="movie" />
           )}

@@ -17,20 +17,4 @@ export default defineConfig({
     },
   },
 
-  server: {
-    proxy: {
-      "/api/alooy": {
-        target: "http://api.dfkz.site",
-        changeOrigin: true,
-
-        rewrite: (path) => {
-          const query = path.includes("?")
-            ? path.substring(path.indexOf("?"))
-            : "";
-
-          return `/alooy/${query}`;
-        },
-      },
-    },
-  },
 });

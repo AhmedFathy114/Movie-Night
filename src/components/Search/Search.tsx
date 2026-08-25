@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MovieMiniCard from "../Cards/MovieMiniCard";
-import { useMovieEndPoint } from "@/features/Shared/useAllEndPoint";
-import type { TMDBResponse } from "@/types/Movies";
+import { useAllEndPoint } from "@/features/Shared/useAllEndPoint";
+import type { TMDBResponse } from "@/types/AllTypes";
 import { language } from "@/lib/Variables";
 import { Search as SearchIcon, X } from "lucide-react";
 import useDebounce from "@/hooks/useDebounce";
@@ -12,7 +12,7 @@ function Search() {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 700);
 
-  const { data, isPending } = useMovieEndPoint<TMDBResponse>(
+  const { data, isPending } = useAllEndPoint<TMDBResponse>(
     "/search/multi",
     {
       language,

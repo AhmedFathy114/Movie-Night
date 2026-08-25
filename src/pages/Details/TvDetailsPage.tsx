@@ -19,7 +19,7 @@ import type {
   TVSeason,
   TVShow,
   Videos,
-} from "@/types/Movies";
+} from "@/types/AllTypes";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 function TvDetails() {

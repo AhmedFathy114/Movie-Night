@@ -1,4 +1,4 @@
-import { getVideos } from "@/services/shared/allWithEndPoint";
+import { getVideos } from "@/services/shared/AllWithEndPoint";
 import { useQuery } from "@tanstack/react-query";
 
 export function useVideos<T>(id: number, type: string) {

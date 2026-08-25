@@ -1,7 +1,7 @@
 import { api } from "@/apis/Axios";
-import type { MovieCredits } from "@/types/Movies";
+import type { MovieCredits } from "@/types/AllTypes";
 
-export async function fetchMovies<T>(
+export async function fetchAllTypes<T>(
   endpoint: string,
   params?: Record<string, string | number | boolean>,
 ): Promise<T> {

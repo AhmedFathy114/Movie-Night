@@ -3,7 +3,7 @@ import type {
   PersonDetails,
   PersonMovies,
   PersonSocials,
-} from "@/types/Movies";
+} from "@/types/AllTypes";
 
 export async function getActorDetails(
   id: number,

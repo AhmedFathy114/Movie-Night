@@ -2,7 +2,7 @@ import { api } from "@/apis/Axios";
 import type {
   MovieCollection,
   MovieResponse,
-} from "@/types/Movies";
+} from "@/types/AllTypes";
 
 interface TmdbSearchResult {
   id: number;

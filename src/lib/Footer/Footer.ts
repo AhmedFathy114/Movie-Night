@@ -1,4 +1,4 @@
-import type { MenuItem, SocialItem } from "@/types/Movies";
+import type { MenuItem, SocialItem } from "@/types/AllTypes";
 import { CalendarDays, Flame, Play, Star, TrendingUp } from "lucide-react";
 
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaDiscord } from "react-icons/fa";

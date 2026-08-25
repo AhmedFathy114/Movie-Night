@@ -1,6 +1,6 @@
 import Stars from "@/components/Stars";
 import { backDropUrl } from "@/lib/Variables";
-import type { genres, Movie } from "@/types/Movies";
+import type { genres, Movie } from "@/types/AllTypes";
 import { useGenres } from "../../Shared/useGeners";
 import { useNavigate } from "react-router-dom";
 import { slugify } from "@/lib/utils";

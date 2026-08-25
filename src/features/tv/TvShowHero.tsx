@@ -1,7 +1,7 @@
 import Stars from "@/components/Stars";
 import formatDate from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { genres, TVDetails, Videos } from "@/types/Movies";
+import type { genres, TVDetails, Videos } from "@/types/AllTypes";
 import { useState } from "react";
 import { X } from "lucide-react";
 
@@ -265,7 +265,6 @@ function TvShowHero({
                 lg:justify-start
               "
             >
-
               {finalTrailer && (
                 <button
                   onClick={() => setShowModal(true)}

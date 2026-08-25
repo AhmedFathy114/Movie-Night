@@ -1,5 +1,5 @@
-import { getCredits } from "@/services/shared/allWithEndPoint";
-import type { MovieCredits } from "@/types/Movies";
+import { getCredits } from "@/services/shared/AllWithEndPoint";
+import type { MovieCredits } from "@/types/AllTypes";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCredits(id: number, type: string) {

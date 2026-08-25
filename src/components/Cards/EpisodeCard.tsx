@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { backDropUrl } from "@/lib/Variables";
-import type { TVDetails, TVEpisode } from "@/types/Movies";
+import type { TVDetails, TVEpisode } from "@/types/AllTypes";
 import { Link } from "react-router-dom";
 import { FaClock } from "react-icons/fa";
 import { slugify } from "@/lib/utils";

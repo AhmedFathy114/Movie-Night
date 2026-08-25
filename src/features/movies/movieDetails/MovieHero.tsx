@@ -1,7 +1,7 @@
 import Stars from "@/components/Stars";
 import formatDate from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { genres, Movie, Videos } from "@/types/Movies";
+import type { genres, Movie, Videos } from "@/types/AllTypes";
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";

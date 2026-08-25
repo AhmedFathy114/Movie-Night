@@ -1,5 +1,5 @@
 import { backDropUrl } from "@/lib/Variables";
-import type { PersonDetails, PersonSocials } from "@/types/Movies";
+import type { PersonDetails, PersonSocials } from "@/types/AllTypes";
 import {
   FaFacebook,
   FaInstagram,
@@ -15,7 +15,6 @@ function ActorHero({
   actor: PersonDetails;
   socials?: PersonSocials;
 }) {
-
   if (!actor) return null;
   return (
     <div className="relative min-h-dvh w-full overflow-hidden mt-2 lg:mt-0">

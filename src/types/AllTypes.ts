@@ -55,6 +55,8 @@ export type MenuItem = {
   title: string;
   to: string;
   icon?: React.ElementType;
+  movieGenreId?:number;
+  tvGenreId?:number;
 };
 
 export type SocialItem = {

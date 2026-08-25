@@ -1,4 +1,4 @@
-import type { Videos } from "@/types/Movies";
+import type { Videos } from "@/types/AllTypes";
 
 function TrailerCard({ video }: { video: Videos }) {
   return (

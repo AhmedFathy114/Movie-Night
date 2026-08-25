@@ -1,4 +1,4 @@
-import { getSimilar } from "@/services/shared/allWithEndPoint";
+import { getSimilar } from "@/services/shared/AllWithEndPoint";
 import { useQuery } from "@tanstack/react-query";
 
 export function useSimilar<T>(id: number, type: string) {

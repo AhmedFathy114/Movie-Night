@@ -1,4 +1,4 @@
-import type { StreamButtons } from "@/types/Movies";
+import type { StreamButtons } from "@/types/AllTypes";
 
 export function generateServerAvatar(name: string) {
   return `https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(name)}`;

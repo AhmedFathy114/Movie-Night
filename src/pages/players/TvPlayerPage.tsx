@@ -4,7 +4,7 @@ import { useDetails } from "@/features/Shared/useDetails";
 import EpisodesSection from "@/features/tv/EpisodeSection";
 import { useSessions } from "@/features/tv/useSeason";
 import { streamDataTv } from "@/lib/streamData";
-import type { TVDetails } from "@/types/Movies";
+import type { TVDetails } from "@/types/AllTypes";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

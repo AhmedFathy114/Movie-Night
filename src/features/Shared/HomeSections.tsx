@@ -1,7 +1,7 @@
-import MovieCard from "./Cards/MovieCard";
+import MovieCard from "@/components/Cards/MovieCard";
 
-import { useMovieEndPoint } from "@/features/Shared/useAllEndPoint";
-import type { SectionProps, TMDBResponse } from "@/types/Movies";
+import { useAllEndPoint } from "@/features/Shared/useAllEndPoint";
+import type { SectionProps, TMDBResponse } from "@/types/AllTypes";
 import { useEffect, useRef, useState } from "react";
 
 function Section({ endpoint, title, params }: SectionProps) {
@@ -29,11 +29,7 @@ function Section({ endpoint, title, params }: SectionProps) {
     return () => observer.disconnect();
   }, []);
 
-  const { data } = useMovieEndPoint<TMDBResponse>(
-    endpoint,
-    params,
-    shouldFetch,
-  );
+  const { data } = useAllEndPoint<TMDBResponse>(endpoint, params, shouldFetch);
 
   const movies = data?.results ?? [];
   return (

@@ -1,6 +1,6 @@
 import { slugify } from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
-import type { CollectionMovie, TVShow } from "@/types/Movies";
+import type { CollectionMovie, Movie, TVShow } from "@/types/AllTypes";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ function CollectionCard({
   data,
   type = "movie",
 }: {
-  data: CollectionMovie | TVShow;
+  data: CollectionMovie | TVShow | Movie;
   type: string;
 }) {
   const navigate = useNavigate();

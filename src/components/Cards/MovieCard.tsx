@@ -1,5 +1,5 @@
 import { backDropUrl } from "@/lib/Variables";
-import type { TMDBItem } from "@/types/Movies";
+import type { TMDBItem } from "@/types/AllTypes";
 import Stars from "../Stars";
 import { useDefineType } from "@/hooks/useDefineType";
 import { useNavigateDetails } from "@/hooks/useNavigateDetails";

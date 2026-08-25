@@ -1,7 +1,7 @@
 import { useNavigateDetails } from "@/hooks/useNavigateDetails";
 import { useDefineType } from "@/hooks/useDefineType";
 import { backDropUrl } from "@/lib/Variables";
-import type { TMDBItem } from "@/types/Movies";
+import type { TMDBItem } from "@/types/AllTypes";
 
 function MovieMiniCard({
   movie,

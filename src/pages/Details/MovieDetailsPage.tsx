@@ -12,7 +12,7 @@ import type {
   MovieResponse,
   MovieVideos,
   Videos,
-} from "@/types/Movies";
+} from "@/types/AllTypes";
 import TrailerCard from "@/components/Cards/TrailerCard";
 import CollectionCard from "@/components/Cards/CollectionCard";
 import { useMovieCollection } from "@/features/movies/movieDetails/useMovieCollection";

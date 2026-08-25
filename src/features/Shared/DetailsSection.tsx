@@ -1,4 +1,4 @@
-import type { SectionDetailsProps } from "@/types/Movies";
+import type { SectionDetailsProps } from "@/types/AllTypes";
 
 function DetailsSection<T>({
   id,

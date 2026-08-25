@@ -1,27 +1,46 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { createPortal } from "react-dom";
 
-import "./App.css";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Loading from "./components/Loaders/Loading";
-import About from "./pages/AboutPage";
-import TvDetails from "./pages/Details/TvDetailsPage";
-import ActorDetails from "./pages/Details/ActorDetailsPage";
-import FullCast from "./pages/Details/FullCastPage";
-import Player from "./pages/players/MoviePlayerPage";
 import ScrollToTop from "./components/ScrollToTop";
-import TvSession from "./pages/Details/TvSessionPage";
-import TvPlayer from "./pages/players/TvPlayerPage";
-import Alooy from "./pages/AlooyPage";
-import AlooyPlayer from "./pages/players/AlooyPlayerPage";
+import PageLoader from "./features/Shared/PageLoader";
 
-const Login = lazy(() => import("./pages/LoginPage"));
-const Home = lazy(() => import("./pages/HomePage"));
-const Profile = lazy(() => import("./pages/Profile"));
-const MovieDetails = lazy(() => import("./pages/Details/MovieDetailsPage"));
+import "./App.css";
+
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+
+const TvDetailsPage = lazy(() => import("./pages/Details/TvDetailsPage"));
+
+const ActorDetailsPage = lazy(() => import("./pages/Details/ActorDetailsPage"));
+
+const FullCastPage = lazy(() => import("./pages/Details/FullCastPage"));
+
+const MoviePlayerPage = lazy(() => import("./pages/players/MoviePlayerPage"));
+
+const TvSessionPage = lazy(() => import("./pages/Details/TvSessionPage"));
+
+const TvPlayerPage = lazy(() => import("./pages/players/TvPlayerPage"));
+
+const AlooyPage = lazy(() => import("./pages/AlooyPage"));
+
+const AlooyPlayerPage = lazy(() => import("./pages/players/AlooyPlayerPage"));
+
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+
+const GenrePage = lazy(() => import("./pages/GenrePage"));
+
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+
+const ProfilePage = lazy(() => import("./pages/Profile"));
+
+const MovieDetailsPage = lazy(() => import("./pages/Details/MovieDetailsPage"));
+
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const queryClient = new QueryClient({
@@ -59,32 +78,64 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/login" element={<Login />} />
+        <Suspense fallback={<PageLoader message="Loading Home Page" />}>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <div className="fixed inset-0 z-99999 bg-black">
+                  <LoginPage />
+                </div>
+              }
+            />
 
-          <Route path="/" element={<AppLayout />}>
-            <Route index element={<Navigate replace to="/home" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/alooy" element={<Alooy />} />
-            <Route path="/alooy/:alloyId/:slug" element={<AlooyPlayer />} />
-            <Route path="/movie/:movieId/:slug" element={<MovieDetails />} />
-            <Route path="/:type/cast/:id/:slug" element={<FullCast />} />
-            <Route path="/movie/player/:movieId/:slug" element={<Player />} />
-            <Route path="/tv/:tvId/:slug" element={<TvDetails />} />
-            <Route
-              path="/tv/season/:tvId/:seasonNumber/:slug"
-              element={<TvSession />}
-            />
-            <Route
-              path="/tv/player/:tvId/:seasonNumber/:episodeNumber/:slug"
-              element={<TvPlayer />}
-            />
-            <Route path="/actor/:actorId/:slug" element={<ActorDetails />} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+            <Route path="/" element={<AppLayout />}>
+              <Route index element={<Navigate replace to="/home" />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/alooy" element={<AlooyPage />} />
+              <Route
+                path="/alooy/:alloyId/:slug"
+                element={<AlooyPlayerPage />}
+              />
+              <Route
+                path="/movie/:movieId/:slug"
+                element={<MovieDetailsPage />}
+              />
+              <Route
+                path="/movie/player/:movieId/:slug"
+                element={<MoviePlayerPage />}
+              />
+              <Route path="/:type/cast/:id/:slug" element={<FullCastPage />} />
+              <Route path="/tv/:tvId/:slug" element={<TvDetailsPage />} />
+              <Route
+                path="/tv/season/:tvId/:seasonNumber/:slug"
+                element={<TvSessionPage />}
+              />
+              <Route
+                path="/tv/player/:tvId/:seasonNumber/:episodeNumber/:slug"
+                element={<TvPlayerPage />}
+              />
+              <Route
+                path="/actor/:actorId/:slug"
+                element={<ActorDetailsPage />}
+              />
+              <Route path="/category/:slug" element={<CategoryPage />} />
+              <Route
+                path="/category/"
+                element={<Navigate to="/category/trending" replace />}
+              />
+              <Route path="/genre/:slug" element={<GenrePage />} />
+              <Route
+                path="/genre/"
+                element={<Navigate to="/genre/action" replace />}
+              />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Route>
+
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
 
       {showLoader &&

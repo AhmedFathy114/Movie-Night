@@ -1,7 +1,7 @@
-import { useMovieEndPoint } from "@/features/Shared/useAllEndPoint";
+import { useAllEndPoint } from "@/features/Shared/useAllEndPoint";
 import useDebounce from "@/hooks/useDebounce";
 import { language } from "@/lib/Variables";
-import type { TMDBResponse } from "@/types/Movies";
+import type { TMDBResponse } from "@/types/AllTypes";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import MovieMiniCard from "../Cards/MovieMiniCard";
@@ -14,7 +14,7 @@ function SearchModal({
   const [localQuery, setLocalQuery] = useState("");
   const debouncedQuery = useDebounce<string>(localQuery, 600);
 
-  const { data } = useMovieEndPoint<TMDBResponse>(
+  const { data } = useAllEndPoint<TMDBResponse>(
     "/search/multi",
     {
       language,

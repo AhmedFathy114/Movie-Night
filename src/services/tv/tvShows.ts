@@ -1,5 +1,5 @@
 import { api } from "@/apis/Axios";
-import type { MovieVideos, TVSeasonDetails } from "@/types/Movies";
+import type { MovieVideos, TVSeasonDetails } from "@/types/AllTypes";
 
 export async function getSeasons(
   id: number,

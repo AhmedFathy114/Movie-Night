@@ -4,7 +4,7 @@ import { useDetails } from "@/features/Shared/useDetails";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import type { Movie, TVDetails } from "@/types/Movies";
+import type { Movie, TVDetails } from "@/types/AllTypes";
 import { capitalizeWords } from "@/lib/utils";
 
 function FullCast() {

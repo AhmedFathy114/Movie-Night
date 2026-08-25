@@ -1,5 +1,5 @@
 import { getMovieCollection } from "@/services/movies/movie";
-import type { MovieCollection } from "@/types/Movies";
+import type { MovieCollection } from "@/types/AllTypes";
 import { useQuery } from "@tanstack/react-query";
 
 export function useMovieCollection(id: number) {

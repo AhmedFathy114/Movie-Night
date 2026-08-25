@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import CarouselSwiperSlide from "./CarouselSwiperSlide";
-import type { Movie } from "@/types/Movies";
+import type { Movie } from "@/types/AllTypes";
 
 function Carousel() {
   const { weekMovies } = useWeeklyMovies();

@@ -7,10 +7,17 @@ import {
 } from "@/components/ui/navigation-menu";
 import { exploreItems, genreItems } from "@/lib/Header/HeaderConstants";
 import MenuLink from "./MenuLink";
+import { useState } from "react";
 
 function DropMenu() {
+  const [menuValue, setMenuValue] = useState("");
+
   return (
-    <NavigationMenu className="relative z-50">
+    <NavigationMenu
+      className="relative z-50"
+      value={menuValue}
+      onValueChange={setMenuValue}
+    >
       <NavigationMenuList>
         {/* Explore */}
         <NavigationMenuItem>
@@ -18,7 +25,10 @@ function DropMenu() {
             Explore
           </NavigationMenuTrigger>
 
-          <NavigationMenuContent className="rounded bg-[#111] p-3 shadow-2xl ">
+          <NavigationMenuContent
+            onClick={() => setMenuValue("")}
+            className="rounded bg-[#111] p-3 shadow-2xl "
+          >
             <div className="w-90">
               <div className="grid grid-cols-2 gap-1">
                 {exploreItems.map((item) => (
@@ -35,7 +45,10 @@ function DropMenu() {
             Genres
           </NavigationMenuTrigger>
 
-          <NavigationMenuContent className="rounded bg-[#111] p-3 shadow-2xl">
+          <NavigationMenuContent
+            onClick={() => setMenuValue("")}
+            className="rounded bg-[#111] p-3 shadow-2xl"
+          >
             <div className="w-125">
               <div className="grid grid-cols-2 gap-1">
                 {genreItems.map((item) => (

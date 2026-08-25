@@ -1,4 +1,4 @@
-import { getRecommended } from "@/services/shared/allWithEndPoint";
+import { getRecommended } from "@/services/shared/AllWithEndPoint";
 import { useQuery } from "@tanstack/react-query";
 
 export function useRecommended<T>(id: number, type: string) {

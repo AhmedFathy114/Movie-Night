@@ -1,4 +1,4 @@
-import type { TVEpisode } from "@/types/Movies";
+import type { TVEpisode } from "@/types/AllTypes";
 
 type SeasonOption = {
   season_number: number;

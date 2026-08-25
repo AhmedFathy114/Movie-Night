@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import type { MenuItem } from "@/types/Movies";
+import type { MenuItem } from "@/types/AllTypes";
 
 function SideMenuItem({
   item,

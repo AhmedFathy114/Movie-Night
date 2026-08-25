@@ -1,5 +1,5 @@
 import Carousel from "@/features/movies/carousel/Carousel";
-import Section from "@/components/HomeSections";
+import Section from "@/features/Shared/HomeSections";
 import PageLoader from "@/features/Shared/PageLoader";
 import { language } from "@/lib/Variables";
 import { useEffect } from "react";

@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { useAlooyPoster } from "@/features/movies/movieDetails/useAlooyPoster";
@@ -96,12 +95,6 @@ function AlooyCard({ data }: AlooyCardProps) {
           </p>
 
           <div className="mt-1 flex items-center justify-center gap-1">
-            <Star
-              size={14}
-              fill="currentColor"
-              className="shrink-0 text-red-600"
-            />
-
             <span className="text-[11px] font-bold text-red-600 sm:text-xs">
               {data.episodes}
             </span>

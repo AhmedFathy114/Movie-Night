@@ -1,6 +1,6 @@
 import { useDefineType } from "@/hooks/useDefineType";
 import { slugify } from "@/lib/utils";
-import type { TMDBItem } from "@/types/Movies";
+import type { TMDBItem } from "@/types/AllTypes";
 import { useNavigate } from "react-router-dom";
 
 export function useNavigateDetails(movie: TMDBItem) {

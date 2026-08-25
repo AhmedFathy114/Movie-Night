@@ -1,4 +1,4 @@
-import type { TMDBItem } from "@/types/Movies";
+import type { TMDBItem } from "@/types/AllTypes";
 
 export function useDefineType(movie: TMDBItem) {
   if ("profile_path" in movie) {

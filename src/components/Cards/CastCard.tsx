@@ -1,5 +1,5 @@
 import { backDropUrl } from "@/lib/Variables";
-import type { CastMember } from "@/types/Movies";
+import type { CastMember } from "@/types/AllTypes";
 import { useNavigate, useParams } from "react-router-dom";
 
 function CastCard({

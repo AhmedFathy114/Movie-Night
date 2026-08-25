@@ -6,7 +6,7 @@ import TvSessionHero from "@/features/tv/TvSessionHero";
 import { useSessions } from "@/features/tv/useSeason";
 import { useSeasonVideos } from "@/features/tv/useSeasonVideos";
 import { capitalizeWords } from "@/lib/utils";
-import type { TVDetails, TVEpisode } from "@/types/Movies";
+import type { TVDetails, TVEpisode } from "@/types/AllTypes";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
