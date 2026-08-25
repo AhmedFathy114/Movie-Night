@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useDetails } from "@/features/Shared/useDetails";
+import { useStreams } from "@/features/Shared/useStreams";
 import EpisodesSection from "@/features/tv/EpisodeSection";
 import { useSessions } from "@/features/tv/useSeason";
-import { streamDataTv } from "@/lib/streamData";
 import type { TVDetails } from "@/types/AllTypes";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -16,12 +17,12 @@ function TvPlayer() {
     slug: string;
   }>();
 
+  const { streams } = useStreams("tv");
+
   const [currentEpisode, setCurrentEpisode] = useState(Number(episodeNumber));
 
   useEffect(() => {
     const episode = Number(episodeNumber);
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentEpisode(episode);
   }, [episodeNumber]);
 
@@ -29,9 +30,14 @@ function TvPlayer() {
     seasonNumber === "specials" ? 0 : Number(seasonNumber),
   );
 
-  const [activeServerName, setActiveServerName] = useState(
-    streamDataTv[0].name,
-  );
+  const [activeServerName, setActiveServerName] = useState("");
+
+  useEffect(() => {
+    if (streams.length > 0 && !activeServerName) {
+      setActiveServerName(streams[0].name);
+    }
+  }, [streams, activeServerName]);
+
   useEffect(() => {
     if (!window.history.state?.server) {
       window.history.replaceState(
@@ -50,16 +56,16 @@ function TvPlayer() {
 
   const { season } = useSessions(Number(tvId), currentSeason);
 
-  const activeServer = streamDataTv.find(
+  const activeServer = streams.find(
     (server) => server.name === activeServerName,
   )!;
 
   const embedUrl =
-    activeServer.name === "MultiEmbed"
-      ? `${activeServer.full_url}${tvId}&tmdb=1&s=${currentSeason}&e=${currentEpisode}`
-      : activeServer.urlType === "query"
-        ? `${activeServer.full_url}${tvId}&type=tv&s=${currentSeason}&e=${currentEpisode}`
-        : `${activeServer.full_url}${tvId}/${currentSeason}/${currentEpisode}`;
+    activeServer?.name === "MultiEmbed"
+      ? `${activeServer?.full_url}${tvId}&tmdb=1&s=${currentSeason}&e=${currentEpisode}`
+      : activeServer?.urlType === "query"
+        ? `${activeServer?.full_url}${tvId}&type=tv&s=${currentSeason}&e=${currentEpisode}`
+        : `${activeServer?.full_url}${tvId}/${currentSeason}/${currentEpisode}`;
 
   const handleEpisodeChange = (episode: number) => {
     setCurrentEpisode(episode);
@@ -175,7 +181,7 @@ function TvPlayer() {
 
           {/* Servers */}
           <div className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start">
-            {streamDataTv.map((server) => (
+            {streams.map((server) => (
               <StreamButton
                 key={server.name}
                 name={server.name}

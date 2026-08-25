@@ -180,6 +180,7 @@ export type StreamButtons = {
   name: string;
   full_url: string;
   urlType?: "path" | "query";
+  media_type:string
 };
 
 export type PersonDetails = {

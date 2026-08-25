@@ -1,4 +1,4 @@
-import { generateServerAvatar } from "@/lib/streamData";
+import { generateServerAvatar } from "@/lib/utils";
 
 function StreamButton({
   name,

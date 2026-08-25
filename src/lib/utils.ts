@@ -28,3 +28,7 @@ export function capitalizeWords(value: string) {
     .toLowerCase()
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
+
+export function generateServerAvatar(name: string) {
+  return `https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+}

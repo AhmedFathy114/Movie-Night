@@ -10,7 +10,11 @@ export const navigationLinks: MenuItem[] = [
   },
   {
     title: "Discover",
-    to: "/explore",
+    to: "/category/explore",
+  },
+  {
+    title: "Trending Arabic",
+    to: "/category/trending-arabic",
   },
   {
     title: "About",

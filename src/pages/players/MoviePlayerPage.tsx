@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
-import { streamDataMovie } from "@/lib/streamData";
+import { useStreams } from "@/features/Shared/useStreams";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,13 +10,20 @@ function Player() {
     movieId: string;
     slug: string;
   }>();
-  const [activeServerName, setActiveServerName] = useState(
-    streamDataMovie[0].name,
-  );
 
-  const activeServer = streamDataMovie.find(
+  const { streams } = useStreams("movie");
+
+  const [activeServerName, setActiveServerName] = useState("");
+
+  useEffect(() => {
+    if (streams.length > 0 && !activeServerName) {
+      setActiveServerName(streams[0].name);
+    }
+  }, [streams, activeServerName]);
+
+  const activeServer = streams?.find(
     (server) => server.name === activeServerName,
-  )!;
+  );
 
   useEffect(() => {
     if (!window.history.state?.server) {
@@ -87,7 +95,7 @@ function Player() {
             ref={playerRef}
             className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start"
           >
-            {streamDataMovie.map((item) => (
+            {streams?.map((item) => (
               <StreamButton
                 key={item.name}
                 name={item.name}
