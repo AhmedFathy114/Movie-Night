@@ -1,13 +1,19 @@
 import { GetStreams } from "@/services/shared/GetStreams";
 import { useQuery } from "@tanstack/react-query";
 
-export function useStreams(type:string){
-    const {data,isPending : isStreamsLoading} = useQuery({
-        queryKey:['streams'],
-        queryFn : GetStreams
-    })
+export function useStreams(type: string) {
+  const { data, isPending: isStreamsLoading } = useQuery({
+    queryKey: ["streams"],
+    queryFn: GetStreams,
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60,
+  });
 
-    const streams = data?.filter(stream => stream.media_type === type) ?? [];
+  const streams =
+    data?.filter((stream) => stream.media_type === type) ?? [];
 
-    return {streams,isStreamsLoading}
+  return {
+    streams,
+    isStreamsLoading,
+  };
 }

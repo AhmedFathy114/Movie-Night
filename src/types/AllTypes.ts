@@ -179,7 +179,7 @@ export type MovieCollection = {
 export type StreamButtons = {
   name: string;
   full_url: string;
-  urlType?: "path" | "query";
+  url_type?: "path" | "query";
   media_type:string
 };
 

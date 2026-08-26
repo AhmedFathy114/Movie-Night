@@ -12,18 +12,16 @@ function Player() {
   }>();
 
   const { streams } = useStreams("movie");
-
   const [activeServerName, setActiveServerName] = useState("");
 
   useEffect(() => {
-    if (streams.length > 0 && !activeServerName) {
+    if (!activeServerName && streams.length > 0) {
       setActiveServerName(streams[0].name);
     }
   }, [streams, activeServerName]);
 
-  const activeServer = streams?.find(
-    (server) => server.name === activeServerName,
-  );
+  const activeServer =
+    streams.find((server) => server.name === activeServerName) ?? streams[0];
 
   useEffect(() => {
     if (!window.history.state?.server) {
@@ -40,11 +38,10 @@ function Player() {
   const playerRef = useRef<HTMLDivElement>(null);
 
   const embedUrl = activeServer
-    ? activeServer.urlType === "query"
+    ? activeServer.url_type === "query"
       ? `${activeServer.full_url}${movieId}&tmdb=1`
       : `${activeServer.full_url}${movieId}`
     : "";
-
   const handleServerChange = (serverName: string) => {
     setActiveServerName(serverName);
 
@@ -70,6 +67,9 @@ function Player() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+
+  console.log("ACTIVE SERVER:", activeServer);
+  console.log("EMBED URL:", embedUrl);
 
   return (
     <>
@@ -109,7 +109,7 @@ function Player() {
           <div className="mt-5 aspect-10/9 lg:aspect-video w-full overflow-hidden rounded-xl bg-neutral-900">
             {embedUrl && (
               <iframe
-                key={embedUrl}
+                key={activeServerName}
                 src={embedUrl}
                 className="h-full w-full border-0"
                 allow="autoplay; encrypted-media; fullscreen; picture-in-picture"

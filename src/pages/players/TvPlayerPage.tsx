@@ -5,7 +5,9 @@ import { useDetails } from "@/features/Shared/useDetails";
 import { useStreams } from "@/features/Shared/useStreams";
 import EpisodesSection from "@/features/tv/EpisodeSection";
 import { useSessions } from "@/features/tv/useSeason";
+import { GetStreams } from "@/services/shared/GetStreams";
 import type { TVDetails } from "@/types/AllTypes";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -63,7 +65,7 @@ function TvPlayer() {
   const embedUrl =
     activeServer?.name === "MultiEmbed"
       ? `${activeServer?.full_url}${tvId}&tmdb=1&s=${currentSeason}&e=${currentEpisode}`
-      : activeServer?.urlType === "query"
+      : activeServer?.url_type === "query"
         ? `${activeServer?.full_url}${tvId}&type=tv&s=${currentSeason}&e=${currentEpisode}`
         : `${activeServer?.full_url}${tvId}/${currentSeason}/${currentEpisode}`;
 
@@ -137,6 +139,16 @@ function TvPlayer() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.prefetchQuery({
+      queryKey: ["streams"],
+      queryFn: GetStreams,
+      staleTime: 1000 * 60 * 60,
+    });
+  }, [queryClient]);
 
   return (
     <>

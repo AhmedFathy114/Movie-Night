@@ -2,9 +2,11 @@ import Stars from "@/components/Stars";
 import formatDate from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
 import type { genres, Movie, Videos } from "@/types/AllTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import { GetStreams } from "@/services/shared/GetStreams";
 
 function MovieHero({
   finalTrailer,
@@ -18,6 +20,16 @@ function MovieHero({
   const [showModal, setShowModal] = useState(false);
   const hours = Math.floor(movie.runtime / 60);
   const minutes = movie.runtime % 60;
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.prefetchQuery({
+      queryKey: ["streams"],
+      queryFn: GetStreams,
+      staleTime: 1000 * 60 * 60,
+    });
+  }, [queryClient]);
 
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
@@ -271,9 +283,13 @@ function MovieHero({
               "
             >
               <button
-                onClick={() =>
-                  navigate(`/movie/player/${Number(movieId)}/${slug}`)
-                }
+                onClick={() => {
+                  console.log("WATCH CLICK", performance.now());
+
+                  navigate(`/movie/player/${movieId}/${slug}`);
+
+                  console.log("AFTER NAVIGATE", performance.now());
+                }}
                 className="
                   cursor-pointer
                   rounded-full
