@@ -1,22 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
+import { getAlooyDetails } from "@/services/alooy/alooy";
 
-import { getAlooyDetails } from "@/services/Alooy/Alooy";
-import type { AlooyDetails } from "@/types/Alooy";
-
-export function useAlooyDetails(id?: string) {
+export function useAlooyDetails(url: string | null) {
   const {
-    data: alooyDetails,
-    isLoading: isAlooyDetailsLoading,
-    isError: isAlooyDetailsError,
-  } = useQuery<AlooyDetails>({
-    queryKey: ["alooy-details", id],
-    queryFn: () => getAlooyDetails(id!),
-    enabled: !!id,
+    data: details,
+    isLoading: isDetailsLoading,
+    isError: isDetailsError,
+  } = useQuery({
+    queryKey: ["alooy-details", url],
+    queryFn: () => getAlooyDetails(url!),
+    enabled: !!url,
+    refetchOnWindowFocus: false,
   });
 
   return {
-    alooyDetails,
-    isAlooyDetailsLoading,
-    isAlooyDetailsError,
+    details,
+    isDetailsLoading,
+    isDetailsError,
   };
 }

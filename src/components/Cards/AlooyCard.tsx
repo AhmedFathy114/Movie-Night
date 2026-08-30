@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-
-import { useAlooyPoster } from "@/features/movies/movieDetails/useAlooyPoster";
 import type { AlooyItem } from "@/types/Alooy";
 
 interface AlooyCardProps {
@@ -10,13 +8,11 @@ interface AlooyCardProps {
 function AlooyCard({ data }: AlooyCardProps) {
   const navigate = useNavigate();
 
-  const { posterUrl, isPosterLoading } = useAlooyPoster(
-    data.title.slice(0, 11),
-  );
-
-  const handleSubmit = () => {
-    navigate(`/alooy/${data.id}/${encodeURIComponent(data.title)}`);
-  };
+  function handleSubmit() {
+    navigate(
+      `/alooy/player?url=${encodeURIComponent(data.url)}&title=${encodeURIComponent(data.title)}`,
+    );
+  }
 
   return (
     <div
@@ -34,46 +30,41 @@ function AlooyCard({ data }: AlooyCardProps) {
         hover:scale-[1.03]
       "
     >
-      {/* Poster */}
       <div className="relative aspect-5/8 w-full overflow-hidden rounded-2xl">
-        {isPosterLoading ? (
-          <div className="h-full w-full animate-pulse rounded-2xl bg-neutral-800" />
-        ) : (
-          <img
-            src={posterUrl}
-            alt={data.title}
-            loading="lazy"
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = "/NoPoster.png";
-            }}
-            className="
-              h-full
-              w-full
-              object-cover
-              rounded-2xl
-              ring-1
-              ring-white/10
-              transition-transform
-              duration-500
-              group-hover:scale-105
-            "
-          />
-        )}
+        <img
+          src={data.poster}
+          alt={data.title}
+          loading="lazy"
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src = "/NoPoster.png";
+          }}
+          className="
+            h-full
+            w-full
+            rounded-2xl
+            object-cover
+            ring-1
+            ring-white/10
+            transition-transform
+            duration-500
+            group-hover:scale-105
+          "
+        />
 
-        {/* Bottom Info */}
         <div
           className="
             absolute
             inset-x-0
             bottom-0
+            z-10
             flex
             flex-col
             items-center
             justify-end
             bg-linear-to-t
             from-black
-            via-black/75
+            via-black/70
             to-transparent
             px-2
             pb-3
@@ -94,11 +85,11 @@ function AlooyCard({ data }: AlooyCardProps) {
             {data.title}
           </p>
 
-          <div className="mt-1 flex items-center justify-center gap-1">
-            <span className="text-[11px] font-bold text-red-600 sm:text-xs">
-              {data.episodes}
+          {data.type === "series" && (
+            <span className="mt-1 text-[11px] font-bold text-red-600 sm:text-xs">
+              {data.episodes ?? 0}
             </span>
-          </div>
+          )}
         </div>
       </div>
     </div>

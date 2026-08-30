@@ -1,4 +1,4 @@
-import { searchAlooy } from "@/services/Alooy/Alooy";
+import { searchAlooy } from "@/services/alooy/alooy";
 import type { AlooyItem } from "@/types/Alooy";
 import useDebounce from "@/hooks/useDebounce";
 import { Search, X } from "lucide-react";
@@ -32,7 +32,7 @@ function AlooySearch() {
 
         const data = await searchAlooy(value);
 
-        setResults(data.result?.slice(0, 5) ?? []);
+        setResults(data.results?.slice(0, 5) ?? []);
         setIsOpen(true);
       } catch (error) {
         console.error("Alooy search error:", error);
@@ -68,7 +68,9 @@ function AlooySearch() {
     setResults([]);
     setIsOpen(false);
 
-    navigate(`/alooy/${item.id}/${encodeURIComponent(item.title)}`);
+    navigate(
+      `/alooy/player?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.title)}`,
+    );
   };
 
   const handleClear = () => {
@@ -174,7 +176,7 @@ function AlooySearch() {
             <div className="divide-y divide-neutral-800/70">
               {results.map((item) => (
                 <button
-                  key={item.id}
+                  key={item.url}
                   type="button"
                   onClick={() => handleSelect(item)}
                   className="
@@ -190,7 +192,7 @@ function AlooySearch() {
                 >
                   <div className="h-16 w-11 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
                     <img
-                      src={item.image}
+                      src={item.poster}
                       alt={item.title}
                       loading="lazy"
                       className="h-full w-full object-cover"

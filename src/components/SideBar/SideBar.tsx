@@ -126,7 +126,6 @@ function SideBar() {
             py-1
           "
         >
-          {/* Home */}
           <NavLink
             to="/home"
             onClick={() => setOpen(false)}
@@ -157,16 +156,15 @@ function SideBar() {
             <span className="font-bebas tracking-wide ">Alooy Tv</span>
           </NavLink>
 
-          {/* Explore */}
           <NavLink
             to="/about"
             onClick={() => setOpen(false)}
             className={({ isActive }) => `
-              group flex items-center gap-4
+            group flex items-center gap-4
               rounded-md px-3 py-2.5
               transition-all duration-200
               ${isActive ? "text-red-500 text-[20px]" : "text-neutral-400 hover:text-red-500 text-[18px]"}
-            `}
+              `}
           >
             <Compass size={19} strokeWidth={2.5} />
 

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 function Pagination({ count }: { count: number }) {
   const [searchParam, setSearchParam] = useSearchParams();
-  
+
   const currentPage = !searchParam.get("page")
     ? 1
     : Number(searchParam.get("page"));
@@ -13,7 +13,6 @@ function Pagination({ count }: { count: number }) {
     searchParam.set("page", `${next}`);
     setSearchParam(searchParam);
   }
-
 
   function handlePrev() {
     const prev = currentPage === 1 ? currentPage : currentPage - 1;
@@ -27,7 +26,13 @@ function Pagination({ count }: { count: number }) {
     <>
       <div className="flex  items-center justify-center gap-3 sm:gap-4 md:gap-8 mt-8 md:mt-16 mb-6 ">
         <button
-          onClick={handlePrev}
+          onClick={() => {
+            handlePrev();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
           disabled={currentPage === 1}
           className="w-full sm:w-auto group flex items-center justify-center gap-2 px-4 py-4 sm:px-7 sm:py-5 bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl hover:bg-red-600 hover:border-red-600 transition-all disabled:opacity-20 disabled:hover:bg-neutral-900/50 disabled:cursor-not-allowed text-xs sm:text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-white duration-500"
         >
@@ -46,9 +51,15 @@ function Pagination({ count }: { count: number }) {
         </div>
 
         <button
-          onClick={handleNext}
+          onClick={() => {
+            handleNext();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
           disabled={currentPage === count}
-          className="w-full sm:w-auto group flex items-center justify-center gap-2 px-4 py-4 sm:px-7 sm:py-5 bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl hover:bg-red-600 hover:border-red-600 text-neutral-400 hover:text-white duration-500 transition-all disabled:opacity-20 disabled:hover:bg-neutral-900/50 disabled:cursor-not-allowed text-xl sm:text-xs font-black uppercase tracking-widest "
+          className="w-full sm:w-auto group flex items-center justify-center gap-2 px-4 py-4 sm:px-7 sm:py-5 bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl hover:bg-red-600 hover:border-red-600 transition-all disabled:opacity-20 disabled:hover:bg-neutral-900/50 disabled:cursor-not-allowed text-xs sm:text-xs font-black uppercase tracking-widest text-neutral-400 hover:text-white duration-500 "
         >
           <span>Next</span>
           <ChevronRight />

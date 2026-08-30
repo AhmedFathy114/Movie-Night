@@ -1,223 +1,129 @@
-import PageLoader from "@/features/Shared/PageLoader";
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { ChevronLeft, Play } from "lucide-react";
 import { useAlooyDetails } from "@/features/Alooy/useAlooyDetails";
-import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import PageLoader from "@/features/Shared/PageLoader";
 
-function AlooyPlayer() {
-  const { alloyId, slug } = useParams<{
-    alloyId: string;
-    slug: string;
-  }>();
+function AlooyPlayerPage() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const { alooyDetails, isAlooyDetailsLoading, isAlooyDetailsError } =
-    useAlooyDetails(alloyId);
+  const url = searchParams.get("url");
+  const title = searchParams.get("title") || "مشاهدة";
 
-  const episodes = useMemo(
-    () => alooyDetails?.episodes ?? [],
-    [alooyDetails?.episodes],
-  );
+  const { details, isDetailsLoading, isDetailsError } = useAlooyDetails(url);
 
-  const [currentEpisode, setCurrentEpisode] = useState<number | null>(null);
+  const [activeEpIndex, setActiveEpIndex] = useState(0);
 
   useEffect(() => {
-    if (episodes.length === 0) return;
+    setActiveEpIndex(0);
+  }, [url]);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setCurrentEpisode((current) => {
-      if (
-        current !== null &&
-        episodes.some((item) => item.episode === current)
-      ) {
-        return current;
-      }
-
-      return episodes[0].episode;
-    });
-  }, [episodes]);
-
-  const currentEpisodeData = episodes.find(
-    (item) => item.episode === currentEpisode,
-  );
-
-  const videoUrl = currentEpisodeData?.url ?? "";
-
-  useEffect(() => {
-    if (currentEpisode === null) return;
-
-    const state = window.history.state;
-
-    if (!state?.alooyPlayer) {
-      window.history.replaceState(
-        {
-          ...state,
-          alooyPlayer: true,
-          episode: currentEpisode,
-        },
-        "",
-        window.location.href,
-      );
-    }
-  }, [currentEpisode]);
-
-  const handleEpisodeChange = (episode: number) => {
-    if (episode === currentEpisode) return;
-
-    window.history.pushState(
-      {
-        ...window.history.state,
-        alooyPlayer: true,
-        episode,
-      },
-      "",
-      window.location.href,
-    );
-
-    setCurrentEpisode(episode);
-  };
-
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      const state = event.state;
-
-      if (!state?.alooyPlayer) return;
-
-      if (typeof state.episode !== "number") return;
-
-      setCurrentEpisode(state.episode);
-    };
-
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, []);
-
-  if (isAlooyDetailsLoading) {
-    return <PageLoader message="Loading Alooy Player" />;
-  }
-
-  if (isAlooyDetailsError || !alooyDetails) {
+  if (!url) {
     return (
       <section className="flex min-h-screen items-center justify-center bg-black">
-        <p className="text-gray-400">Failed to load Alooy content.</p>
+        <p className="text-gray-400">الرابط غير صحيح أو مفقود.</p>
       </section>
     );
   }
 
+  if (isDetailsLoading) {
+    return <PageLoader message="Loading Alooy player" />;
+  }
+
+  if (isDetailsError || !details) {
+    return (
+      <section className="flex min-h-screen items-center justify-center bg-black">
+        <p className="text-gray-400">فشل في تحميل تفاصيل العرض.</p>
+      </section>
+    );
+  }
+
+  const episodes = details.episodes || [];
+  const currentEpisode = episodes[activeEpIndex];
+
   return (
-    <section className="flex min-h-screen flex-col items-center bg-black px-4 pb-10 pt-24">
-      <div className="w-full max-w-6xl space-y-5">
-        <div className="flex items-center gap-2 md:gap-3">
-          <div
-            className="
-              h-8
-              w-1
-              rounded-full
-              bg-red-700
-              shadow-lg
-              shadow-red-700/50
-              md:h-13
-              md:w-1.5
-            "
-          />
+    <section className="relative min-h-screen bg-black pt-20 px-3 sm:px-6 md:px-10 lg:px-20 pb-10">
+      <div className="mb-6 flex flex-col gap-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex w-fit items-center gap-2 rounded-xl bg-neutral-900/50 px-4 py-2 text-sm text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+        >
+          <ChevronLeft className="h-5 w-5" />
+          <span>عودة</span>
+        </button>
+        <h1 className="text-2xl font-bold text-white md:text-3xl lg:text-4xl">
+          {title}{" "}
+          {episodes.length > 1 && (
+            <span className="text-red-600">- {currentEpisode?.title}</span>
+          )}
+        </h1>
+      </div>
 
-          <h2
-            className="
-              text-2xl
-              font-bold
-              tracking-wide
-              text-white
-              md:text-3xl
-              lg:text-4xl
-            "
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-900 shadow-2xl border border-white/5">
+        {currentEpisode?.video ? (
+          <video
+            key={currentEpisode.video}
+            controls
+            autoPlay
+            className="h-full w-full"
+            controlsList="nodownload"
           >
-            Watch:
-            <span className="ml-2 text-gray-400">
-              {alooyDetails.title || slug}
-            </span>
-          </h2>
-        </div>
+            <source
+              src={currentEpisode.video}
+              type={currentEpisode.videoType || "video/mp4"}
+            />
+          </video>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center flex-col gap-3">
+            <Play className="h-12 w-12 text-neutral-600" />
+            <p className="text-neutral-500">
+              لا يوجد مصدر فيديو متاح لهذه الحلقة.
+            </p>
+          </div>
+        )}
+      </div>
 
-        {/* Description */}
+      {episodes.length > 1 && (
+        <div className="mt-10">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="h-6 w-1 rounded-full bg-red-700" />
+            <h3 className="text-xl font-bold text-white">
+              الحلقات ({details.count})
+            </h3>
+          </div>
 
-        <p className="text-sm font-semibold text-gray-400 md:text-[15px]">
-          Choose an episode to start watching.
-        </p>
-
-        {episodes.length > 0 && (
-          <div className="rounded-xl bg-neutral-950 p-4">
-            <div className="mb-4 flex items-center gap-2">
-              <div className="h-6 w-1 rounded-full bg-red-700" />
-
-              <h3 className="text-lg font-bold text-white md:text-xl">
-                Episodes
-              </h3>
-            </div>
-
-            <div
-              className="
-                grid
-                grid-cols-4
-                gap-2
-                sm:grid-cols-6
-                md:grid-cols-8
-                lg:grid-cols-10
-              "
-            >
-              {episodes.map((item) => (
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+            {episodes.map((ep, index) => {
+              const isActive = activeEpIndex === index;
+              return (
                 <button
-                  key={item.episode}
-                  type="button"
-                  onClick={() => handleEpisodeChange(item.episode)}
+                  key={ep.url}
+                  onClick={() => {
+                    setActiveEpIndex(index);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
                   className={`
-                    rounded-lg
-                    px-3
-                    py-2
-                    text-sm
-                    font-bold
-                    transition-colors
+                    group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border p-3 transition-all duration-300
                     ${
-                      currentEpisode === item.episode
-                        ? "bg-red-700 text-white shadow-lg shadow-red-700/30"
-                        : "bg-neutral-800 text-gray-300 hover:bg-neutral-700 hover:text-white"
+                      isActive
+                        ? "border-red-600 bg-red-600/10 text-red-500"
+                        : "border-neutral-800 bg-neutral-900/40 text-neutral-400 hover:border-neutral-600 hover:text-white"
                     }
                   `}
                 >
-                  {item.episode}
+                  <span className="text-sm font-bold uppercase tracking-wider">
+                    {ep.title}
+                  </span>
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        )}
-
-        <div
-          className="
-            aspect-video
-            w-full
-            overflow-hidden
-            rounded-xl
-            bg-neutral-900
-          "
-        >
-          {videoUrl ? (
-            <video
-              key={videoUrl}
-              src={videoUrl}
-              className="h-full w-full"
-              controls
-              autoPlay
-              playsInline
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-gray-500">
-              No video available.
-            </div>
-          )}
         </div>
-      </div>
+      )}
     </section>
   );
 }
 
-export default AlooyPlayer;
+export default AlooyPlayerPage;

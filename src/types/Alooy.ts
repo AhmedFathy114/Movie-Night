@@ -1,31 +1,52 @@
 export type AlooyItem = {
-  id: string;
   title: string;
-  image: string;
-  episodes: string;
+  url: string;
+  type: "movie" | "series";
+  poster?: string;
+  episodes?: number;
+};
+
+export type AlooyListResponse = {
+  success: boolean;
+  type: "all" | "search";
+  page?: number;
+  offset?: number;
+  count: number;
+  total?: number;
+  hasNext?: boolean;
+  results: AlooyItem[];
+};
+
+export type AlooySource = {
+  url: string;
+  type?: string;
 };
 
 export type AlooyEpisode = {
-  episode: number;
+  title: string;
   url: string;
+  video?: string | null; 
+  videoType?: string | null; 
+  sources?: AlooySource[]; 
 };
 
 export type AlooyDetails = {
-  id: string;
-  title: string;
-  image: string;
-  description: string;
-  genre: string[];
-  release: string;
-  rating: string;
+  success: boolean;
+  type: "details";
+  id?: string;
+  url: string;
+  title?: string;
+  count: number;
+  resolved?: boolean;
   episodes: AlooyEpisode[];
-  actor: string;
 };
 
-export type AlooyResponse = {
-  status: string;
-  cached: boolean;
-  query: string;
-  total: number;
-  result: AlooyItem[];
+export type AlooyEpisodeResponse = {
+  success: boolean;
+  type: "episode";
+  url: string;
+  key?: string;
+  title: string;
+  count: number;
+  sources: AlooySource[];
 };

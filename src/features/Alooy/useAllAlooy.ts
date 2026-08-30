@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllAlooy } from "@/services/Alooy/Alooy";
+import { getAllAlooy } from "@/services/alooy/alooy";
 
-export function useAllAlooy() {
+export function useAllAlooy(page: number) {
   const {
     data: alooyItems,
     isLoading: isAlooyLoading,
     isError: isAlooyError,
   } = useQuery({
-    queryKey: ["alooy-all"],
-    queryFn: getAllAlooy,
+    queryKey: ["alooy-all", page],
+    queryFn: () => getAllAlooy(page),
+    placeholderData: (previousData) => previousData,
   });
 
   return {

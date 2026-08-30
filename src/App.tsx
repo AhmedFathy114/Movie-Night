@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import PageLoader from "./features/Shared/PageLoader";
 
 import "./App.css";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 
@@ -79,62 +80,65 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Suspense fallback={<PageLoader message="Loading Home Page" />}>
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                <div className="fixed inset-0 z-99999 bg-black">
-                  <LoginPage />
-                </div>
-              }
-            />
+          <AuthProvider>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  <div className="fixed inset-0 z-99999 bg-black">
+                    <LoginPage />
+                  </div>
+                }
+              />
 
-            <Route path="/" element={<AppLayout />}>
-              <Route index element={<Navigate replace to="/home" />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/alooy" element={<AlooyPage />} />
-              <Route
-                path="/alooy/:alloyId/:slug"
-                element={<AlooyPlayerPage />}
-              />
-              <Route
-                path="/movie/:movieId/:slug"
-                element={<MovieDetailsPage />}
-              />
-              <Route
-                path="/movie/player/:movieId/:slug"
-                element={<MoviePlayerPage />}
-              />
-              <Route path="/:type/cast/:id/:slug" element={<FullCastPage />} />
-              <Route path="/tv/:tvId/:slug" element={<TvDetailsPage />} />
-              <Route
-                path="/tv/season/:tvId/:seasonNumber/:slug"
-                element={<TvSessionPage />}
-              />
-              <Route
-                path="/tv/player/:tvId/:seasonNumber/:episodeNumber/:slug"
-                element={<TvPlayerPage />}
-              />
-              <Route
-                path="/actor/:actorId/:slug"
-                element={<ActorDetailsPage />}
-              />
-              <Route path="/category/:slug" element={<CategoryPage />} />
-              <Route
-                path="/category/"
-                element={<Navigate to="/category/trending" replace />}
-              />
-              <Route path="/genre/:slug" element={<GenrePage />} />
-              <Route
-                path="/genre/"
-                element={<Navigate to="/genre/action" replace />}
-              />
-              <Route path="/profile" element={<ProfilePage />} />
-            </Route>
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<Navigate replace to="/home" />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/alooy" element={<AlooyPage />} />
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+                <Route path="/alooy/player" element={<AlooyPlayerPage />} />
+                <Route
+                  path="/movie/:movieId/:slug"
+                  element={<MovieDetailsPage />}
+                />
+                <Route
+                  path="/movie/player/:movieId/:slug"
+                  element={<MoviePlayerPage />}
+                />
+                <Route
+                  path="/:type/cast/:id/:slug"
+                  element={<FullCastPage />}
+                />
+                <Route path="/tv/:tvId/:slug" element={<TvDetailsPage />} />
+                <Route
+                  path="/tv/season/:tvId/:seasonNumber/:slug"
+                  element={<TvSessionPage />}
+                />
+                <Route
+                  path="/tv/player/:tvId/:seasonNumber/:episodeNumber/:slug"
+                  element={<TvPlayerPage />}
+                />
+                <Route
+                  path="/actor/:actorId/:slug"
+                  element={<ActorDetailsPage />}
+                />
+                <Route path="/category/:slug" element={<CategoryPage />} />
+                <Route
+                  path="/category/"
+                  element={<Navigate to="/category/trending" replace />}
+                />
+                <Route path="/genre/:slug" element={<GenrePage />} />
+                <Route
+                  path="/genre/"
+                  element={<Navigate to="/genre/action" replace />}
+                />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Route>
+
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </AuthProvider>
         </Suspense>
       </BrowserRouter>
 

@@ -30,7 +30,7 @@ function Search() {
   const showResults = debouncedQuery.trim().length > 0;
 
   return (
-    <div className="relative w-full md:w-100">
+    <div className="relative w-7 lg:w-100">
       <input
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -48,7 +48,7 @@ function Search() {
           focus:ring-0
           lg:block
           font-roboto text-[17px] font-bold
-
+          
         "
       />
 
@@ -67,7 +67,6 @@ function Search() {
       />
 
       <SearchIcon
-        size={18}
         className="text-white size-6 absolute top-1/2 right-4 sm:right-0 -translate-y-1/2 lg:hidden sm:size-7 "
         onClick={() => setOpenModal(true)}
       />

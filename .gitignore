@@ -32,3 +32,5 @@ dist-ssr
 supabase/.temp/
 supabase/.branches/
 supabase/.gitignore
+
+supabase/functions/alooy/

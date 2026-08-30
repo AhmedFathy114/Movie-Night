@@ -1,52 +1,35 @@
 import AlooySection from "@/features/Alooy/AlooySection";
 import { useAllAlooy } from "@/features/Alooy/useAllAlooy";
 import PageLoader from "@/features/Shared/PageLoader";
-import { PAGE_SIZE } from "@/lib/Variables";
 import { useSearchParams } from "react-router-dom";
 
-function Alooy() {
-  const [searchParam, setSearchParam] = useSearchParams();
-  const { alooyItems, isAlooyLoading } = useAllAlooy();
+function AlooyPage() {
+  const [searchParams] = useSearchParams();
 
-  if (isAlooyLoading) return <PageLoader message="Loading movie and Tv show" />;
+  const currentPage = Math.max(1, Number(searchParams.get("page")) || 1);
 
-  const currentPage = !searchParam.get("page")
-    ? 1
-    : Number(searchParam.get("page"));
-  const pageCount = Math.ceil((alooyItems?.total ?? 0) / PAGE_SIZE);
+  const { alooyItems, isAlooyLoading, isAlooyError } = useAllAlooy(currentPage);
 
-  function handleNext() {
-    const next = currentPage === pageCount ? currentPage : currentPage + 1;
-    searchParam.set("page", `${next}`);
-    setSearchParam(searchParam);
+  const results = alooyItems?.results ?? [];
+
+  if (isAlooyLoading && !alooyItems) {
+    return <PageLoader message="Loading Alooy movie and TV shows" />;
   }
 
-  function handlePrev() {
-    const prev = currentPage === 1 ? currentPage : currentPage - 1;
-    searchParam.set("page", `${prev}`);
-    setSearchParam(searchParam);
+  if (isAlooyError) {
+    return (
+      <section className="flex min-h-screen items-center justify-center bg-black">
+        <p className="text-gray-400">Failed to load Alooy content.</p>
+      </section>
+    );
   }
-
-  if (pageCount <= 1) return null;
-
-  const items = alooyItems?.result
-    ?.filter((item) => item.title && item.image)
-    .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   return (
     <>
-      <PageLoader message="Loading movie and Tv show" />
-      {alooyItems?.result.length && (
-        <AlooySection
-          alooyItems={items ?? []}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
-          currentPage={currentPage}
-          pageCount={pageCount}
-        />
-      )}
+      <PageLoader message="Loading Alooy movie and TV shows" />
+      <AlooySection alooyItems={results} />;
     </>
   );
 }
 
-export default Alooy;
+export default AlooyPage;

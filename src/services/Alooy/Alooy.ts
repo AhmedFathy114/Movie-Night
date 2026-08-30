@@ -1,44 +1,47 @@
 import type {
   AlooyDetails,
-  AlooyResponse,
+  AlooyEpisodeResponse,
+  AlooyListResponse,
 } from "@/types/Alooy";
 
 const ALOOY_API = import.meta.env.VITE_ALOOY_API;
 
-export async function getAllAlooy(): Promise<AlooyResponse> {
-  const res = await fetch(ALOOY_API);
+async function request<T>(params: Record<string, string>) {
+  const url = new URL(ALOOY_API);
 
-  if (!res.ok) {
-    throw new Error(`Failed to get Alooy: ${res.status}`);
+  Object.entries(params).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw new Error(`Alooy request failed: ${response.status}`);
   }
 
-  return await res.json();
+  return (await response.json()) as T;
 }
 
-export async function searchAlooy(
-  query: string,
-): Promise<AlooyResponse> {
-  const res = await fetch(
-    `${ALOOY_API}?q=${encodeURIComponent(query)}`,
-  );
-
-  if (!res.ok) {
-    throw new Error(`Failed to search Alooy: ${res.status}`);
-  }
-
-  return await res.json();
+export function getAllAlooy(page = 1) {
+  return request<AlooyListResponse>({
+    page: String(page),
+  });
 }
 
-export async function getAlooyDetails(
-  id: string,
-): Promise<AlooyDetails> {
-  const res = await fetch(
-    `${ALOOY_API}?id=${encodeURIComponent(id)}`,
-  );
+export function searchAlooy(q: string) {
+  return request<AlooyListResponse>({
+    q,
+  });
+}
 
-  if (!res.ok) {
-    throw new Error(`Failed to get Alooy details: ${res.status}`);
-  }
+export function getAlooyDetails(url: string) {
+  return request<AlooyDetails>({
+    url,
+  });
+}
 
-  return await res.json();
+export function getAlooyEpisode(url: string) {
+  return request<AlooyEpisodeResponse>({
+    episodeUrl: url,
+  });
 }
