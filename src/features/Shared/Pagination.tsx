@@ -1,29 +1,43 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import PageLoader from "./PageLoader";
 
 function Pagination({ count }: { count: number }) {
   const [searchParam, setSearchParam] = useSearchParams();
+  const [showLoader, setShowLoader] = useState(false);
 
   const currentPage = !searchParam.get("page")
     ? 1
     : Number(searchParam.get("page"));
 
+  useEffect(() => {
+    const pop = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+
+    return () => clearTimeout(pop);
+  }, [currentPage]);
+
   function handleNext() {
     const next = currentPage === count ? currentPage : currentPage + 1;
     searchParam.set("page", `${next}`);
     setSearchParam(searchParam);
+    setShowLoader(true);
   }
 
   function handlePrev() {
     const prev = currentPage === 1 ? currentPage : currentPage - 1;
     searchParam.set("page", `${prev}`);
     setSearchParam(searchParam);
+    setShowLoader(true);
   }
 
   if (count <= 1) return null;
 
   return (
     <>
+      {showLoader && <PageLoader />}
       <div className="flex  items-center justify-center gap-3 sm:gap-4 md:gap-8 mt-8 md:mt-16 mb-6 ">
         <button
           onClick={() => {

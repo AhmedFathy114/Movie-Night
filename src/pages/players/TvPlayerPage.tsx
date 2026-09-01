@@ -8,8 +8,9 @@ import { useSessions } from "@/features/tv/useSeason";
 import { GetStreams } from "@/services/shared/GetStreams";
 import type { TVDetails } from "@/types/AllTypes";
 import { useQueryClient } from "@tanstack/react-query";
+import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function TvPlayer() {
   const { tvId, seasonNumber, episodeNumber, slug } = useParams<{
@@ -19,6 +20,7 @@ function TvPlayer() {
     slug: string;
   }>();
 
+  const navigate = useNavigate();
   const { streams } = useStreams("tv");
 
   const [currentEpisode, setCurrentEpisode] = useState(Number(episodeNumber));
@@ -155,6 +157,13 @@ function TvPlayer() {
       <PageLoader message="Loading Tv Player" />
       <section className="flex min-h-screen flex-col items-center bg-black px-4 pb-10 pt-24">
         <div className="w-full max-w-6xl space-y-4">
+          <button
+            onClick={() => navigate(`/tv/${tvId}/${slug}`)}
+            className="flex w-fit items-center gap-2 rounded-xl bg-neutral-900/50 px-4 py-2 text-sm text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+          >
+            <ChevronLeft className="h-5 w-5" />
+            <span>Back</span>
+          </button>
           {/* Title */}
           <div className="flex items-center gap-2 md:gap-3">
             <div

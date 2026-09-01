@@ -278,6 +278,11 @@ export type TVSeasonDetails = {
   episodes: TVEpisode[];
 };
 
+export type Media ={
+  id:number,
+  media_type:string
+}
+
 export type MovieResponse = PaginatedResponse<Movie>;
 
 export type TVResponse = PaginatedResponse<TVShow>;

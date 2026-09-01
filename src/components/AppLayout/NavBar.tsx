@@ -4,11 +4,14 @@ import Search from "../Search/Search";
 import { useEffect, useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { UserRound } from "lucide-react";
-import { useAuth } from "@/features/auth/useAuth";
+import { useUser } from "@/features/authentication/useUser";
+import { useProfile } from "@/features/authentication/useProfile";
 
 function NavBar() {
   const [scrolled, setScrolled] = useState<boolean>();
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useUser();
+  const { profile } = useProfile(user?.id ?? "");
+
   useEffect(function () {
     function handleScroll() {
       setScrolled(window.scrollY > 20);
@@ -17,6 +20,7 @@ function NavBar() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   });
+
   return (
     <>
       <nav
@@ -49,7 +53,7 @@ function NavBar() {
 
             <Link
               to="/alooy"
-              className="text-neutral-400 transition-all duration-300 hover:scale-105 hover:text-white font-roboto"
+              className="text-neutral-400 transition-all duration-300 hover:scale-105 hover:text-white font-roboto text-[12.1px]"
             >
               Alooy Tv
             </Link>
@@ -68,17 +72,29 @@ function NavBar() {
             <Link
               to={isAuthenticated ? "/profile" : "/login"}
               className="
-                flex size-7 shrink-0 items-center justify-center
-                text-white
-                transition-colors
-                hover:text-red-500
-                lg:size-10
-                lg:rounded-full
-                lg:border lg:border-white/10
-                lg:bg-black/20
-              "
+              flex size-7 shrink-0 items-center justify-center
+              overflow-hidden rounded-full
+              text-white
+              transition-colors hover:text-red-500
+              lg:size-10
+              lg:border lg:border-white/10
+              lg:bg-black/20
+            "
             >
-              <UserRound className="size-6 lg:size-5" />
+              {profile?.avatar_url ? (
+                <img
+                  src={profile?.avatar_url}
+                  alt={profile?.full_name || "Profile"}
+                  className="
+                    size-full
+                    object-cover
+                    rounded-full
+                    block
+                  "
+                />
+              ) : (
+                <UserRound className="size-6 lg:size-5" />
+              )}
             </Link>
           </div>
         </div>

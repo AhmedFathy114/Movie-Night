@@ -7,7 +7,13 @@ import { Bookmark, Heart, X } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { GetStreams } from "@/services/shared/GetStreams";
-import { useAuth } from "@/features/auth/useAuth";
+import { useUser } from "@/features/authentication/useUser";
+import { useAddFavorite } from "@/features/favorites/useAddFavorite";
+import { useIsFavorite } from "@/features/favorites/useIsFavorite";
+import { useRemoveFavorite } from "@/features/favorites/useRemoveFavorite";
+import { useAddWatchlist } from "@/features/watchlist/useAddWatchlist";
+import { useIsWatchlist } from "@/features/watchlist/useIsWatchlist";
+import { useRemoveWatchlist } from "@/features/watchlist/useRemoveWatchlist";
 
 function MovieHero({
   finalTrailer,
@@ -18,7 +24,19 @@ function MovieHero({
 }) {
   const { movieId, slug } = useParams<{ movieId: string; slug: string }>();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useUser();
+  const { addFavorite, isAddFavorite } = useAddFavorite();
+  const { removeFavorite, isRemoveFavorite } = useRemoveFavorite();
+  const { isFavorite } = useIsFavorite({
+    id: Number(movieId),
+    media_type: "movie",
+  });
+  const { addWatchlist, isAddWatchlist } = useAddWatchlist();
+  const { isWatchlist } = useIsWatchlist({
+    id: Number(movieId),
+    media_type: "movie",
+  });
+  const { removeWatchlist, isRemoveWatchlist } = useRemoveWatchlist();
   const [showModal, setShowModal] = useState(false);
   const hours = Math.floor(movie.runtime / 60);
   const minutes = movie.runtime % 60;
@@ -285,10 +303,19 @@ function MovieHero({
             >
               <button
                 type="button"
+                disabled={isAddWatchlist || isRemoveWatchlist}
                 onClick={() => {
                   if (!isAuthenticated) {
                     navigate("/login");
                     return;
+                  }
+                  if (!isWatchlist) {
+                    addWatchlist({ id: Number(movieId), media_type: "movie" });
+                  } else {
+                    removeWatchlist({
+                      id: Number(movieId),
+                      media_type: "movie",
+                    });
                   }
                 }}
                 className="
@@ -315,25 +342,37 @@ function MovieHero({
                   cursor-pointer
                   sm:py-3
                   sm:text-base
-                "
+                  "
               >
                 <Bookmark
                   size={18}
                   strokeWidth={2.5}
-                  className="transition-transform duration-300 group-hover:text-yellow-400 group-hover:fill-yellow-400"
+                  className={`transition-transform duration-300 group-hover:text-yellow-400 group-hover:fill-yellow-400
+                    ${isWatchlist && "text-yellow-400 fill-yellow-400"}`}
                 />
-                <span>Add to Watchlist</span>
+                <span>
+                  {isWatchlist ? "Remove from watchlist" : "Add to Watchlist"}
+                </span>
               </button>
 
               <button
                 type="button"
+                disabled={isAddFavorite || isRemoveFavorite}
                 onClick={() => {
                   if (!isAuthenticated) {
                     navigate("/login");
                     return;
                   }
+                  if (!isFavorite) {
+                    addFavorite({ id: Number(movieId), media_type: "movie" });
+                  } else {
+                    removeFavorite({
+                      id: Number(movieId),
+                      media_type: "movie",
+                    });
+                  }
                 }}
-                className="
+                className={`
                   group
                   flex
                   items-center
@@ -358,14 +397,18 @@ function MovieHero({
                   sm:px-6
                   sm:py-3
                   sm:text-base
-                "
+                `}
               >
                 <Heart
                   size={18}
                   strokeWidth={2.5}
-                  className="transition-transform duration-300 group-hover:fill-red-600 group-hover:stroke-red-600"
+                  className={`transition-transform duration-300 group-hover:fill-red-600 group-hover:stroke-red-600
+                    ${isFavorite && "fill-red-600 stroke-red-600"}
+                    `}
                 />
-                <span>Add to Favorites</span>
+                <span>
+                  {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                </span>
               </button>
             </div>
 

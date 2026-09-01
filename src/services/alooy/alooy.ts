@@ -8,11 +8,9 @@ const ALOOY_API = import.meta.env.VITE_ALOOY_API;
 
 async function request<T>(params: Record<string, string>) {
   const url = new URL(ALOOY_API);
-
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
-
   const response = await fetch(url.toString());
 
   if (!response.ok) {

@@ -14,7 +14,7 @@ function DropMenu() {
 
   return (
     <NavigationMenu
-      className="relative z-50"
+      className="relative z-50 pb-0.5"
       value={menuValue}
       onValueChange={setMenuValue}
     >

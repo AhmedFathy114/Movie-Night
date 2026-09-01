@@ -23,124 +23,19 @@ function EpisodesSection({
   onSeasonChange,
 }: EpisodesSectionProps) {
   return (
-    <section
-      className="
-        w-full
-        rounded-[28px]
-        bg-[#171717]
-        px-6
-        py-7
-        sm:px-8
-        sm:py-8
-      "
-    >
-      <div
-        className="
-          flex
-          flex-col
-          gap-7
-          lg:flex-row
-          lg:items-start
-          lg:justify-between
-          lg:gap-8
-        "
-      >
-        {/* Episodes */}
-        <div className="min-w-0 flex-1">
-          <h2
-            className="
-              font-bebas
-              text-4xl
-              font-bold
-              tracking-wide
-              text-white
-              sm:text-5xl
-            "
-          >
-            EPISODES
-          </h2>
+    <section className="mt-10">
+      {/* Header */}
+      <div className="mb-6 flex items-center gap-3">
+        <div className="h-8 w-1 rounded-full bg-red-700" />
 
-          {/* Episodes List */}
-          <div
-            className="
-              mt-7
-              flex
-              gap-4
-              overflow-x-auto
-              pb-1
-              scrollbar-none
-            "
-          >
-            {episodes.map((episode) => {
-              const isActive = episode.episode_number === currentEpisode;
-              return (
-                <button
-                  key={episode.id}
-                  type="button"
-                  onClick={() => onEpisodeChange(episode.episode_number)}
-                  className={`
-                    flex
-                    lg:h-20
-                    h-20
-                    lg:w-20
-                    w-19
-                    shrink-0
-                    cursor-pointer
-                    flex-col
-                    items-center
-                    justify-center
-                    rounded-xl
-                    border-2
-                    transition-all
-                    duration-200
+        <h3 className="text-3xl font-bold text-white">
+          episodes ({episodes.length})
+        </h3>
+      </div>
 
-                    ${
-                      isActive
-                        ? `
-                          border-red-500
-                          bg-red-600
-                          shadow-lg
-                          shadow-red-600/20
-                        `
-                        : `
-                          border-white/10
-                          bg-[#242424]
-                          hover:border-red-500/60
-                          hover:bg-[#2b2b2b]
-                        `
-                    }
-                  `}
-                >
-                  <span
-                    className={`
-                      font-roboto
-                      text-sm
-                      font-semibold
-                      ${isActive ? "text-red-100" : "text-slate-400"}
-                    `}
-                  >
-                    EP
-                  </span>
-
-                  <span
-                    className={`
-                      mt-1
-                      font-roboto
-                      text-2xl
-                      font-bold
-                      ${isActive ? "text-white" : "text-slate-300"}
-                    `}
-                  >
-                    {episode.episode_number}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Season Select */}
-        <div className="w-full shrink-0 lg:w-56">
+      {/* Season Select */}
+      {seasons.length > 1 && (
+        <div className="mb-6 w-full sm:w-56">
           <label htmlFor="season-select" className="sr-only">
             Select Season
           </label>
@@ -150,38 +45,78 @@ function EpisodesSection({
             value={currentSeason}
             onChange={(event) => onSeasonChange(Number(event.target.value))}
             className="
-            appearance-none
-              h-15
+              h-12
               w-full
               cursor-pointer
+              appearance-none
               rounded-xl
               border-2
-              border-neutral-700
-              hover:border-red-600
-              focus:border-red-800
-              bg-[#242424]
-              px-6
+              border-neutral-800
+              bg-neutral-900/40
+              px-4
               font-roboto
-              lg:text-lg
-              text-[20px]
+              text-sm
               font-bold
               text-white
               outline-none
               transition
-              hover:bg-[#2b2b2b]
+              hover:border-red-600
+              focus:border-red-600
             "
           >
             {seasons.map((season) => (
               <option
-                className="text-[13px] lg:text-lg"
                 key={season.season_number}
                 value={season.season_number}
+                className="bg-neutral-900 text-white"
               >
                 {season.name || `Season ${season.season_number}`}
               </option>
             ))}
           </select>
         </div>
+      )}
+
+      {/* Episodes Grid */}
+      <div
+        className="
+          grid
+          grid-cols-2
+          gap-3
+          sm:grid-cols-3
+          md:grid-cols-4
+          lg:grid-cols-6
+          xl:grid-cols-8
+        "
+      >
+        {episodes.map((episode) => {
+          const isActive = episode.episode_number === currentEpisode;
+
+          return (
+            <button
+              key={episode.id}
+              type="button"
+              onClick={() => {
+                onEpisodeChange(episode.episode_number);
+                window.scrollTo({ top: 350, behavior: "smooth" });
+              }}
+              className={`
+                    group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border p-3 transition-all duration-300
+                    ${
+                      isActive
+                        ? "border-red-600 bg-red-600/10 text-red-500"
+                        : "border-neutral-800 bg-neutral-900/40 text-neutral-400 hover:border-neutral-600 hover:text-white"
+                    }
+                  `}
+            >
+              <span className="text-sm font-bold uppercase tracking-wider">
+                {episode.episode_number
+                  ? `EP#${episode.episode_number}`
+                  : episode.name}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

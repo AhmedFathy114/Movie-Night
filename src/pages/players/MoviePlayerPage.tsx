@@ -2,15 +2,16 @@
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useStreams } from "@/features/Shared/useStreams";
+import { ChevronLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Player() {
   const { movieId, slug } = useParams<{
     movieId: string;
     slug: string;
   }>();
-
+  const navigate = useNavigate();
   const { streams } = useStreams("movie");
   const [activeServerName, setActiveServerName] = useState("");
 
@@ -77,6 +78,13 @@ function Player() {
 
       <section className="flex min-h-screen flex-col items-center bg-black px-4 pb-10 pt-24">
         <div className="w-full max-w-6xl space-y-4">
+          <button
+            onClick={() => navigate(`/movie/${movieId}/${slug}`)}
+            className="flex w-fit items-center gap-2 rounded-xl bg-neutral-900/50 px-4 py-2 text-sm text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+          >
+            <ChevronLeft className="h-5 w-5" />
+            <span>Back</span>
+          </button>
           <div className="flex items-center gap-2 md:gap-3">
             <div className="h-8 w-1 rounded-full bg-red-700 shadow-lg shadow-red-700/50 md:h-13 md:w-1.5" />
 

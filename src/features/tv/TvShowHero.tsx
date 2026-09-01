@@ -3,7 +3,15 @@ import formatDate from "@/lib/utils";
 import { backDropUrl } from "@/lib/Variables";
 import type { genres, TVDetails, Videos } from "@/types/AllTypes";
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Bookmark, Heart, X } from "lucide-react";
+import { useUser } from "../authentication/useUser";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAddFavorite } from "../favorites/useAddFavorite";
+import { useIsFavorite } from "../favorites/useIsFavorite";
+import { useRemoveFavorite } from "../favorites/useRemoveFavorite";
+import { useAddWatchlist } from "../watchlist/useAddWatchlist";
+import { useIsWatchlist } from "../watchlist/useIsWatchlist";
+import { useRemoveWatchlist } from "../watchlist/useRemoveWatchlist";
 
 function TvShowHero({
   finalTrailer,
@@ -12,8 +20,22 @@ function TvShowHero({
   finalTrailer?: Videos;
   tv: TVDetails;
 }) {
+  const { tvId } = useParams<{ tvId: string }>();
   const [showModal, setShowModal] = useState(false);
-
+  const { isAuthenticated } = useUser();
+  const navigate = useNavigate();
+  const { addFavorite, isAddFavorite } = useAddFavorite();
+  const { isFavorite } = useIsFavorite({
+    id: Number(tvId),
+    media_type: "tv",
+  });
+  const { removeFavorite, isRemoveFavorite } = useRemoveFavorite();
+  const { addWatchlist, isAddWatchlist } = useAddWatchlist();
+  const { isWatchlist } = useIsWatchlist({
+    id: Number(tvId),
+    media_type: "tv",
+  });
+  const { removeWatchlist, isRemoveWatchlist } = useRemoveWatchlist();
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
       {/* Background */}
@@ -249,6 +271,130 @@ function TvShowHero({
               >
                 {tv.overview}
               </p>
+            </div>
+
+            {/* Watchlist & Favorite */}
+            <div
+              className="
+                mt-5
+                flex
+                whitespace-nowrap
+                flex-wrap
+                justify-center
+                gap-3
+                sm:gap-4
+                lg:justify-start
+              "
+            >
+              <button
+                type="button"
+                disabled={isAddWatchlist || isRemoveWatchlist}
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate("/login");
+                    return;
+                  }
+                  if (!isWatchlist) {
+                    addWatchlist({ id: Number(tvId), media_type: "tv" });
+                  } else {
+                    removeWatchlist({
+                      id: Number(tvId),
+                      media_type: "tv",
+                    });
+                  }
+                }}
+                className="
+                  group
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/5
+                  px-5
+                  py-2.5
+                  font-roboto
+                  text-sm
+                  font-bold
+                  text-white
+                  backdrop-blur-sm
+                  transition-all
+                  hover:border-red-600
+                  hover:bg-red-700
+                  sm:px-6
+                  cursor-pointer
+                  sm:py-3
+                  sm:text-base
+                "
+              >
+                <Bookmark
+                  size={18}
+                  strokeWidth={2.5}
+                  className={`transition-transform duration-300 group-hover:text-yellow-400 group-hover:fill-yellow-400
+                    ${isWatchlist && "text-yellow-400 fill-yellow-400"}`}
+                />
+                <span>
+                  {isWatchlist ? "Remove from watchlist" : "Add to Watchlist"}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isAddFavorite || isRemoveFavorite}
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate("/login");
+                    return;
+                  }
+                  if (!isFavorite) {
+                    addFavorite({ id: Number(tvId), media_type: "tv" });
+                  } else {
+                    removeFavorite({
+                      id: Number(tvId),
+                      media_type: "tv",
+                    });
+                  }
+                }}
+                className="
+                  group
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/5
+                  px-5
+                  py-2.5
+                  font-roboto
+                  text-sm
+                  font-bold
+                  text-white
+                  backdrop-blur-sm
+                  transition-all
+                  duration-300
+                  cursor-pointer
+                  hover:bg-white
+                  hover:text-black
+                  sm:px-6
+                  sm:py-3
+                  sm:text-base
+                "
+              >
+                <Heart
+                  size={18}
+                  strokeWidth={2.5}
+                  className={`transition-transform duration-300 group-hover:fill-red-600 group-hover:stroke-red-600
+                    ${isFavorite && "fill-red-600 stroke-red-600"}
+                    `}
+                />
+                <span>
+                  {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                </span>
+              </button>
             </div>
 
             {/* Buttons */}

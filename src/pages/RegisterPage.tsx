@@ -1,4 +1,4 @@
-import { useLogin } from "@/features/authentication/useLogin";
+import { useSignUp } from "@/features/authentication/useSignUp";
 import PageLoader from "@/features/Shared/PageLoader";
 import { loginWithGoogle } from "@/services/supabase/auth/apiAuth";
 import { Eye, EyeOff } from "lucide-react";
@@ -6,31 +6,37 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-type loginProps = {
+type SignUpProps = {
   email: string;
   password: string;
+  fullName: string;
 };
 
-function LoginPage() {
+function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
-  } = useForm<loginProps>();
+  } = useForm<SignUpProps>();
+
+  const { signUp, isSigning } = useSignUp();
 
   const navigate = useNavigate();
-  const { login, isLogin } = useLogin();
 
-  function handleLogin(data: loginProps) {
-    login(
+  function handleLogin(data: SignUpProps) {
+    signUp(
       {
-        email: data.email,
+        fullName: data.fullName,
         password: data.password,
+        email: data.email,
       },
       {
-        onSuccess: () => reset(),
+        onSuccess: () => {
+          reset();
+          navigate("/login");
+        },
       },
     );
   }
@@ -44,12 +50,12 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    document.title = "Login | Movie Night";
+    document.title = "Register | Movie Night";
   }, []);
 
   return (
     <>
-      <PageLoader message="Loading Login Page" />
+      <PageLoader message="Loading Register Page" />
       <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black px-4 py-4 text-white">
         {/* Background Glow */}
         <div className="pointer-events-none absolute inset-0">
@@ -59,7 +65,7 @@ function LoginPage() {
         {/* Login Card */}
         <div
           className="
-        relative z-10
+          relative z-10
           flex w-full max-w-md flex-col
           rounded-4xl
           border border-white/10
@@ -93,6 +99,49 @@ function LoginPage() {
             onSubmit={handleSubmit(handleLogin)}
             className="mt-6 flex flex-col gap-4"
           >
+            {/* full name */}
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="fullName"
+                className="font-roboto text-sm font-medium text-neutral-300"
+              >
+                Full Name
+              </label>
+
+              <input
+                id="fullName"
+                type="text"
+                placeholder="Ahmed"
+                {...register("fullName", {
+                  required: "fullName is required",
+                })}
+                className="
+                h-10
+                w-full
+                rounded-lg
+                border-neutral-700
+                bg-neutral-900/60
+                px-4
+                font-roboto
+                text-sm
+                font-medium
+                tracking-wide
+                text-neutral-200
+                placeholder:text-neutral-600
+                outline-none
+                focus:border-red-600
+                focus:ring-1
+                focus:ring-red-500
+              "
+              />
+
+              {errors.fullName?.message && (
+                <p className="text-xs pt-0.5 text-red-500">
+                  {errors.fullName.message as string}
+                </p>
+              )}
+            </div>
+
             {/* Email */}
             <div className="flex flex-col gap-1.5">
               <label
@@ -130,7 +179,7 @@ function LoginPage() {
                 focus:border-red-600
                 focus:ring-1
                 focus:ring-red-500
-                "
+              "
               />
 
               {errors.email?.message && (
@@ -216,16 +265,15 @@ function LoginPage() {
                 text-neutral-500
                 transition-colors
                 hover:text-red-500
-                "
+              "
               >
                 Forgot password?
               </button>
             </div>
 
-            {/* Login */}
             <button
               type="submit"
-              disabled={isLogin}
+              disabled={isSigning}
               className="
               h-10
               w-full
@@ -243,7 +291,7 @@ function LoginPage() {
               active:scale-[0.98]
             "
             >
-              Login
+              Register
             </button>
 
             {/* Google Login */}
@@ -281,7 +329,7 @@ function LoginPage() {
                 hover:shadow-white/20
                 active:scale-[0.98]
                 cursor-pointer
-                "
+              "
               >
                 <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true">
                   <path
@@ -306,15 +354,14 @@ function LoginPage() {
             </div>
           </form>
 
-          {/* Register */}
           <p className="mt-5 text-center font-roboto text-xs text-neutral-500 sm:text-sm">
-            Don't have an account?{" "}
+            You have an account?{" "}
             <button
               type="button"
-              onClick={() => navigate("/register")}
+              onClick={() => navigate("/login")}
               className="font-semibold text-red-500 transition-colors hover:text-red-400"
             >
-              Sign up
+              Login
             </button>
           </p>
         </div>
@@ -323,4 +370,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
