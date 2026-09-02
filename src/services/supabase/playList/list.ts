@@ -78,3 +78,26 @@ export async function removeWatchlist({id,media_type}:Media){
     return data
 }
 
+export async function getFavorite(userId: string,type:string) {
+  const { data, error } = await supabase
+    .from("favorites")
+    .select("media_id, media_type")
+    .eq("user_id", userId)
+    .eq("media_type", type);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function getWatchlist(userId: string,type:string) {
+  const { data, error } = await supabase
+    .from("watchlist")
+    .select("media_id, media_type")
+    .eq("user_id", userId)
+    .eq("media_type", type);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}

@@ -1,13 +1,19 @@
-import { useProfile } from "@/features/authentication/useProfile";
+import { useProfile } from "@/features/profile/useProfile";
 import { useUser } from "@/features/authentication/useUser";
 import ProfileHero from "@/features/profile/ProfileHero";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineLogout } from "react-icons/hi";
+import { useLogout } from "@/features/authentication/useLogout";
+import { Bookmark, Heart } from "lucide-react";
+import FavoriteSection from "@/features/favorites/FavoriteSection";
+import WatchlistSection from "@/features/watchlist/WatchlistSection";
 
 function Profile() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isPending: isPending2 } = useUser();
   const { profile, isPending } = useProfile(user?.id ?? "");
+  const { logout, isLogout } = useLogout();
 
   if (isPending || isPending2) return <PageLoader message="Loading Profile" />;
 
@@ -62,6 +68,16 @@ function Profile() {
               profile
             </h2>
           </div>
+
+          <button
+            onClick={() => logout()}
+            disabled={isLogout}
+            className="w-fit py-1.5 px-3 bg-red-600 rounded-2xl border border-red-600 flex justify-center items-center gap-2 hover:bg-red-700 cursor-pointer md:text-4xl
+              tracking-wide"
+          >
+            <HiOutlineLogout size={22} />{" "}
+            <span className="font-roboto lg:text-lg">Logout</span>
+          </button>
         </div>
 
         <div
@@ -79,6 +95,8 @@ function Profile() {
         />
 
         <ProfileHero profile={profile} />
+        <FavoriteSection title="Favorites" icon={<Heart />} />
+        <WatchlistSection title="watchlist" icon={<Bookmark />} />
       </section>
     </>
   );

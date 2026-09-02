@@ -255,22 +255,6 @@ function RegisterPage() {
               )}
             </div>
 
-            {/* Forgot Password */}
-            <div className="-mt-1 flex justify-end">
-              <button
-                type="button"
-                className="
-                font-roboto
-                text-xs
-                text-neutral-500
-                transition-colors
-                hover:text-red-500
-              "
-              >
-                Forgot password?
-              </button>
-            </div>
-
             <button
               type="submit"
               disabled={isSigning}
@@ -289,6 +273,7 @@ function RegisterPage() {
               hover:shadow-lg
               hover:shadow-red-600/20
               active:scale-[0.98]
+              cursor-pointer
             "
             >
               Register
@@ -359,7 +344,7 @@ function RegisterPage() {
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="font-semibold text-red-500 transition-colors hover:text-red-400"
+              className="font-semibold text-red-500 transition-colors hover:text-red-400 cursor-pointer"
             >
               Login
             </button>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUpdateProfile } from "../authentication/useUpdateProfile";
+import { UserRound } from "lucide-react";
+import { MdDelete } from "react-icons/md";
 
 interface Profile {
   id: string;
@@ -46,15 +48,25 @@ function ProfileHero({ profile }: { profile: Profile }) {
         <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col justify-center items-center gap-6">
             <div className="relative">
-              <img
-                src={
-                  selectedImage
-                    ? URL.createObjectURL(selectedImage)
-                    : profile.avatar_url
-                }
-                alt={profile.full_name}
-                className="size-40 rounded-full object-cover ring-2 ring-white/10"
-              />
+              {profile.avatar_url ? (
+                <img
+                  src={
+                    selectedImage
+                      ? URL.createObjectURL(selectedImage)
+                      : profile.avatar_url
+                  }
+                  alt={profile.full_name}
+                  className="size-40 rounded-full object-cover ring-2 ring-white/10"
+                />
+              ) : selectedImage ? (
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt={profile.full_name}
+                  className="size-40 rounded-full object-cover ring-2 ring-white/10"
+                />
+              ) : (
+                <UserRound className="size-30" />
+              )}
 
               <label
                 htmlFor="avatar"
@@ -64,7 +76,7 @@ function ProfileHero({ profile }: { profile: Profile }) {
                 rounded-full bg-red-600
                 text-white
                 transition-colors hover:bg-red-700
-            "
+              "
               >
                 ✎
               </label>
@@ -82,8 +94,14 @@ function ProfileHero({ profile }: { profile: Profile }) {
               <div className="text-center -mb-3 -mt-2.5">
                 <p className="text-xs text-neutral-500">Selected image</p>
 
-                <p className="mt-1 max-w-60 truncate text-sm text-red-500">
-                  {selectedImage.name}
+                <p className="mt-1 max-w-60 truncate text-sm text-red-500 flex item-center justify-center gap-2 flex-wrap">
+                  <span className="line-clamp-1">{selectedImage.name} </span>
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    className="cursor-pointer pt-1.25"
+                  >
+                    <MdDelete size={16}/>
+                  </button>
                 </p>
               </div>
             )}

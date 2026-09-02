@@ -14,15 +14,15 @@ import "./App.css";
 
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 
-const TvDetailsPage = lazy(() => import("./pages/Details/TvDetailsPage"));
+const TvDetailsPage = lazy(() => import("./pages/details/TvDetailsPage"));
 
-const ActorDetailsPage = lazy(() => import("./pages/Details/ActorDetailsPage"));
+const ActorDetailsPage = lazy(() => import("./pages/details/ActorDetailsPage"));
 
-const FullCastPage = lazy(() => import("./pages/Details/FullCastPage"));
+const FullCastPage = lazy(() => import("./pages/details/FullCastPage"));
 
 const MoviePlayerPage = lazy(() => import("./pages/players/MoviePlayerPage"));
 
-const TvSessionPage = lazy(() => import("./pages/Details/TvSessionPage"));
+const TvSessionPage = lazy(() => import("./pages/details/TvSessionPage"));
 
 const TvPlayerPage = lazy(() => import("./pages/players/TvPlayerPage"));
 
@@ -34,15 +34,19 @@ const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 
 const GenrePage = lazy(() => import("./pages/GenrePage"));
 
-const LoginPage = lazy(() => import("./pages/LoginPage"));
+const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
 
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const RegisterPage = lazy(() => import("./pages/auth/RegisterPage"));
+
+const ResetPage = lazy(() => import("./pages/auth/ResetPage"));
+
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
-const MovieDetailsPage = lazy(() => import("./pages/Details/MovieDetailsPage"));
+const MovieDetailsPage = lazy(() => import("./pages/details/MovieDetailsPage"));
 
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
@@ -112,6 +116,8 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPage />} />
 
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Navigate replace to="/home" />} />

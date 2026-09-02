@@ -26,7 +26,7 @@ export async function login({email,password}:loginProps){
 
 export async function getCurrentUser(){
     const {data:sessions} = await supabase.auth.getSession();
-    if(!sessions?.session) return;
+    if(!sessions?.session) return null;
     const {data,error} = await supabase.auth.getUser();
     if(error) throw new Error(error.message);
 
@@ -43,7 +43,7 @@ export async function signUp({email,password,fullName}:SignUpProps){
                 avatar:'',
             }
             ,
-            emailRedirectTo: "https://movie-night-11.vercel.app/home",
+            emailRedirectTo: `${window.location.origin}/home`,
         }
     })
 
@@ -127,4 +127,33 @@ export async function updateProfile({image,full_name,userId}:{image:File|null,fu
     }
 
     return data;
+}
+
+export async function logout(){
+    const {error} = await supabase.auth.signOut();
+    if(error){
+        throw new Error(error.message)
+    }
+}
+
+export async function resetPassword(email: string) {
+  const { error} = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
+
+  
+  if (error) {
+      throw new Error(error.message);
+    }
+
+}
+
+export async function updateUser(newPassword:string) {
+    const {error} = await supabase.auth.updateUser({
+        password:newPassword
+    })
+
+    if (error) {
+        throw new Error(error.message);
+    }
 }

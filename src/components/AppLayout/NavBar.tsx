@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import { UserRound } from "lucide-react";
 import { useUser } from "@/features/authentication/useUser";
-import { useProfile } from "@/features/authentication/useProfile";
+import { useProfile } from "@/features/profile/useProfile";
 
 function NavBar() {
   const [scrolled, setScrolled] = useState<boolean>();
@@ -81,7 +81,7 @@ function NavBar() {
               lg:bg-black/20
             "
             >
-              {profile?.avatar_url ? (
+              {isAuthenticated && profile?.avatar_url ? (
                 <img
                   src={profile?.avatar_url}
                   alt={profile?.full_name || "Profile"}
