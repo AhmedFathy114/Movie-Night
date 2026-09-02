@@ -17,7 +17,7 @@ function TrailerCard({ video }: { video: Videos }) {
         md:w-120
       "
     >
-      {/* Video */}
+      
       <div
         className="
           relative
@@ -44,7 +44,7 @@ function TrailerCard({ video }: { video: Videos }) {
         />
       </div>
 
-      {/* Title */}
+      
       <p
         className="
           mt-3

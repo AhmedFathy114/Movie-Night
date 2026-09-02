@@ -73,7 +73,7 @@ function CarouselSwiperSlide({ movie }: { movie: Movie }) {
               </span>
             </div>
 
-            {/* Genres */}
+            
             <div className="mt-3 md:flex flex-wrap gap-2 hidden">
               {movieGenres?.map((genre: genres) => (
                 <span
@@ -87,7 +87,7 @@ function CarouselSwiperSlide({ movie }: { movie: Movie }) {
               ))}
             </div>
 
-            {/* Overview */}
+            
             <div className="mt-5 md:mt-8">
               <h2 className="font-bebas text-2xl tracking-wide text-red-600 sm:text-3xl">
                 OVERVIEW

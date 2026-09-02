@@ -32,12 +32,12 @@ function ResetPage() {
     <>
       <PageLoader message="Loading reset password Page" />
       <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black px-4 py-4 text-white">
-        {/* Background Glow */}
+        
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-400/60 blur-[120px]" />
         </div>
 
-        {/* Login Card */}
+        
         <div
           className="
         relative z-10
@@ -52,7 +52,7 @@ function ResetPage() {
           sm:px-8 sm:py-7
         "
         >
-          {/* Header */}
+          
           <div className="flex flex-col items-center">
             <img
               src="/favicon.png"
@@ -69,12 +69,12 @@ function ResetPage() {
             </p>
           </div>
 
-          {/* Form */}
+          
           <form
             onSubmit={handleSubmit(handleReset)}
             className="mt-6 flex flex-col gap-4"
           >
-            {/* Password */}
+            
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="password"

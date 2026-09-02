@@ -38,7 +38,7 @@ function TvShowHero({
   const { removeWatchlist, isRemoveWatchlist } = useRemoveWatchlist();
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
-      {/* Background */}
+      
       <img
         src={`${backDropUrl}${tv.backdrop_path}`}
         alt={tv.name || tv.original_name}
@@ -46,7 +46,7 @@ function TvShowHero({
         className="absolute inset-0 h-full w-full object-cover blur-[3px]"
       />
 
-      {/* Overlay */}
+      
       <div
         className="
           absolute inset-0
@@ -77,7 +77,7 @@ function TvShowHero({
         </div>
       )}
 
-      {/* Content */}
+      
       <div
         className="
           relative z-10
@@ -108,7 +108,7 @@ function TvShowHero({
             lg:pb-12
           "
         >
-          {/* Poster */}
+          
           <div className="flex justify-center lg:justify-end">
             <img
               src={`${backDropUrl}${tv.poster_path || tv.backdrop_path}`}
@@ -138,7 +138,7 @@ function TvShowHero({
             />
           </div>
 
-          {/* Details */}
+          
           <div
             className="
               w-full
@@ -158,7 +158,7 @@ function TvShowHero({
               lg:text-start
             "
           >
-            {/* Title */}
+            
             <h1
               className="
                 font-bebas
@@ -178,7 +178,7 @@ function TvShowHero({
               {tv.name || tv.original_name}
             </h1>
 
-            {/* Info */}
+            
             <div
               className="
                 mt-4
@@ -210,7 +210,7 @@ function TvShowHero({
               </span>
             </div>
 
-            {/* Genres */}
+            
             <div
               className="
                 lg:mt-4
@@ -232,7 +232,7 @@ function TvShowHero({
               ))}
             </div>
 
-            {/* Overview */}
+            
             <div className="mt-5 md:mt-7">
               <h2
                 className="
@@ -273,7 +273,7 @@ function TvShowHero({
               </p>
             </div>
 
-            {/* Watchlist & Favorite */}
+            
             <div
               className="
                 mt-5
@@ -397,7 +397,7 @@ function TvShowHero({
               </button>
             </div>
 
-            {/* Buttons */}
+            
             <div
               className="
                 mt-6

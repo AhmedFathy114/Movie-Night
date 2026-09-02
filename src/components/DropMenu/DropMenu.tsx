@@ -19,7 +19,7 @@ function DropMenu() {
       onValueChange={setMenuValue}
     >
       <NavigationMenuList>
-        {/* Explore */}
+        
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-neutral-400 transition-all duration-300 hover:text-white font-roboto">
             Explore
@@ -39,7 +39,7 @@ function DropMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        {/* Genres */}
+        
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-neutral-400 transition-all duration-300 hover:text-white font-roboto">
             Genres

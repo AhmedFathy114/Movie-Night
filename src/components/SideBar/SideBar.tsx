@@ -21,7 +21,7 @@ function SideBar() {
   const [open, setOpen] = useState(false);
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      {/* Open Button */}
+      
       <SheetTrigger
         render={
           <Button
@@ -39,7 +39,7 @@ function SideBar() {
         <Menu className="mb-1 size-7" strokeWidth={2} />
       </SheetTrigger>
 
-      {/* Sidebar */}
+      
       <SheetContent
         side="left"
         showCloseButton={false}
@@ -59,13 +59,13 @@ function SideBar() {
           z-9999
           "
       >
-        {/* Accessibility */}
+        
         <SheetHeader className="sr-only">
           <SheetTitle>Menu</SheetTitle>
           <SheetDescription>Movie Night navigation menu</SheetDescription>
         </SheetHeader>
 
-        {/* Header */}
+        
         <div
           className="
             relative
@@ -90,7 +90,7 @@ function SideBar() {
             MENU
           </span>
 
-          {/* Close Button */}
+          
           <SheetClose
             className="
               absolute
@@ -113,7 +113,7 @@ function SideBar() {
           </SheetClose>
         </div>
 
-        {/* Menu Content */}
+        
         <div
           className="
             min-h-0
@@ -171,7 +171,7 @@ function SideBar() {
             <span className="font-bebas tracking-wide ">About</span>
           </NavLink>
 
-          {/* Categories */}
+          
           <SectionTitle>Categories</SectionTitle>
 
           {exploreItems.map((item) => (
@@ -182,7 +182,7 @@ function SideBar() {
             />
           ))}
 
-          {/* Genres */}
+          
           <SectionTitle>Genres</SectionTitle>
 
           {genreItems.map((item) => (

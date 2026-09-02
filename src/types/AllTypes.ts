@@ -15,9 +15,7 @@ export type Movie = {
   vote_average: number;
   vote_count: number;
 
-  release_date: string;
-
-  // Details
+  release_date: string;
   runtime: number;
 
   belongs_to_collection: {

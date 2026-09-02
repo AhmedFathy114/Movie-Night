@@ -24,7 +24,7 @@ function EpisodesSection({
 }: EpisodesSectionProps) {
   return (
     <section className="mt-10">
-      {/* Header */}
+      
       <div className="mb-6 flex items-center gap-3">
         <div className="h-8 w-1 rounded-full bg-red-700" />
 
@@ -33,7 +33,7 @@ function EpisodesSection({
         </h3>
       </div>
 
-      {/* Season Select */}
+      
       {seasons.length > 1 && (
         <div className="mb-6 w-full sm:w-56">
           <label htmlFor="season-select" className="sr-only">
@@ -77,7 +77,7 @@ function EpisodesSection({
         </div>
       )}
 
-      {/* Episodes Grid */}
+      
       <div
         className="
           grid

@@ -51,12 +51,12 @@ function LoginPage() {
     <>
       <PageLoader message="Loading Login Page" />
       <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black px-4 py-4 text-white">
-        {/* Background Glow */}
+        
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-400/60 blur-[120px]" />
         </div>
 
-        {/* Login Card */}
+        
         <div
           className="
         relative z-10
@@ -71,7 +71,7 @@ function LoginPage() {
           sm:px-8 sm:py-7
         "
         >
-          {/* Header */}
+          
           <div className="flex flex-col items-center">
             <img
               src="/favicon.png"
@@ -88,12 +88,12 @@ function LoginPage() {
             </p>
           </div>
 
-          {/* Form */}
+          
           <form
             onSubmit={handleSubmit(handleLogin)}
             className="mt-6 flex flex-col gap-4"
           >
-            {/* Email */}
+            
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="email"
@@ -140,7 +140,7 @@ function LoginPage() {
               )}
             </div>
 
-            {/* Password */}
+            
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="password"
@@ -206,7 +206,7 @@ function LoginPage() {
               )}
             </div>
 
-            {/* Forgot Password */}
+            
             <div className="-mt-1 flex justify-end">
               <button
                 onClick={() => navigate("/forgot-password")}
@@ -224,7 +224,7 @@ function LoginPage() {
               </button>
             </div>
 
-            {/* Login */}
+            
             <button
               type="submit"
               disabled={isLogin}
@@ -249,9 +249,9 @@ function LoginPage() {
               Login
             </button>
 
-            {/* Google Login */}
+            
             <div>
-              {/* OR */}
+              
               <div className="flex items-center gap-3">
                 <div className="h-px flex-1 bg-neutral-800" />
 
@@ -262,7 +262,7 @@ function LoginPage() {
                 <div className="h-px flex-1 bg-neutral-800" />
               </div>
 
-              {/* Google Button */}
+              
               <button
                 type="button"
                 onClick={handleGoogleLogin}
@@ -309,7 +309,7 @@ function LoginPage() {
             </div>
           </form>
 
-          {/* Register */}
+          
           <p className="mt-5 text-center font-roboto text-xs text-neutral-500 sm:text-sm">
             Don't have an account?{" "}
             <button

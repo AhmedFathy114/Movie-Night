@@ -19,8 +19,7 @@ function AlooySearch() {
   useEffect(() => {
     const value = debouncedQuery.trim();
 
-    if (!value) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!value) {
       setResults([]);
       setIsOpen(false);
       return;

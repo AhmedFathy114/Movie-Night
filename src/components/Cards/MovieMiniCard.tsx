@@ -9,9 +9,7 @@ function MovieMiniCard({
 }: {
   movie: TMDBItem;
   setSearchQuery: (searchQuery: string) => void;
-}) {
-  // const isMovie = movie.media_type === "movie";
-  // const isTv = movie.media_type === "tv";
+}) {
 
   const { type, data } = useDefineType(movie);
   const { handleSubmit } = useNavigateDetails(movie);

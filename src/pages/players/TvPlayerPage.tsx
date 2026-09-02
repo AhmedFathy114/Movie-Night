@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useDetails } from "@/features/Shared/useDetails";
@@ -164,7 +164,7 @@ function TvPlayer() {
             <ChevronLeft className="h-5 w-5" />
             <span>Back</span>
           </button>
-          {/* Title */}
+          
           <div className="flex items-center gap-2 md:gap-3">
             <div
               className="
@@ -194,13 +194,13 @@ function TvPlayer() {
             </h2>
           </div>
 
-          {/* Description */}
+          
           <p className="mt-2 text-sm font-semibold text-gray-400 md:text-[15px]">
             Having trouble? Try switching between different stream sources below
             for the best playback experience.
           </p>
 
-          {/* Servers */}
+          
           <div className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start">
             {streams.map((server) => (
               <StreamButton
@@ -212,7 +212,7 @@ function TvPlayer() {
             ))}
           </div>
 
-          {/* Player */}
+          
           <div
             className="
             mt-5
@@ -234,7 +234,7 @@ function TvPlayer() {
             />
           </div>
 
-          {/* Episodes */}
+          
           {details && season && (
             <EpisodesSection
               episodes={season.episodes}

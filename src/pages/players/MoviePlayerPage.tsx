@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+
 import StreamButton from "@/components/StreamButton";
 import PageLoader from "@/features/Shared/PageLoader";
 import { useStreams } from "@/features/Shared/useStreams";
@@ -98,7 +98,7 @@ function Player() {
             for the best playback experience.
           </p>
 
-          {/* Servers */}
+          
           <div
             ref={playerRef}
             className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start"
@@ -113,7 +113,7 @@ function Player() {
             ))}
           </div>
 
-          {/* Player */}
+          
           <div className="mt-5 aspect-10/9 lg:aspect-video w-full overflow-hidden rounded-xl bg-neutral-900">
             {embedUrl && (
               <iframe

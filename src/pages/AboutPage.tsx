@@ -11,7 +11,7 @@ function About() {
       <div className="min-h-screen bg-black text-white flex flex-col">
         <main className="grow pt-24 pb-16">
           <section className="relative py-20 overflow-hidden">
-            {/* Glow blobs */}
+            
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-175 h-100 bg-red-700/20 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 right-0 w-100 h-75 bg-red-900/15 rounded-full blur-[100px] pointer-events-none" />
 

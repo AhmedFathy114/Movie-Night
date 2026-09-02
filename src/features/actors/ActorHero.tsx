@@ -18,7 +18,7 @@ function ActorHero({
   if (!actor) return null;
   return (
     <div className="relative min-h-dvh w-full overflow-hidden mt-2 lg:mt-0">
-      {/* Content */}
+      
       <div
         className="
           relative z-10
@@ -50,7 +50,7 @@ function ActorHero({
             lg:pb-12
           "
         >
-          {/* Poster */}
+          
           <div className="flex flex-col justify-center gap-5 ">
             <div className="flex justify-center lg:justify-end">
               <img
@@ -138,7 +138,7 @@ function ActorHero({
                   </h2>
                 </div>
 
-                {/* Info */}
+                
                 <div className="space-y-3 pt-4">
                   <div>
                     <p className="font-serif text-lg text-slate-400">
@@ -171,12 +171,12 @@ function ActorHero({
                   </div>
                 </div>
 
-                {/* Divider */}
+                
                 <div className="my-5 h-px bg-white/10" />
 
-                {/* Social Icons */}
+                
                 <div className="flex flex-wrap items-center gap-4">
-                  {/* IMDb */}
+                  
                   {socials?.imdb_id && (
                     <a
                       href={`https://www.imdb.com/name/${socials?.imdb_id}`}
@@ -199,7 +199,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* Instagram */}
+                  
                   {socials?.instagram_id && (
                     <a
                       href={`https://instagram.com/${socials.instagram_id}`}
@@ -220,7 +220,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* Facebook */}
+                  
                   {socials?.facebook_id && (
                     <a
                       href={`https://facebook.com/${socials.facebook_id}`}
@@ -241,7 +241,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* X / Twitter */}
+                  
                   {socials?.twitter_id && (
                     <a
                       href={`https://twitter.com/${socials.twitter_id}`}
@@ -262,7 +262,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* TikTok */}
+                  
                   {socials?.tiktok_id && (
                     <a
                       href={`https://tiktok.com/@${socials.tiktok_id}`}
@@ -283,7 +283,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* YouTube */}
+                  
                   {socials?.youtube_id && (
                     <a
                       href={`https://youtube.com/${socials.youtube_id}`}
@@ -304,7 +304,7 @@ function ActorHero({
                     </a>
                   )}
 
-                  {/* wikidata */}
+                  
                   {socials?.wikidata_id && (
                     <a
                       href={`https://www.wikidata.org/wiki/${socials.wikidata_id}`}
@@ -326,7 +326,7 @@ function ActorHero({
                   )}
                 </div>
 
-                {/* Official Socials */}
+                
                 <button
                   className="
                   mt-8
@@ -350,7 +350,7 @@ function ActorHero({
             </div>
           </div>
 
-          {/* Details */}
+          
           <div
             className="
               w-full
@@ -368,7 +368,7 @@ function ActorHero({
               lg:text-start
             "
           >
-            {/* Title */}
+            
             <h1
               className="
                 hidden
@@ -394,7 +394,7 @@ function ActorHero({
               {actor.name}
             </h1>
 
-            {/* Overview */}
+            
             <div className="mt-10 md:mt-7">
               <h2
                 className="

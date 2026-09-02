@@ -21,7 +21,7 @@ function EpisodeCard({
       )}`}
       className="group bg-neutral-900/40 border border-white/5 rounded-2xl overflow-hidden hover:bg-neutral-900/60 transition-all duration-300 flex flex-col md:flex-row cursor-pointer"
     >
-      {/* Poster */}
+      
       <div
         className="
       relative
@@ -55,7 +55,7 @@ function EpisodeCard({
         </span>
       </div>
 
-      {/* Content */}
+      
       <div className="p-6 flex-1 flex flex-col justify-center">
         <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
           <h3

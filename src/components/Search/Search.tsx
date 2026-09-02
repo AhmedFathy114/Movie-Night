@@ -52,7 +52,7 @@ function Search() {
         "
       />
 
-      {/* Search icon */}
+      
 
       <SearchIcon
         size={18}
@@ -73,7 +73,7 @@ function Search() {
 
       {openModal && <SearchModal setIsSearchModelOpen={setOpenModal} />}
 
-      {/* Clear button */}
+      
       {searchQuery && (
         <button
           type="button"

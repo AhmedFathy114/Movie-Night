@@ -7,12 +7,12 @@ export default function LoadingModel({
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-md">
       <div className="relative flex flex-col items-center">
-        {/* Animated Outer Ring */}
+        
         <div className="relative w-32 h-32">
           <div className="absolute inset-0 rounded-full border-t-4 border-l-4 border-red-600 animate-spin" />
           <div className="absolute inset-2 rounded-full border-r-4 border-b-4 border-red-900/50 animate-spin-reverse" />
 
-          {/* Pulsing Cinema Icon */}
+          
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(220,38,38,0.4)] animate-pulse">
               <svg
@@ -26,7 +26,7 @@ export default function LoadingModel({
           </div>
         </div>
 
-        {/* Text Animation */}
+        
         <div className="mt-10 flex flex-col items-center gap-4">
           <h2 className="text-2xl font-bold tracking-[0.2em] text-white uppercase text-center max-w-xs">
             {message === "MOVIE NIGHT" ? (

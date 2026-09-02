@@ -53,7 +53,7 @@ function MovieHero({
 
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
-      {/* Background */}
+      
       <img
         src={`${backDropUrl}${movie.backdrop_path}`}
         alt={movie.title}
@@ -61,7 +61,7 @@ function MovieHero({
         className="absolute inset-0 h-full w-full object-cover blur-[3px]"
       />
 
-      {/* Overlay */}
+      
       <div
         className="
           absolute inset-0
@@ -92,7 +92,7 @@ function MovieHero({
         </div>
       )}
 
-      {/* Content */}
+      
       <div
         className="
           relative z-10
@@ -123,7 +123,7 @@ function MovieHero({
             lg:pb-12
           "
         >
-          {/* Poster */}
+          
           <div className="flex justify-center lg:justify-end">
             <img
               src={`${backDropUrl}${movie.poster_path}`}
@@ -153,7 +153,7 @@ function MovieHero({
             />
           </div>
 
-          {/* Details */}
+          
           <div
             className="
               w-full
@@ -173,7 +173,7 @@ function MovieHero({
               lg:text-start
             "
           >
-            {/* Title */}
+            
             <h1
               className="
                 font-bebas
@@ -195,7 +195,7 @@ function MovieHero({
               {movie.title}
             </h1>
 
-            {/* Info */}
+            
             <div
               className="
                 mt-4
@@ -225,7 +225,7 @@ function MovieHero({
               </span>
             </div>
 
-            {/* Genres */}
+            
             <div
               className="
                 lg:mt-4
@@ -247,7 +247,7 @@ function MovieHero({
               ))}
             </div>
 
-            {/* Overview */}
+            
             <div className="mt-5 md:mt-7">
               <h2
                 className="
@@ -288,7 +288,7 @@ function MovieHero({
               </p>
             </div>
 
-            {/* Watchlist & Favorite */}
+            
             <div
               className="
                 mt-5
@@ -412,7 +412,7 @@ function MovieHero({
               </button>
             </div>
 
-            {/* Buttons */}
+            
             <div
               className="
                 mt-6

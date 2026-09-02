@@ -13,7 +13,7 @@ function Footer() {
     <footer className="mt-16 border-t border-neutral-800 bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 lg:px-16 text-center md:text-start">
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 ">
-          {/* Brand */}
+          
           <div className="space-y-4">
             <h2 className="font-bebas text-3xl tracking-widest text-red-600">
               MOVIE NIGHT

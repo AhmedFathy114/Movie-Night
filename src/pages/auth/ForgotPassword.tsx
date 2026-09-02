@@ -38,7 +38,7 @@ function ForgotPassword() {
           sm:px-8 sm:py-7
         "
         >
-          {/* Header */}
+          
           <div className="flex flex-col items-center">
             <img
               src="/favicon.png"
@@ -134,7 +134,7 @@ function ForgotPassword() {
             </div>
           </form>
 
-          {/* Register */}
+          
           <p className="mt-5 text-center font-roboto text-xs text-neutral-500 sm:text-sm">
             Don't have an account?{" "}
             <button

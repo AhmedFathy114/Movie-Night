@@ -39,7 +39,7 @@ function FullCast() {
       <PageLoader key={id} message="Fetching full cast" />
       <main className="min-h-dvh bg-black px-4 py-24 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          {/* Header */}
+          
           <div className="mb-8">
             <h1
               className="
@@ -54,7 +54,7 @@ function FullCast() {
               FULL CAST
             </h1>
 
-            {/* Movie */}
+            
             <div className="mt-4 flex items-center gap-4">
               <h2
                 className="
@@ -90,7 +90,7 @@ function FullCast() {
             <div className="mt-4 h-1.5 w-20 rounded-full bg-red-600" />
           </div>
 
-          {/* Cast */}
+          
           <div
             className="
             grid

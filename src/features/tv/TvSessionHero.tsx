@@ -19,7 +19,7 @@ function TvSessionHero({
 
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
-      {/* Background */}
+      
       <img
         src={`${backDropUrl}${backdropPath}`}
         alt={tvName}
@@ -34,7 +34,7 @@ function TvSessionHero({
         "
       />
 
-      {/* Overlay */}
+      
       <div
         className="
           absolute
@@ -46,7 +46,7 @@ function TvSessionHero({
         "
       />
 
-      {/* Trailer Modal */}
+      
       {showModal && finalTrailer && (
         <div
           className="
@@ -93,7 +93,7 @@ function TvSessionHero({
         </div>
       )}
 
-      {/* Content */}
+      
       <div
         className="
           relative
@@ -128,7 +128,7 @@ function TvSessionHero({
             lg:pb-12
             "
         >
-          {/* Poster */}
+          
           <div className="text-center ">
             <Link
               className="inline-flex items-center gap-2 text-gray-400 hover:text-red-500 transition-colors mb-8 group self-start font-roboto"
@@ -169,7 +169,7 @@ function TvSessionHero({
             </div>
           </div>
 
-          {/* Details */}
+          
           <div
             className="
               w-full
@@ -188,7 +188,7 @@ function TvSessionHero({
               lg:text-start
             "
           >
-            {/* TV Name */}
+            
             <h1
               className="
                 font-bebas
@@ -204,7 +204,7 @@ function TvSessionHero({
               {tvName}
             </h1>
 
-            {/* Season */}
+            
             <h2
               className="
                 mt-5
@@ -223,7 +223,7 @@ function TvSessionHero({
                 : `SEASON ${season.season_number}`}
             </h2>
 
-            {/* Info */}
+            
             <div
               className="
                 mt-6
@@ -249,7 +249,7 @@ function TvSessionHero({
               </span>
             </div>
 
-            {/* Overview */}
+            
             <div className="mt-8">
               <h3
                 className="
@@ -284,7 +284,7 @@ function TvSessionHero({
               </p>
             </div>
 
-            {/* Trailer */}
+            
             {finalTrailer && (
               <div
                 className="

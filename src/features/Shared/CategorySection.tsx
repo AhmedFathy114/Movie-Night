@@ -30,7 +30,7 @@ function CategorySection({ title, type, setType, data }: categoryProps) {
         id={slug}
         key={slug}
       >
-        {/* Header */}
+        
         <div className="mb-4 flex items-center justify-between gap-3 md:mb-6">
           <div className="flex items-center gap-2 md:gap-3">
             <div
@@ -64,7 +64,7 @@ function CategorySection({ title, type, setType, data }: categoryProps) {
           </div>
         </div>
 
-        {/* Red line */}
+        
         <div
           className="
           -mt-2
@@ -79,7 +79,7 @@ function CategorySection({ title, type, setType, data }: categoryProps) {
         "
         />
 
-        {/* Description */}
+        
 
         <div className="flex flex-col lg:flex-row justify-between mt-6 font-roboto items-center">
           <p className="text-gray-400 text-sm md:text-lg max-w-2xl ml-4 md:ml-8">
@@ -108,7 +108,7 @@ function CategorySection({ title, type, setType, data }: categoryProps) {
             </select>
           </div>
         </div>
-        {/* Divider */}
+        
         <div className="mt-4 h-px bg-stone-500/15 lg:mt-8" />
 
         <div
