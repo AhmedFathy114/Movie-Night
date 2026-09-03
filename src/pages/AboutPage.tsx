@@ -1,17 +1,20 @@
 import PageLoader from "@/features/Shared/PageLoader";
 import { features, stats } from "@/lib/AboutPageData";
 import { socialMedia } from "@/lib/Footer/Footer";
+import { useEffect } from "react";
 import { FaFilm, FaHeart, FaRocket } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function About() {
+  useEffect(() => {
+    document.title = `About | Movie Night`;
+  }, []);
   return (
     <>
       <PageLoader message="Loading Page Loader" />
       <div className="min-h-screen bg-black text-white flex flex-col">
         <main className="grow pt-24 pb-16">
           <section className="relative py-20 overflow-hidden">
-            
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-175 h-100 bg-red-700/20 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 right-0 w-100 h-75 bg-red-900/15 rounded-full blur-[100px] pointer-events-none" />
 

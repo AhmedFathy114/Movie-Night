@@ -1,6 +1,7 @@
 import AlooySection from "@/features/Alooy/AlooySection";
 import { useAllAlooy } from "@/features/Alooy/useAllAlooy";
 import PageLoader from "@/features/Shared/PageLoader";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function AlooyPage() {
@@ -11,6 +12,10 @@ function AlooyPage() {
   const { alooyItems, isAlooyLoading, isAlooyError } = useAllAlooy(currentPage);
 
   const results = alooyItems?.results ?? [];
+
+  useEffect(() => {
+    document.title = `Alooy | Movie Night`;
+  }, []);
 
   if (isAlooyLoading && !alooyItems) {
     return <PageLoader message="Loading Alooy movie and TV shows" />;

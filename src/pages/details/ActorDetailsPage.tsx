@@ -7,6 +7,7 @@ import { useActorSocials } from "@/features/actors/useActorSocials";
 import DetailsSection from "@/features/Shared/DetailsSection";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { capitalizeWords } from "@/lib/utils";
 function ActorDetails() {
   const { actorId, slug } = useParams<{ actorId: string; slug: string }>();
   const { actor, isActorDetailsLoading } = useActorDetails(Number(actorId));
@@ -16,7 +17,7 @@ function ActorDetails() {
   useEffect(
     function () {
       document.title = slug
-        ? `${slug.replaceAll("-", " ")} | Movie Night`
+        ? `${capitalizeWords(slug.replaceAll("-", " "))} | Movie Night`
         : "Movie Night";
     },
     [slug],

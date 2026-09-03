@@ -3,9 +3,10 @@ import PageLoader from "@/features/Shared/PageLoader";
 import Pagination from "@/features/Shared/Pagination";
 import { useAllEndPoint } from "@/features/Shared/useAllEndPoint";
 import { genreItems } from "@/lib/Header/HeaderConstants";
+import { capitalizeWords } from "@/lib/utils";
 import { language } from "@/lib/Variables";
 import type { MovieResponse, TVResponse } from "@/types/AllTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 type MediaType = "movie" | "tv";
 
@@ -32,6 +33,10 @@ function GenrePage() {
     },
     Boolean(slug && type),
   );
+
+  useEffect(() => {
+    document.title = `${capitalizeWords(slug ?? "Movie-Night")} | Movie Night`;
+  }, [slug]);
 
   if (isPending)
     return (

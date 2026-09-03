@@ -1,11 +1,12 @@
 import PageLoader from "@/features/Shared/PageLoader";
 import { useParams, useSearchParams } from "react-router-dom";
 import CategorySection from "@/features/Shared/CategorySection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAllEndPoint } from "@/features/Shared/useAllEndPoint";
 import type { MovieResponse, TVResponse } from "@/types/AllTypes";
 import { language } from "@/lib/Variables";
 import Pagination from "@/features/Shared/Pagination";
+import { capitalizeWords } from "@/lib/utils";
 
 type MediaType = "movie" | "tv";
 
@@ -52,6 +53,10 @@ function CategoryPage() {
     },
     Boolean(slug && type),
   );
+
+  useEffect(() => {
+    document.title = `${capitalizeWords(slug ?? "Movie-Night")} | Movie Night`;
+  }, [slug]);
 
   if (isPending)
     return (

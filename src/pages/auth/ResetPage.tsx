@@ -1,7 +1,7 @@
 import { useUpdateUser } from "@/features/authentication/useUpateUser";
 import PageLoader from "@/features/Shared/PageLoader";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -28,16 +28,18 @@ function ResetPage() {
     updatePassword(data.password, { onSuccess: () => reset() });
   }
 
+  useEffect(() => {
+    document.title = `Update-Password | Movie Night`;
+  }, []);
+
   return (
     <>
       <PageLoader message="Loading reset password Page" />
       <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black px-4 py-4 text-white">
-        
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-400/60 blur-[120px]" />
         </div>
 
-        
         <div
           className="
         relative z-10
@@ -52,7 +54,6 @@ function ResetPage() {
           sm:px-8 sm:py-7
         "
         >
-          
           <div className="flex flex-col items-center">
             <img
               src="/favicon.png"
@@ -69,12 +70,10 @@ function ResetPage() {
             </p>
           </div>
 
-          
           <form
             onSubmit={handleSubmit(handleReset)}
             className="mt-6 flex flex-col gap-4"
           >
-            
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="password"

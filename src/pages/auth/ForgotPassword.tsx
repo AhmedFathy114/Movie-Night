@@ -1,5 +1,6 @@
 import { useResetPassword } from "@/features/authentication/useResetPassword";
 import PageLoader from "@/features/Shared/PageLoader";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +17,10 @@ function ForgotPassword() {
   function handleForget({ email }: { email: string }) {
     Reset(email, { onSuccess: () => reset() });
   }
+
+  useEffect(() => {
+    document.title = `Forgot-Password | Movie Night`;
+  }, []);
   return (
     <>
       <PageLoader message="Loading Forget password Page" />
@@ -38,7 +43,6 @@ function ForgotPassword() {
           sm:px-8 sm:py-7
         "
         >
-          
           <div className="flex flex-col items-center">
             <img
               src="/favicon.png"
@@ -134,7 +138,6 @@ function ForgotPassword() {
             </div>
           </form>
 
-          
           <p className="mt-5 text-center font-roboto text-xs text-neutral-500 sm:text-sm">
             Don't have an account?{" "}
             <button

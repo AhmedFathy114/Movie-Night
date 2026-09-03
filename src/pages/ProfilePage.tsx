@@ -8,12 +8,17 @@ import { useLogout } from "@/features/authentication/useLogout";
 import { Bookmark, Heart } from "lucide-react";
 import FavoriteSection from "@/features/favorites/FavoriteSection";
 import WatchlistSection from "@/features/watchlist/WatchlistSection";
+import { useEffect } from "react";
 
 function Profile() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isPending: isPending2 } = useUser();
   const { profile, isPending } = useProfile(user?.id ?? "");
   const { logout, isLogout } = useLogout();
+
+  useEffect(() => {
+    document.title = `Profile | Movie Night`;
+  }, []);
 
   if (isPending || isPending2) return <PageLoader message="Loading Profile" />;
 
