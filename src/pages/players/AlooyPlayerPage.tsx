@@ -1,9 +1,9 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ChevronLeft, Play } from "lucide-react";
 import { useAlooyDetails } from "@/features/Alooy/useAlooyDetails";
 import PageLoader from "@/features/Shared/PageLoader";
+import { proxiedVideoUrl } from "@/lib/videoProxy";
 
 function AlooyPlayerPage() {
   const [searchParams] = useSearchParams();
@@ -19,6 +19,17 @@ function AlooyPlayerPage() {
   useEffect(() => {
     setActiveEpIndex(0);
   }, [url]);
+
+  const episodes = details?.episodes || [];
+  const currentEpisode = episodes[activeEpIndex];
+
+  // لينك الفيديو بعد ما يعدي من البروكسي
+  const videoSrc = useMemo(
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
+    () =>
+      currentEpisode?.video ? proxiedVideoUrl(currentEpisode.video) : null,
+    [currentEpisode?.video],
+  );
 
   if (!url) {
     return (
@@ -39,9 +50,6 @@ function AlooyPlayerPage() {
       </section>
     );
   }
-
-  const episodes = details.episodes || [];
-  const currentEpisode = episodes[activeEpIndex];
 
   return (
     <>
@@ -64,21 +72,19 @@ function AlooyPlayerPage() {
         </div>
 
         <div className="relative w-full overflow-hidden rounded-2xl bg-neutral-900 shadow-2xl border border-white/5">
-          {currentEpisode?.video ? (
+          {videoSrc ? (
             <video
-              key={currentEpisode.video}
+              key={videoSrc}
+              src={videoSrc}
               controls
               autoPlay
+              playsInline
+              preload="metadata"
               className="w-full"
               controlsList="nodownload"
-            >
-              <source
-                src={currentEpisode.video}
-                type={currentEpisode.videoType || "video/mp4"}
-              />
-            </video>
+            />
           ) : (
-            <div className="flex h-full w-full items-center justify-center flex-col gap-3">
+            <div className="flex aspect-video w-full flex-col items-center justify-center gap-3">
               <Play className="h-12 w-12 text-neutral-600" />
               <p className="text-neutral-500">
                 لا يوجد مصدر فيديو متاح لهذه الحلقة.
