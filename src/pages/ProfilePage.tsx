@@ -24,13 +24,22 @@ function Profile() {
 
   if (!isAuthenticated) {
     navigate("/home", { replace: true });
+    return null;
+  }
+
+  if (!profile) {
+    return (
+      <section className="flex min-h-screen items-center justify-center bg-black">
+        <p className="text-gray-400">Failed to load profile.</p>
+      </section>
+    );
   }
 
   return (
     <>
       <PageLoader message="Loading Profile" />
       <section
-        id="AlooyTv"
+        id="profile"
         className="
         relative
         mx-3

@@ -26,10 +26,6 @@ const TvSessionPage = lazy(() => import("./pages/details/TvSessionPage"));
 
 const TvPlayerPage = lazy(() => import("./pages/players/TvPlayerPage"));
 
-const AlooyPage = lazy(() => import("./pages/AlooyPage"));
-
-const AlooyPlayerPage = lazy(() => import("./pages/players/AlooyPlayerPage"));
-
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 
 const GenrePage = lazy(() => import("./pages/GenrePage"));
@@ -123,9 +119,6 @@ function App() {
               <Route index element={<Navigate replace to="/home" />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/alooy" element={<AlooyPage />} />
-
-              <Route path="/alooy/player" element={<AlooyPlayerPage />} />
               <Route
                 path="/movie/:movieId/:slug"
                 element={<MovieDetailsPage />}

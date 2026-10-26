@@ -52,13 +52,6 @@ function NavBar() {
             <DropMenu />
 
             <Link
-              to="/alooy"
-              className="text-neutral-400 transition-all duration-300 hover:scale-105 hover:text-white font-roboto text-[12.1px]"
-            >
-              Alooy Tv
-            </Link>
-
-            <Link
               to="/about"
               className="text-neutral-400 transition-all duration-300 hover:scale-105 hover:text-white font-roboto"
             >

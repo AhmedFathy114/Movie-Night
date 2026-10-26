@@ -78,11 +78,12 @@ export async function loginWithGoogle(){
 export async function getProfile(userId:string) {
   const { data, error } = await supabase
     .from('profile')
-    .select('*')
+    .select('id,email,full_name,avatar_url')
     .eq('id', userId)
     .single();
 
   if (error) throw error;
+  if (!data) throw new Error("Profile not found");
 
   return data;
 }

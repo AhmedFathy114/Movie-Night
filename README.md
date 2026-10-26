@@ -41,9 +41,8 @@ A modern, cinematic movie and TV discovery platform built with React, Vite, Type
 - 🎬 **Movie Details** — Explore movies, genres, cast, related content, and metadata.
 - 📺 **TV Shows** — Browse TV shows, seasons, episodes, and detailed information.
 - 👥 **Actors & Cast** — Explore actor details and full cast pages.
-- 🎞️ **Media Players** — Dedicated players for movies, TV shows, and Alooy.
+- 🎞️ **Media Players** — Dedicated players for movies and TV shows.
 - 🏠 **Dynamic Home Page** — Discover content through different categories and sections.
-- 📡 **Alooy TV** — Dedicated section for available TV content.
 - ❤️ **Favorites** — Save movies and TV shows to your favorites.
 - 📋 **Watchlist** — Keep track of content you want to watch later.
 - 👤 **User Profiles** — Manage your profile information and avatar.
@@ -75,7 +74,6 @@ The application provides dedicated experiences for:
 - ❤️ Favorites
 - 📋 Watchlist
 - ▶️ Movie & TV Players
-- 📡 Alooy TV
 
 ---
 
@@ -315,7 +313,6 @@ Supabase handles application-specific user data, while TMDB provides the enterta
 │   │   ├── 📂 movies
 │   │   ├── 📂 tv
 │   │   ├── 📂 Shared
-│   │   └── 📂 Alooy
 │   │
 │   ├── 📂 hooks
 │   │   └── Custom React hooks

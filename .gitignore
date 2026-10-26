@@ -27,10 +27,3 @@ dist-ssr
 .env
 .env.*
 .env.example
-
-# Supabase local files
-supabase/.temp/
-supabase/.branches/
-supabase/.gitignore
-
-supabase/functions/alooy/

@@ -5,9 +5,7 @@ import { useDetails } from "@/features/Shared/useDetails";
 import { useStreams } from "@/features/Shared/useStreams";
 import EpisodesSection from "@/features/tv/EpisodeSection";
 import { useSessions } from "@/features/tv/useSeason";
-import { GetStreams } from "@/services/shared/GetStreams";
 import type { TVDetails } from "@/types/AllTypes";
-import { useQueryClient } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,7 +19,7 @@ function TvPlayer() {
   }>();
 
   const navigate = useNavigate();
-  const { streams } = useStreams("tv");
+  const { streams, isStreamsLoading, isStreamsError } = useStreams("tv");
 
   const [currentEpisode, setCurrentEpisode] = useState(Number(episodeNumber));
 
@@ -142,16 +140,6 @@ function TvPlayer() {
     };
   }, []);
 
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    queryClient.prefetchQuery({
-      queryKey: ["streams"],
-      queryFn: GetStreams,
-      staleTime: 1000 * 60 * 60,
-    });
-  }, [queryClient]);
-
   return (
     <>
       <PageLoader message="Loading Tv Player" />
@@ -224,17 +212,26 @@ function TvPlayer() {
             lg:aspect-video
           "
           >
-            <iframe
-              key={embedUrl}
-              src={embedUrl}
-              className="h-full w-full border-0"
-              allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-              allowFullScreen
-              title={`Watch ${slug}`}
-            />
+            {embedUrl ? (
+              <iframe
+                key={embedUrl}
+                src={embedUrl}
+                className="h-full w-full border-0"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allowFullScreen
+                title={`Watch ${slug}`}
+              />
+            ) : (
+              !isStreamsLoading && (
+                <div className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-neutral-500">
+                  {isStreamsError
+                    ? "Unable to load stream sources right now."
+                    : "No stream source is available."}
+                </div>
+              )
+            )}
           </div>
 
-          
           {details && season && (
             <EpisodesSection
               episodes={season.episodes}

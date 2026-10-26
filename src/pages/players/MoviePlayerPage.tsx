@@ -12,7 +12,7 @@ function Player() {
     slug: string;
   }>();
   const navigate = useNavigate();
-  const { streams } = useStreams("movie");
+  const { streams, isStreamsLoading, isStreamsError } = useStreams("movie");
   const [activeServerName, setActiveServerName] = useState("");
 
   useEffect(() => {
@@ -115,7 +115,7 @@ function Player() {
 
           
           <div className="mt-5 aspect-10/9 lg:aspect-video w-full overflow-hidden rounded-xl bg-neutral-900">
-            {embedUrl && (
+            {embedUrl ? (
               <iframe
                 key={activeServerName}
                 src={embedUrl}
@@ -124,6 +124,14 @@ function Player() {
                 allowFullScreen
                 title={`Watch ${slug}`}
               />
+            ) : (
+              !isStreamsLoading && (
+                <div className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-neutral-500">
+                  {isStreamsError
+                    ? "Unable to load stream sources right now."
+                    : "No stream source is available."}
+                </div>
+              )
             )}
           </div>
         </div>
